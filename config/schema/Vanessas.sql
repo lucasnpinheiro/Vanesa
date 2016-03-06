@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `apagar`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `apagar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numero documento` varchar(15) DEFAULT NULL,
+  `numero_documento` varchar(15) DEFAULT NULL,
   `status` int(1) DEFAULT NULL COMMENT '1 - Aberto | 2 - Baixado',
   `pessoa_id` int(11) DEFAULT NULL,
   `data_vencimento` date DEFAULT NULL,
@@ -288,11 +288,12 @@ CREATE TABLE `pessoas` (
   `cnpj` varchar(18) DEFAULT NULL,
   `incricao` varchar(18) DEFAULT NULL,
   `username` varchar(15) DEFAULT NULL,
-  `senha` varchar(32) DEFAULT NULL,
+  `senha` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
+  `root` int(1) DEFAULT '0' COMMENT '0 - Não | 1 - Sim',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,6 +303,7 @@ CREATE TABLE `pessoas` (
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
+INSERT  IGNORE INTO `pessoas` (`id`, `nome`, `status`, `endereco`, `numero`, `bairro`, `cidade`, `estado`, `cep`, `fone1`, `fone2`, `cnpj`, `incricao`, `username`, `senha`, `created`, `modified`, `root`) VALUES (1,'Administrador Geral do Sistema',1,'Rua Joaquim Francisco Galeano','109','Vila Guiomar','Ribeirão Preto','SP','14031010','16 39191956','16 992660128','','','super','$2y$10$o/yJEQxcHBQntbM1SMPtUO9ZVkQmqFUDlwdRJKO6KVGb94863xeyO','2016-03-06 17:21:38','2016-03-06 17:26:35',1);
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,4 +414,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-04 21:35:42
+-- Dump completed on 2016-03-06 16:59:28

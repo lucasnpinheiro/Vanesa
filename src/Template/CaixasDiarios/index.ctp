@@ -1,51 +1,59 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Caixas Diario'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Pessoas'), ['controller' => 'Pessoas', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pessoa'), ['controller' => 'Pessoas', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Caixas Movimentos'), ['controller' => 'CaixasMovimentos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Caixas Movimento'), ['controller' => 'CaixasMovimentos', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="caixasDiarios index large-9 medium-8 columns content">
-    <h3><?= __('Caixas Diarios') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('data') ?></th>
-                <th><?= $this->Paginator->sort('terminal') ?></th>
-                <th><?= $this->Paginator->sort('pessoa_id') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($caixasDiarios as $caixasDiario): ?>
-            <tr>
-                <td><?= $this->Number->format($caixasDiario->id) ?></td>
-                <td><?= h($caixasDiario->data) ?></td>
-                <td><?= $this->Number->format($caixasDiario->terminal) ?></td>
-                <td><?= $caixasDiario->has('pessoa') ? $this->Html->link($caixasDiario->pessoa->id, ['controller' => 'Pessoas', 'action' => 'view', $caixasDiario->pessoa->id]) : '' ?></td>
-                <td><?= h($caixasDiario->created) ?></td>
-                <td><?= h($caixasDiario->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $caixasDiario->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $caixasDiario->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $caixasDiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasDiario->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+<div class="panel panel-primary">
+    <div class="panel-heading font-header">
+        <?php echo $titulo_pagina . ' - ' . __('View') ?>
+        <ul class="panel-toolbar list-unstyled font-12 m-d-3">
+            <li><?php echo $this->Html->link('', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
         </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 text-right">
+                <?php
+                echo $this->Form->create(null, [
+                    'inline' => true,
+                    'label' => false
+                ]);
+                echo $this->Form->input('data', ['label' => false, 'placeholder' => 'Data']);
+                echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
+                echo $this->Form->end();
+                ?>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped font-12">
+            <thead>
+                <tr>
+                    <th><?= $this->Paginator->sort('data') ?></th>
+                    <th><?= $this->Paginator->sort('terminal') ?></th>
+                    <th><?= $this->Paginator->sort('pessoa_id') ?></th>
+                    <th><?= $this->Paginator->sort('created') ?></th>
+                    <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th class="actions"><?= __('Actions') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($caixasDiarios as $caixasDiario): ?>
+                    <tr>
+                        <td><?= h($caixasDiario->data) ?></td>
+                        <td><?= $this->Number->format($caixasDiario->terminal) ?></td>
+                        <td><?= $caixasDiario->has('pessoa') ? $this->Html->link($caixasDiario->pessoa->id, ['controller' => 'Pessoas', 'action' => 'view', $caixasDiario->pessoa->id]) : '' ?></td>
+                        <td><?= h($caixasDiario->created) ?></td>
+                        <td><?= h($caixasDiario->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $caixasDiario->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $caixasDiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasDiario->id)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+    <div class="panel-footer">
+        <div class="row font-12 text-center-xs">
+            <?php echo $this->element('Painel/paginacao') ?>
+        </div><!-- /.row -->
     </div>
 </div>

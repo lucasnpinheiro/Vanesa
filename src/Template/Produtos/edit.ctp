@@ -1,25 +1,16 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $produto->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $produto->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Produtos'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Pedidos Itens'), ['controller' => 'PedidosItens', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pedidos Iten'), ['controller' => 'PedidosItens', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Requisicoes'), ['controller' => 'Requisicoes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Requisico'), ['controller' => 'Requisicoes', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="produtos form large-9 medium-8 columns content">
-    <?= $this->Form->create($produto) ?>
-    <fieldset>
-        <legend><?= __('Edit Produto') ?></legend>
+<div class="panel panel-primary">
+    <div class="panel-heading font-header">
+        <?php echo $titulo_pagina . ' - ' . __('Edit') ?>
+        <ul class="panel-toolbar list-unstyled font-12 m-d-3">
+            <li><?php echo $this->Html->link('', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+        </ul>
+
+    </div>
+    <div class="panel-body">
+        <?= $this->Form->create($produto) ?>
         <?php
-            echo $this->Form->input('nome');
+        echo $this->Form->input('nome');
             echo $this->Form->input('unidade');
             echo $this->Form->input('status');
             echo $this->Form->input('grupo_estoque_id');
@@ -35,7 +26,10 @@
             echo $this->Form->input('atalho');
             echo $this->Form->input('nome_atalho');
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+        <div class="clearfix"></div>
+        <div class="text-right">
+            <?= $this->Form->button(__('Submit')) ?>
+        </div>
+        <?= $this->Form->end() ?>
+    </div>
 </div>

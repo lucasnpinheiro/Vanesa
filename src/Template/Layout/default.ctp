@@ -46,7 +46,12 @@
         <!-- /.wrapper -->
         <?php echo $this->Html->script('/js/jquery-1.11.2.min.js'); ?>
         <?php echo $this->Html->script('/js/bootstrap.min.js'); ?>
-        <?php echo $this->Html->script('/js/app.min.js'); ?>
+        <?php echo $this->Html->script('/js/jquery.mask.min'); ?>
+        <?php echo $this->Html->script('/js/jquery.maskMoney.min.js'); ?>
+         <?php echo $this->Html->script('/js/plugins/bootstrap-datepicker/bootstrap-datepicker.js') ?>
+        <?php echo $this->Html->script('/js/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.js') ?>
+        <?php echo $this->Html->script('/js/Funcoes.js'); ?>
+        <?php //echo $this->Html->script('/js/app.min.js'); ?>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
     </body>
