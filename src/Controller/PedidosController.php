@@ -10,7 +10,10 @@ use App\Controller\AppController;
  */
 class PedidosController extends AppController
 {
-
+public function __construct(\Cake\Network\Request $request = null, \Cake\Network\Response $response = null, $name = null, $eventManager = null, $components = null) {
+        parent::__construct($request, $response, $name, $eventManager, $components);
+        $this->set('titulo_pagina', 'Pedidos');
+    }
     /**
      * Index method
      *

@@ -134,7 +134,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
-                <th><?= __('Numero Documento') ?></th>
+                <th><?= __('numero_documento') ?></th>
                 <th><?= __('Data') ?></th>
                 <th><?= __('Produto Id') ?></th>
                 <th><?= __('Tipo') ?></th>

@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Apagar Entity.
  *
  * @property int $id
- * @property string $numero documento
+ * @property string $numero_documento
  * @property int $status
  * @property int $pessoa_id
  * @property \App\Model\Entity\Pessoa $pessoa

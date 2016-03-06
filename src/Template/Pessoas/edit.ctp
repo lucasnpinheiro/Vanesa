@@ -1,42 +1,35 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $pessoa->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $pessoa->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Pessoas'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Apagar'), ['controller' => 'Apagar', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Apagar'), ['controller' => 'Apagar', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Caixas Diarios'), ['controller' => 'CaixasDiarios', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Caixas Diario'), ['controller' => 'CaixasDiarios', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Pessoas Tipos'), ['controller' => 'PessoasTipos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pessoas Tipo'), ['controller' => 'PessoasTipos', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="pessoas form large-9 medium-8 columns content">
-    <?= $this->Form->create($pessoa) ?>
-    <fieldset>
-        <legend><?= __('Edit Pessoa') ?></legend>
+<div class="panel panel-primary">
+    <div class="panel-heading font-header">
+        <?php echo $titulo_pagina . ' - ' . __('Edit') ?>
+        <ul class="panel-toolbar list-unstyled font-12 m-d-3">
+            <li><?php echo $this->Html->link('', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+        </ul>
+
+    </div>
+    <div class="panel-body">
+        <?= $this->Form->create($pessoa) ?>
         <?php
-            echo $this->Form->input('nome');
-            echo $this->Form->input('status');
-            echo $this->Form->input('endereco');
-            echo $this->Form->input('numero');
-            echo $this->Form->input('bairro');
-            echo $this->Form->input('cidade');
-            echo $this->Form->input('estado');
-            echo $this->Form->input('cep');
-            echo $this->Form->input('fone1');
-            echo $this->Form->input('fone2');
-            echo $this->Form->input('cnpj');
-            echo $this->Form->input('incricao');
-            echo $this->Form->input('username');
-            echo $this->Form->input('senha');
+        echo $this->Form->input('nome', ['div' => ['class' => 'col-xs-12 col-md-6']]);
+        echo $this->Form->status('status', ['div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->input('cep', ['div' => ['class' => 'col-xs-12 col-md-3']]);
+
+        echo $this->Form->input('endereco', ['div' => ['class' => 'col-xs-12 col-md-10']]);
+        echo $this->Form->input('numero', ['div' => ['class' => 'col-xs-12 col-md-2']]);
+        echo $this->Form->input('bairro', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('cidade', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('estado', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('fone1', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('fone2', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('cnpj', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('incricao', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('username', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('senha', ['value' => '', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+        <div class="clearfix"></div>
+        <div class="text-right">
+            <?= $this->Form->button(__('Submit')) ?>
+        </div>
+        <?= $this->Form->end() ?>
+    </div>
 </div>

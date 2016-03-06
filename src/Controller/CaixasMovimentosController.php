@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -8,16 +9,19 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\CaixasMovimentosTable $CaixasMovimentos
  */
-class CaixasMovimentosController extends AppController
-{
+class CaixasMovimentosController extends AppController {
+
+    public function __construct(\Cake\Network\Request $request = null, \Cake\Network\Response $response = null, $name = null, $eventManager = null, $components = null) {
+        parent::__construct($request, $response, $name, $eventManager, $components);
+        $this->set('titulo_pagina', 'Caixas Movimentos');
+    }
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $this->paginate = [
             'contain' => ['CaixasDiarios', 'Grupos']
         ];
@@ -34,8 +38,7 @@ class CaixasMovimentosController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $caixasMovimento = $this->CaixasMovimentos->get($id, [
             'contain' => ['CaixasDiarios', 'Grupos']
         ]);
@@ -49,8 +52,7 @@ class CaixasMovimentosController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $caixasMovimento = $this->CaixasMovimentos->newEntity();
         if ($this->request->is('post')) {
             $caixasMovimento = $this->CaixasMovimentos->patchEntity($caixasMovimento, $this->request->data);
@@ -74,8 +76,7 @@ class CaixasMovimentosController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $caixasMovimento = $this->CaixasMovimentos->get($id, [
             'contain' => []
         ]);
@@ -101,8 +102,7 @@ class CaixasMovimentosController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $caixasMovimento = $this->CaixasMovimentos->get($id);
         if ($this->CaixasMovimentos->delete($caixasMovimento)) {
@@ -112,4 +112,5 @@ class CaixasMovimentosController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
 }

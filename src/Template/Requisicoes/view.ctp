@@ -13,7 +13,7 @@
     <h3><?= h($requisico->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th><?= __('Numero Documento') ?></th>
+            <th><?= __('numero_documento') ?></th>
             <td><?= h($requisico->numero_documento) ?></td>
         </tr>
         <tr>

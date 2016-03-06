@@ -1,63 +1,61 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Apagar'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Pessoas'), ['controller' => 'Pessoas', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pessoa'), ['controller' => 'Pessoas', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="apagar index large-9 medium-8 columns content">
-    <h3><?= __('Apagar') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('numero documento') ?></th>
-                <th><?= $this->Paginator->sort('status') ?></th>
-                <th><?= $this->Paginator->sort('pessoa_id') ?></th>
-                <th><?= $this->Paginator->sort('data_vencimento') ?></th>
-                <th><?= $this->Paginator->sort('valor_codumento') ?></th>
-                <th><?= $this->Paginator->sort('tipo') ?></th>
-                <th><?= $this->Paginator->sort('historico') ?></th>
-                <th><?= $this->Paginator->sort('data_pagamento') ?></th>
-                <th><?= $this->Paginator->sort('valor_pagamento') ?></th>
-                <th><?= $this->Paginator->sort('valor_acrescimo') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($apagar as $apagar): ?>
-            <tr>
-                <td><?= $this->Number->format($apagar->id) ?></td>
-                <td><?= h($apagar->numero documento) ?></td>
-                <td><?= $this->Number->format($apagar->status) ?></td>
-                <td><?= $apagar->has('pessoa') ? $this->Html->link($apagar->pessoa->id, ['controller' => 'Pessoas', 'action' => 'view', $apagar->pessoa->id]) : '' ?></td>
-                <td><?= h($apagar->data_vencimento) ?></td>
-                <td><?= $this->Number->format($apagar->valor_codumento) ?></td>
-                <td><?= $this->Number->format($apagar->tipo) ?></td>
-                <td><?= h($apagar->historico) ?></td>
-                <td><?= h($apagar->data_pagamento) ?></td>
-                <td><?= $this->Number->format($apagar->valor_pagamento) ?></td>
-                <td><?= $this->Number->format($apagar->valor_acrescimo) ?></td>
-                <td><?= h($apagar->created) ?></td>
-                <td><?= h($apagar->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $apagar->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $apagar->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $apagar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apagar->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+<div class="panel panel-primary">
+    <div class="panel-heading font-header">
+        <?php echo $titulo_pagina . ' - ' . __('View') ?>
+        <ul class="panel-toolbar list-unstyled font-12 m-d-3">
+            <li><?php echo $this->Html->link('', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
         </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 text-right">
+                <?php
+                echo $this->Form->create(null, [
+                    'inline' => true,
+                    'label' => false
+                ]);
+                echo $this->Form->input('nome', ['label' => false, 'placeholder' => 'Nome']);
+                echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
+                echo $this->Form->end();
+                ?>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped font-12">
+            <thead>
+                <tr>
+                    <th><?= $this->Paginator->sort('numero_documento') ?></th>
+                    <th><?= $this->Paginator->sort('status') ?></th>
+                    <th><?= $this->Paginator->sort('pessoa_id') ?></th>
+                    <th><?= $this->Paginator->sort('data_vencimento') ?></th>
+                    <th><?= $this->Paginator->sort('valor_codumento') ?></th>
+                    <th><?= $this->Paginator->sort('tipo') ?></th>
+                    <th class="actions"><?= __('Actions') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($apagar as $apagar): ?>
+                    <tr>
+                        <td><?= h($apagar->numero_documento) ?></td>
+                        <td><?= $this->Number->format($apagar->status) ?></td>
+                        <td><?= $apagar->has('pessoa') ? $this->Html->link($apagar->pessoa->id, ['controller' => 'Pessoas', 'action' => 'view', $apagar->pessoa->id]) : '' ?></td>
+                        <td><?= h($apagar->data_vencimento) ?></td>
+                        <td><?= $this->Number->format($apagar->valor_codumento) ?></td>
+                        <td><?= $this->Number->format($apagar->tipo) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $apagar->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $apagar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apagar->id)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+    <div class="panel-footer">
+        <div class="row font-12 text-center-xs">
+            <?php echo $this->element('Painel/paginacao') ?>
+        </div><!-- /.row -->
     </div>
 </div>

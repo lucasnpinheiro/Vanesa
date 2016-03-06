@@ -1,26 +1,22 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $grupo->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $grupo->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Grupos'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Caixas Movimentos'), ['controller' => 'CaixasMovimentos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Caixas Movimento'), ['controller' => 'CaixasMovimentos', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="grupos form large-9 medium-8 columns content">
-    <?= $this->Form->create($grupo) ?>
-    <fieldset>
-        <legend><?= __('Edit Grupo') ?></legend>
+<div class="panel panel-primary">
+    <div class="panel-heading font-header">
+        <?php echo $titulo_pagina . ' - ' . __('Edit') ?>
+        <ul class="panel-toolbar list-unstyled font-12 m-d-3">
+            <li><?php echo $this->Html->link('', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+        </ul>
+
+    </div>
+    <div class="panel-body">
+        <?= $this->Form->create($grupo) ?>
         <?php
-            echo $this->Form->input('nome');
-            echo $this->Form->input('status');
+        echo $this->Form->input('nome', ['div' => ['class' => 'col-xs-12 col-md-9']]);
+        echo $this->Form->status('status', ['div' => ['class' => 'col-xs-12 col-md-3']]);
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+        <div class="clearfix"></div>
+        <div class="text-right">
+            <?= $this->Form->button(__('Submit')) ?>
+        </div>
+        <?= $this->Form->end() ?>
+    </div>
 </div>

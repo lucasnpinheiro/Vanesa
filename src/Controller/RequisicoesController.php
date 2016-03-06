@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -8,16 +9,19 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\RequisicoesTable $Requisicoes
  */
-class RequisicoesController extends AppController
-{
+class RequisicoesController extends AppController {
+
+    public function __construct(\Cake\Network\Request $request = null, \Cake\Network\Response $response = null, $name = null, $eventManager = null, $components = null) {
+        parent::__construct($request, $response, $name, $eventManager, $components);
+        $this->set('titulo_pagina', 'Requisições');
+    }
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $this->paginate = [
             'contain' => ['Produtos']
         ];
@@ -34,8 +38,7 @@ class RequisicoesController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $requisico = $this->Requisicoes->get($id, [
             'contain' => ['Produtos']
         ]);
@@ -49,8 +52,7 @@ class RequisicoesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $requisico = $this->Requisicoes->newEntity();
         if ($this->request->is('post')) {
             $requisico = $this->Requisicoes->patchEntity($requisico, $this->request->data);
@@ -73,8 +75,7 @@ class RequisicoesController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $requisico = $this->Requisicoes->get($id, [
             'contain' => []
         ]);
@@ -99,8 +100,7 @@ class RequisicoesController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $requisico = $this->Requisicoes->get($id);
         if ($this->Requisicoes->delete($requisico)) {
@@ -110,4 +110,5 @@ class RequisicoesController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
 }
