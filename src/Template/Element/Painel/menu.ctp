@@ -8,13 +8,23 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parametros</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
-                            <li><?php echo $this->Html->link('Configurações', ['controller' => 'Paramentros', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link('Usuários', ['controller' => 'Pessoas', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link('Empresas', ['controller' => 'Pessoas', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Configurações', ['controller' => 'Parametros', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Usuários', ['controller' => 'Usuarios', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Empresas', ['controller' => 'Empresas', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros</a>
+                        <ul class="dropdown-menu dropdown-animated fade-effect">
+                            <li><?php echo $this->Html->link('Clientes', ['controller' => 'Clientes', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Fornecedores', ['controller' => 'Fornecedores', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Funcionarios', ['controller' => 'Funcionarios', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Operadores de Caixas', ['controller' => 'OperadoresCaixas', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Vendedores', ['controller' => 'Vendedores', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Estoques</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
                             <li><?php echo $this->Html->link('Grupos', ['controller' => 'Grupos', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Grupos Estoques', ['controller' => 'GruposEstoques', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>

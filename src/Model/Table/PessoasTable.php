@@ -143,4 +143,15 @@ class PessoasTable extends Table {
         return true;
     }
 
+    public function afterSave(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options) {
+        $t = \Cake\ORM\TableRegistry::get('PessoasTipos');
+        $f = $t->findByPessoaIdAndTipo($entity->id, $entity->tipos)->first();
+        if (empty($f)) {
+            $d = $t->newEntity();
+            $d->pessoa_id = $entity->id;
+            $d->tipo = $entity->tipos;
+            $t->save($d);
+        }
+    }
+
 }

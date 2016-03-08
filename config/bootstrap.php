@@ -210,3 +210,12 @@ Type::build('date')
 Type::build('datetime')
     ->useImmutable()
     ->useLocaleParser();
+
+
+$parametros = Cake\ORM\TableRegistry::get('Parametros');
+$findParametros = $parametros->find('all')->all();
+if (!empty($findParametros)) {
+    foreach ($findParametros as $key => $value) {
+        Configure::write('Parametros.'.Inflector::camelize($value->chave), $value->valor);
+    }
+}

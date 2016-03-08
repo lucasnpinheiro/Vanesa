@@ -197,6 +197,38 @@ LOCK TABLES `grupos_estoques` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `parametros`
+--
+
+DROP TABLE IF EXISTS `parametros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parametros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) DEFAULT NULL,
+  `chave` varchar(100) DEFAULT NULL,
+  `valor` text,
+  `tipo` int(1) DEFAULT NULL COMMENT '1 - Inteiro | 2 - String | 3 - Texto | 4 - Lista | 5 - Float',
+  `opcoes` text,
+  `grupo` varchar(100) DEFAULT NULL,
+  `root` int(1) DEFAULT '0',
+  `required` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parametros`
+--
+-- ORDER BY:  `id`
+
+LOCK TABLES `parametros` WRITE;
+/*!40000 ALTER TABLE `parametros` DISABLE KEYS */;
+INSERT  IGNORE INTO `parametros` (`id`, `nome`, `chave`, `valor`, `tipo`, `opcoes`, `grupo`, `root`, `required`) VALUES (1,'Liberar Desconto em','D_Pedido_Local','A',4,'{\"A\":\"Ambos\", \"I\":\"Item\", \"P\":\"Pedido\"}','Pedido',0,1),(2,'Desconto no Item','D_Pedido_Item','50,0000',6,NULL,'Pedido',0,0),(3,'Desconto no Total do Pedido','D_Pedido','5,0000',6,NULL,'Pedido',0,0),(4,'Casas Decimais','N_Casas_Decimais','3',4,'[0,1,2,3,4]','Produtos',1,1),(5,'Codigo de Acesso','C_Acesso','',2,NULL,'Sistema',1,0),(6,'Data do Ultimo Acesso','C_Acesso_Data','',2,NULL,'Sistema',1,0),(7,'Codigo de Acesso da Empresa','C_Acesso_Empresa','',1,NULL,'Sistema',1,0),(8,'Carregar tela pagamento ao finalizar o pedido.','P_Tela_Pagamento','1',4,'[\"Não\",\"Sim\"]','Pedido',0,1),(9,'Quantidade maxima de parcelas','C_Max_Parcelas','5',1,'','Pedido',0,1),(10,'Novo pedido ao finalizar pagamento','P_Tela_Pedido','1',4,'[\"Não\",\"Sim\"]','Pedido',0,1);
+/*!40000 ALTER TABLE `parametros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pedidos`
 --
 
@@ -293,7 +325,7 @@ CREATE TABLE `pessoas` (
   `modified` datetime DEFAULT NULL,
   `root` int(1) DEFAULT '0' COMMENT '0 - Não | 1 - Sim',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +335,7 @@ CREATE TABLE `pessoas` (
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
-INSERT  IGNORE INTO `pessoas` (`id`, `nome`, `status`, `endereco`, `numero`, `bairro`, `cidade`, `estado`, `cep`, `fone1`, `fone2`, `cnpj`, `incricao`, `username`, `senha`, `created`, `modified`, `root`) VALUES (1,'Administrador Geral do Sistema',1,'Rua Joaquim Francisco Galeano','109','Vila Guiomar','Ribeirão Preto','SP','14031010','16 39191956','16 992660128','','','super','$2y$10$o/yJEQxcHBQntbM1SMPtUO9ZVkQmqFUDlwdRJKO6KVGb94863xeyO','2016-03-06 17:21:38','2016-03-06 17:26:35',1);
+INSERT  IGNORE INTO `pessoas` (`id`, `nome`, `status`, `endereco`, `numero`, `bairro`, `cidade`, `estado`, `cep`, `fone1`, `fone2`, `cnpj`, `incricao`, `username`, `senha`, `created`, `modified`, `root`) VALUES (1,'Administrador Geral do Sistema',1,'Rua Joaquim Francisco Galeano','109','Vila Guiomar','Ribeirão Preto','SP','14031010','16 39191956','16 992660128','','','super','$2y$10$o/yJEQxcHBQntbM1SMPtUO9ZVkQmqFUDlwdRJKO6KVGb94863xeyO','2016-03-06 17:21:38','2016-03-06 17:26:35',1),(2,'Consumidor',1,'Rua Joaquim Francisco Galiano','109','Vila Guiomar','Ribeirão Preto','SP','14031-010','(16) 39191-956','(16) 99266-0128','','',NULL,NULL,'2016-03-08 03:05:19','2016-03-08 03:20:37',0);
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +353,7 @@ CREATE TABLE `pessoas_tipos` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,6 +363,7 @@ CREATE TABLE `pessoas_tipos` (
 
 LOCK TABLES `pessoas_tipos` WRITE;
 /*!40000 ALTER TABLE `pessoas_tipos` DISABLE KEYS */;
+INSERT  IGNORE INTO `pessoas_tipos` (`id`, `pessoa_id`, `tipo`, `created`, `modified`) VALUES (1,2,2,'2016-03-08 03:20:37','2016-03-08 03:20:37');
 /*!40000 ALTER TABLE `pessoas_tipos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-06 16:59:28
+-- Dump completed on 2016-03-08  0:24:44

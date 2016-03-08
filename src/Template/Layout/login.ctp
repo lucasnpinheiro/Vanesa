@@ -1,9 +1,9 @@
-
+<?php $this->assign('title', 'Login'); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Quantum Admin</title>
+        <title><?= $this->fetch('title') . ' - ' . $titulo_pagina ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="format-detection" content="telephone=no">
         <meta name="description" content="">
@@ -16,6 +16,7 @@
         echo $this->Html->css('/css/animsition.min.css');
         echo $this->Html->css('/css/app.css');
         ?>       
+        <?php echo $this->element('Painel/scripts'); ?>
     </head>
 
     <body class="bg-dark3">

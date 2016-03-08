@@ -16,6 +16,7 @@
                     'label' => false
                 ]);
                 echo $this->Form->input('nome', ['label' => false, 'placeholder' => 'Nome']);
+                echo $this->Form->status('status', ['label' => false, 'placeholder' => 'Situação']);
                 echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
                 echo $this->Form->end();
                 ?>
@@ -27,24 +28,24 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('nome') ?></th>
-                    <th><?= $this->Paginator->sort('cnpj', 'CNPJ') ?></th>
-                    <th><?= $this->Paginator->sort('inscricao', 'Inscrição') ?></th>
+                    <th><?= $this->Paginator->sort('status') ?></th>
                     <th><?= $this->Paginator->sort('fone1', 'Telefone 1') ?></th>
                     <th><?= $this->Paginator->sort('fone2', 'Telefone 2') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('cnpj', 'CNPJ') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($empresas as $empresa): ?>
+                <?php foreach ($pessoas as $pessoa): ?>
                     <tr>
-                        <td><?= h($empresa->nome) ?></td>
-                        <td><?= h($empresa->cnpj) ?></td>
-                        <td><?= h($empresa->inscricao) ?></td>
-                        <td><?= h($empresa->fone1) ?></td>
-                        <td><?= h($empresa->fone2) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $empresa->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $empresa->id], ['confirm' => __('Are you sure you want to delete # {0}?', $empresa->id)]) ?>
+                        <td><?= h($pessoa->nome) ?></td>
+                        <td><?= $this->Html->status($pessoa->status) ?></td>
+                        <td><?= h($pessoa->fone1) ?></td>
+                        <td><?= h($pessoa->fone2) ?></td>
+                        <td><?= h($pessoa->cnpj) ?></td>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $pessoa->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $pessoa->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pessoa->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

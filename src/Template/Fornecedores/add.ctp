@@ -8,19 +8,22 @@
 
     </div>
     <div class="panel-body">
-        <?= $this->Form->create($empresa) ?>
+        <?= $this->Form->create($pessoa) ?>
         <?php
-        echo $this->Form->input('nome', ['div' => ['class' => 'col-xs-12 col-md-6']]);
-        echo $this->Form->cnpj('cnpj', ['label' => 'CNPJ', 'div' => ['class' => 'col-xs-12 col-md-3']]);
-        echo $this->Form->numero('inscricao', ['maxlength' => 20, 'label' => 'Inscrição', 'div' => ['class' => 'col-xs-12 col-md-3']]);
-        echo $this->Form->cep('cep', ['label' => 'CEP', 'div' => ['class' => 'col-xs-12 col-md-2'], 'onchange' => 'cake.util.getCep(this.value)']);
-        echo $this->Form->input('endereco', ['label' => 'Endereço', 'div' => ['class' => 'col-xs-12 col-md-8']]);
+        echo $this->Form->input('tipos', ['type' => 'hidden', 'value' => 3]);
+        echo $this->Form->input('nome', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-6']]);
+        echo $this->Form->status('status', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->cep('cep', ['label' => 'CEP', 'div' => ['class' => 'col-xs-12 col-md-3'], 'onchange' => 'cake.util.getCep(this.value)']);
+
+        echo $this->Form->input('endereco', ['label' => 'Endereço', 'div' => ['class' => 'col-xs-12 col-md-10']]);
         echo $this->Form->numero('numero', ['label' => 'Número', 'div' => ['class' => 'col-xs-12 col-md-2']]);
         echo $this->Form->input('bairro', ['div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('cidade', ['div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('estado', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->telefone('fone1', ['label' => 'Telefone 1', 'div' => ['class' => 'col-xs-12 col-md-6']]);
-        echo $this->Form->telefone('fone2', ['label' => 'Telefone 2', 'div' => ['class' => 'col-xs-12 col-md-6']]);
+        echo $this->Form->telefone('fone1', ['label' => 'Telefone 1', 'div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->telefone('fone2', ['label' => 'Telefone 2', 'div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->cnpj('cnpj', ['label' => 'CNPJ', 'div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->numero('incricao', ['maxlength' => 20, 'label' => 'Inscrição', 'div' => ['class' => 'col-xs-12 col-md-3']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">
@@ -29,4 +32,3 @@
         <?= $this->Form->end() ?>
     </div>
 </div>
-
