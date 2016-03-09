@@ -35,7 +35,7 @@
                     <th><?= $this->Paginator->sort('motivo') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -50,10 +50,9 @@
                         <td><?= h($requisico->motivo) ?></td>
                         <td><?= h($requisico->created) ?></td>
                         <td><?= h($requisico->modified) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $requisico->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $requisico->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $requisico->id], ['confirm' => __('Are you sure you want to delete # {0}?', $requisico->id)]) ?>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $requisico->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $requisico->id], ['confirm' => __('Are you sure you want to delete # {0}?', $requisico->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

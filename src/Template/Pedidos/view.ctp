@@ -89,7 +89,7 @@
                 <th><?= __('Valor Liquido') ?></th>
                 <th><?= __('Created') ?></th>
                 <th><?= __('Modified') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th class="actions text-right"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($pedido->pedidos_itens as $pedidosItens): ?>
             <tr>
@@ -104,7 +104,7 @@
                 <td><?= h($pedidosItens->valor_liquido) ?></td>
                 <td><?= h($pedidosItens->created) ?></td>
                 <td><?= h($pedidosItens->modified) ?></td>
-                <td class="actions">
+                <td class="actions text-right">
                     <?= $this->Html->link(__('View'), ['controller' => 'PedidosItens', 'action' => 'view', $pedidosItens->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'PedidosItens', 'action' => 'edit', $pedidosItens->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'PedidosItens', 'action' => 'delete', $pedidosItens->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedidosItens->id)]) ?>

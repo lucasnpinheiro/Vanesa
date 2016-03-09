@@ -32,7 +32,7 @@
                     <th><?= $this->Paginator->sort('data_vencimento') ?></th>
                     <th><?= $this->Paginator->sort('valor_codumento') ?></th>
                     <th><?= $this->Paginator->sort('tipo') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -44,9 +44,9 @@
                         <td><?= h($apagar->data_vencimento) ?></td>
                         <td><?= $this->Number->format($apagar->valor_codumento) ?></td>
                         <td><?= $this->Number->format($apagar->tipo) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $apagar->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $apagar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apagar->id)]) ?>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $apagar->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $apagar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apagar->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

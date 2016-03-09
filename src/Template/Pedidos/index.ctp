@@ -26,7 +26,7 @@
                 <th><?= $this->Paginator->sort('valor_troco') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th><?= $this->Paginator->sort('modified') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th class="actions text-right"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -47,7 +47,7 @@
                 <td><?= $this->Number->format($pedido->valor_troco) ?></td>
                 <td><?= h($pedido->created) ?></td>
                 <td><?= h($pedido->modified) ?></td>
-                <td class="actions">
+                <td class="actions text-right">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $pedido->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $pedido->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id)]) ?>

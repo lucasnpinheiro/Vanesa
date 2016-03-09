@@ -31,7 +31,7 @@
                     <th><?= $this->Paginator->sort('pessoa_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -42,9 +42,9 @@
                         <td><?= $caixasDiario->has('pessoa') ? $this->Html->link($caixasDiario->pessoa->id, ['controller' => 'Pessoas', 'action' => 'view', $caixasDiario->pessoa->id]) : '' ?></td>
                         <td><?= h($caixasDiario->created) ?></td>
                         <td><?= h($caixasDiario->modified) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $caixasDiario->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $caixasDiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasDiario->id)]) ?>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $caixasDiario->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $caixasDiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasDiario->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

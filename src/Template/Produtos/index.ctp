@@ -30,21 +30,10 @@
                     <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('unidade') ?></th>
                     <th><?= $this->Paginator->sort('status') ?></th>
-                    <th><?= $this->Paginator->sort('grupo_estoque_id') ?></th>
-                    <th><?= $this->Paginator->sort('peso_baixa_estoque') ?></th>
-                    <th><?= $this->Paginator->sort('desconto_pedido') ?></th>
-                    <th><?= $this->Paginator->sort('quantidade_pedido') ?></th>
-                    <th><?= $this->Paginator->sort('compra') ?></th>
-                    <th><?= $this->Paginator->sort('margem') ?></th>
                     <th><?= $this->Paginator->sort('venda') ?></th>
                     <th><?= $this->Paginator->sort('promocao') ?></th>
-                    <th><?= $this->Paginator->sort('estoque_minimo') ?></th>
                     <th><?= $this->Paginator->sort('estoque_atual') ?></th>
-                    <th><?= $this->Paginator->sort('atalho') ?></th>
-                    <th><?= $this->Paginator->sort('nome_atalho') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -54,24 +43,11 @@
                         <td><?= h($produto->nome) ?></td>
                         <td><?= h($produto->unidade) ?></td>
                         <td><?= $this->Number->format($produto->status) ?></td>
-                        <td><?= $this->Number->format($produto->grupo_estoque_id) ?></td>
-                        <td><?= $this->Number->format($produto->peso_baixa_estoque) ?></td>
-                        <td><?= $this->Number->format($produto->desconto_pedido) ?></td>
-                        <td><?= $this->Number->format($produto->quantidade_pedido) ?></td>
-                        <td><?= $this->Number->format($produto->compra) ?></td>
-                        <td><?= $this->Number->format($produto->margem) ?></td>
                         <td><?= $this->Number->format($produto->venda) ?></td>
-                        <td><?= $this->Number->format($produto->promocao) ?></td>
-                        <td><?= $this->Number->format($produto->estoque_minimo) ?></td>
                         <td><?= $this->Number->format($produto->estoque_atual) ?></td>
-                        <td><?= $this->Number->format($produto->atalho) ?></td>
-                        <td><?= h($produto->nome_atalho) ?></td>
-                        <td><?= h($produto->created) ?></td>
-                        <td><?= h($produto->modified) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $produto->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $produto->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $produto->id], ['confirm' => __('Are you sure you want to delete # {0}?', $produto->id)]) ?>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $produto->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $produto->id], ['confirm' => __('Are you sure you want to delete # {0}?', $produto->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

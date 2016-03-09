@@ -31,7 +31,7 @@
                     <th><?= $this->Paginator->sort('inscricao', 'Inscrição') ?></th>
                     <th><?= $this->Paginator->sort('fone1', 'Telefone 1') ?></th>
                     <th><?= $this->Paginator->sort('fone2', 'Telefone 2') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -42,9 +42,9 @@
                         <td><?= h($empresa->inscricao) ?></td>
                         <td><?= h($empresa->fone1) ?></td>
                         <td><?= h($empresa->fone2) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $empresa->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $empresa->id], ['confirm' => __('Are you sure you want to delete # {0}?', $empresa->id)]) ?>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $empresa->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $empresa->id], ['confirm' => __('Are you sure you want to delete # {0}?', $empresa->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

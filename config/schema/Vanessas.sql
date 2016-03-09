@@ -379,16 +379,16 @@ CREATE TABLE `produtos` (
   `nome` varchar(255) DEFAULT NULL,
   `unidade` varchar(2) DEFAULT NULL,
   `status` int(1) DEFAULT NULL COMMENT '1 - Ativo | 2 - Inativo | 9 - Excluido',
-  `grupo_estoque_id` int(11) DEFAULT NULL,
-  `peso_baixa_estoque` float(4,4) DEFAULT NULL,
+  `grupos_estoque_id` int(11) DEFAULT NULL,
+  `peso_baixa_estoque` float(12,4) DEFAULT NULL,
   `desconto_pedido` int(1) DEFAULT NULL COMMENT '0 - Nao | 1 - Sim',
   `quantidade_pedido` int(1) DEFAULT NULL COMMENT '0 - Nao | 1 - Sim',
   `compra` float(10,2) DEFAULT NULL,
-  `margem` float(4,4) DEFAULT NULL,
+  `margem` float(12,4) DEFAULT NULL,
   `venda` float(10,2) DEFAULT NULL,
   `promocao` float(10,2) DEFAULT NULL,
-  `estoque_minimo` float(6,4) DEFAULT NULL,
-  `estoque_atual` float(6,4) DEFAULT NULL,
+  `estoque_minimo` float(12,4) DEFAULT NULL,
+  `estoque_atual` float(12,4) DEFAULT NULL,
   `atalho` int(1) DEFAULT NULL COMMENT '0 - Nao | 1 - Sim',
   `nome_atalho` varchar(15) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
@@ -447,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-08  0:24:44
+-- Dump completed on 2016-03-09  0:41:57

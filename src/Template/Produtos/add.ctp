@@ -10,21 +10,21 @@
     <div class="panel-body">
         <?= $this->Form->create($produto) ?>
         <?php
-        echo $this->Form->input('nome');
-            echo $this->Form->input('unidade');
-            echo $this->Form->input('status');
-            echo $this->Form->input('grupo_estoque_id');
-            echo $this->Form->input('peso_baixa_estoque');
-            echo $this->Form->input('desconto_pedido');
-            echo $this->Form->input('quantidade_pedido');
-            echo $this->Form->input('compra');
-            echo $this->Form->input('margem');
-            echo $this->Form->input('venda');
-            echo $this->Form->input('promocao');
-            echo $this->Form->input('estoque_minimo');
-            echo $this->Form->input('estoque_atual');
-            echo $this->Form->input('atalho');
-            echo $this->Form->input('nome_atalho');
+        echo $this->Form->input('nome', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-6']]);
+        echo $this->Form->input('unidade', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->status('status', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->input('grupo_estoque_id', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->quantidade('peso_baixa_estoque', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->simNao('desconto_pedido', ['div' => ['required' => true, 'class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->simNao('quantidade_pedido', ['div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->moeda('compra', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->moeda('venda', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->juros('margem', ['disabled' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->moeda('promocao', ['required' => true, 'label' => 'Promoção', 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->quantidade('estoque_minimo', ['div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->quantidade('estoque_atual', ['div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->simNao('atalho', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->input('nome_atalho', ['div' => ['class' => 'col-sx-12 col-md-3']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

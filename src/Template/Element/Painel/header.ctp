@@ -23,7 +23,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-animated pop-effect" role="menu">
                         <li>
-                            <?php echo $this->Html->link('Perfil', ['controller' => 'Pessoas', 'action' => 'edit', $this->request->session()->read('Auth.User.id')], ['icon' => false]) ?>
+                            <?php echo $this->Html->link('Perfil', ['controller' => 'Usuarios', 'action' => 'edit', $this->request->session()->read('Auth.User.id')], ['icon' => false]) ?>
                         </li>
                         <li>
                             <?php echo $this->Html->link('Sair', '/sair', ['icon' => false]) ?>

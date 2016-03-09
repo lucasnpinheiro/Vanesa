@@ -23,7 +23,7 @@ class ProdutosController extends AppController {
      */
     public function index() {
         $this->paginate = [
-            'contain' => ['GrupoEstoques']
+            'contain' => ['GruposEstoques']
         ];
         $produtos = $this->paginate($this->Produtos);
 
@@ -40,7 +40,7 @@ class ProdutosController extends AppController {
      */
     public function view($id = null) {
         $produto = $this->Produtos->get($id, [
-            'contain' => ['GrupoEstoques', 'PedidosItens', 'Requisicoes']
+            'contain' => ['GruposEstoques', 'PedidosItens', 'Requisicoes']
         ]);
 
         $this->set('produto', $produto);
@@ -63,8 +63,8 @@ class ProdutosController extends AppController {
                 $this->Flash->error(__('The produto could not be saved. Please, try again.'));
             }
         }
-        $grupoEstoques = $this->Produtos->GrupoEstoques->find('list', ['limit' => 200]);
-        $this->set(compact('produto', 'grupoEstoques'));
+        $gruposEstoques = $this->Produtos->GruposEstoques->find('list', ['limit' => 200]);
+        $this->set(compact('produto', 'gruposEstoques'));
         $this->set('_serialize', ['produto']);
     }
 
@@ -88,8 +88,8 @@ class ProdutosController extends AppController {
                 $this->Flash->error(__('The produto could not be saved. Please, try again.'));
             }
         }
-        $grupoEstoques = $this->Produtos->GrupoEstoques->find('list', ['limit' => 200]);
-        $this->set(compact('produto', 'grupoEstoques'));
+        $gruposEstoques = $this->Produtos->GruposEstoques->find('list', ['limit' => 200]);
+        $this->set(compact('produto', 'gruposEstoques'));
         $this->set('_serialize', ['produto']);
     }
 

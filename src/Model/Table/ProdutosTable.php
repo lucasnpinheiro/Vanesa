@@ -33,8 +33,8 @@ class ProdutosTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('GrupoEstoques', [
-            'foreignKey' => 'grupo_estoque_id'
+        $this->belongsTo('GruposEstoques', [
+            'foreignKey' => 'grupos_estoque_id'
         ]);
         $this->hasMany('PedidosItens', [
             'foreignKey' => 'produto_id'
@@ -121,7 +121,7 @@ class ProdutosTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['grupo_estoque_id'], 'GrupoEstoques'));
+        $rules->add($rules->existsIn(['grupos_estoque_id'], 'GruposEstoques'));
         return $rules;
     }
 }

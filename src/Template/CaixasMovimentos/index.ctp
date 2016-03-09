@@ -33,7 +33,7 @@
                     <th><?= $this->Paginator->sort('grupo_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -46,10 +46,9 @@
                         <td><?= $caixasMovimento->has('grupo') ? $this->Html->link($caixasMovimento->grupo->id, ['controller' => 'Grupos', 'action' => 'view', $caixasMovimento->grupo->id]) : '' ?></td>
                         <td><?= h($caixasMovimento->created) ?></td>
                         <td><?= h($caixasMovimento->modified) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $caixasMovimento->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $caixasMovimento->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $caixasMovimento->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasMovimento->id)]) ?>
+                        <td class="actions text-right">
+                           <?= $this->Html->link(null, ['action' => 'edit', $caixasMovimento->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $caixasMovimento->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasMovimento->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

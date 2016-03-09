@@ -30,7 +30,7 @@
                     <th><?= $this->Paginator->sort('estoque_global') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -40,9 +40,9 @@
                         <td><?= $this->Number->format($gruposEstoque->estoque_global) ?></td>
                         <td><?= h($gruposEstoque->created) ?></td>
                         <td><?= h($gruposEstoque->modified) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $gruposEstoque->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $gruposEstoque->id], ['confirm' => __('Are you sure you want to delete # {0}?', $gruposEstoque->id)]) ?>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $gruposEstoque->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $gruposEstoque->id], ['confirm' => __('Are you sure you want to delete # {0}?', $gruposEstoque->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
