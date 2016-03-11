@@ -63,8 +63,8 @@ class CaixasMovimentosController extends AppController {
                 $this->Flash->error(__('The caixas movimento could not be saved. Please, try again.'));
             }
         }
-        $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list', ['limit' => 200]);
-        $grupos = $this->CaixasMovimentos->Grupos->find('list', ['limit' => 200]);
+        $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list');
+        $grupos = $this->CaixasMovimentos->Grupos->find('list');
         $this->set(compact('caixasMovimento', 'caixasDiarios', 'grupos'));
         $this->set('_serialize', ['caixasMovimento']);
     }
@@ -89,8 +89,8 @@ class CaixasMovimentosController extends AppController {
                 $this->Flash->error(__('The caixas movimento could not be saved. Please, try again.'));
             }
         }
-        $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list', ['limit' => 200]);
-        $grupos = $this->CaixasMovimentos->Grupos->find('list', ['limit' => 200]);
+        $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list');
+        $grupos = $this->CaixasMovimentos->Grupos->find('list');
         $this->set(compact('caixasMovimento', 'caixasDiarios', 'grupos'));
         $this->set('_serialize', ['caixasMovimento']);
     }

@@ -2,8 +2,8 @@
     <div class="panel-heading font-header">
         <?php echo $titulo_pagina . ' - ' . __('Add') ?>
         <ul class="panel-toolbar list-unstyled font-12 m-d-3">
-            <li><?php echo $this->Html->link('', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
-            <li><?php echo $this->Html->link('', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+            <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
         </ul>
 
     </div>
@@ -11,7 +11,7 @@
         <?= $this->Form->create($grupo) ?>
         <?php
         echo $this->Form->input('nome', ['div' => ['class' => 'col-xs-12 col-md-9']]);
-        echo $this->Form->status('status', ['div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->status('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-3']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

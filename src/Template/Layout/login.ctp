@@ -24,7 +24,7 @@
         <!-- wrapper -->
         <div class="wrapper">
             <div class="container text-center">
-                <h1 class="font-header login-header text-upper">Vanessa<span class="text-main">Sorvetes</span></h1>
+                <h1 class="font-header login-header text-upper">Vanesa<span class="text-main">Sorvetes</span></h1>
                 <div class="single-wrap">
                     <?= $this->Flash->render() ?>
                 </div>

@@ -2,8 +2,8 @@
     <div class="panel-heading font-header">
         <?php echo $titulo_pagina . ' - ' . __('Add') ?>
         <ul class="panel-toolbar list-unstyled font-12 m-d-3">
-            <li><?php echo $this->Html->link('', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
-            <li><?php echo $this->Html->link('', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+            <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
         </ul>
 
     </div>
@@ -11,7 +11,7 @@
         <?= $this->Form->create($apagar) ?>
         <?php
         echo $this->Form->input('numero_documento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->status('status', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->status('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('pessoa_id', ['options' => $pessoas, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->data('data_vencimento', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->moeda('valor_codumento', ['div' => ['class' => 'col-xs-12 col-md-4']]);

@@ -59,7 +59,7 @@ class ApagarController extends AppController {
                 $this->Flash->error(__('The apagar could not be saved. Please, try again.'));
             }
         }
-        $pessoas = $this->Apagar->Pessoas->find('list', ['limit' => 200]);
+        $pessoas = $this->Apagar->Pessoas->find('list');
         $this->set(compact('apagar', 'pessoas'));
         $this->set('_serialize', ['apagar']);
     }
@@ -84,7 +84,7 @@ class ApagarController extends AppController {
                 $this->Flash->error(__('The apagar could not be saved. Please, try again.'));
             }
         }
-        $pessoas = $this->Apagar->Pessoas->find('list', ['limit' => 200]);
+        $pessoas = $this->Apagar->Pessoas->find('list');
         $this->set(compact('apagar', 'pessoas'));
         $this->set('_serialize', ['apagar']);
     }

@@ -63,7 +63,7 @@ class RequisicoesController extends AppController {
                 $this->Flash->error(__('The requisico could not be saved. Please, try again.'));
             }
         }
-        $produtos = $this->Requisicoes->Produtos->find('list', ['limit' => 200]);
+        $produtos = $this->Requisicoes->Produtos->find('list');
         $this->set(compact('requisico', 'produtos'));
         $this->set('_serialize', ['requisico']);
     }
@@ -88,7 +88,7 @@ class RequisicoesController extends AppController {
                 $this->Flash->error(__('The requisico could not be saved. Please, try again.'));
             }
         }
-        $produtos = $this->Requisicoes->Produtos->find('list', ['limit' => 200]);
+        $produtos = $this->Requisicoes->Produtos->find('list');
         $this->set(compact('requisico', 'produtos'));
         $this->set('_serialize', ['requisico']);
     }

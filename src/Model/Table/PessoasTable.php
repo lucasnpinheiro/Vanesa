@@ -28,7 +28,7 @@ class PessoasTable extends Table {
         parent::initialize($config);
 
         $this->table('pessoas');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

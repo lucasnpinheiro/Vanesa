@@ -26,7 +26,7 @@ class PedidosTable extends Table
         parent::initialize($config);
 
         $this->table('pedidos');
-        $this->displayField('id');
+        $this->displayField('ficha');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

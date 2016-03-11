@@ -25,7 +25,7 @@ class EmpresasTable extends Table
         parent::initialize($config);
 
         $this->table('empresas');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
     }
 

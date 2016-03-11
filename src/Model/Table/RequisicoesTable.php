@@ -26,7 +26,7 @@ class RequisicoesTable extends Table
         parent::initialize($config);
 
         $this->table('requisicoes');
-        $this->displayField('id');
+        $this->displayField('numero_documento');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

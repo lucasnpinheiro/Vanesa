@@ -39,7 +39,7 @@
             <!-- Start Footer -->
             <footer class="footer">
                 <div class="container">
-                    &copy; <?php echo date('Y') ?>. <b>Vanessa Sorvetes</b>
+                    &copy; <?php echo date('Y') ?>. <b>Vanesa Sorvetes</b>
                 </div>
             </footer>
             <!-- End Footer -->

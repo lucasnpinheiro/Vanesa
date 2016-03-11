@@ -27,7 +27,7 @@ class ParametrosTable extends Table
         parent::initialize($config);
 
         $this->table('parametros');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
             $this->addBehavior('Search.Search');

@@ -26,7 +26,7 @@ class ApagarTable extends Table {
         parent::initialize($config);
 
         $this->table('apagar');
-        $this->displayField('id');
+        $this->displayField('numero_documento');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

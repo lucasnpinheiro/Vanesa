@@ -22,7 +22,7 @@ class PessoasController extends AppController {
      * @return void
      */
     public function login() {
-        $this->set('titulo_pagina', 'Vanessa Sorvetes');
+        $this->set('titulo_pagina', 'Vanesa Sorvetes');
 
         $this->viewBuilder()->layout('login');
         if ($this->request->is('post')) {

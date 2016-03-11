@@ -227,7 +227,7 @@ return [
             //'port' => 'non_standard_port_number',
             'username' => 'root',
             'password' => '',
-            'database' => 'vanessa',
+            'database' => 'vanesa',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],

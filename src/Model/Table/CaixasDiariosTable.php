@@ -27,7 +27,7 @@ class CaixasDiariosTable extends Table
         parent::initialize($config);
 
         $this->table('caixas_diarios');
-        $this->displayField('id');
+        $this->displayField('data');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

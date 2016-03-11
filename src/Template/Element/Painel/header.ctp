@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <?php echo $this->Html->link('Vanessa Sorvetes', '/', ['class' => 'navbar-brand text-upper']); ?>
+            <?php echo $this->Html->link('Vanesa Sorvetes', '/', ['class' => 'navbar-brand text-upper']); ?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

@@ -63,7 +63,7 @@ class CaixasDiariosController extends AppController {
                 $this->Flash->error(__('The caixas diario could not be saved. Please, try again.'));
             }
         }
-        $pessoas = $this->CaixasDiarios->Pessoas->find('list', ['limit' => 200]);
+        $pessoas = $this->CaixasDiarios->Pessoas->find('list');
         $this->set(compact('caixasDiario', 'pessoas'));
         $this->set('_serialize', ['caixasDiario']);
     }
@@ -88,7 +88,7 @@ class CaixasDiariosController extends AppController {
                 $this->Flash->error(__('The caixas diario could not be saved. Please, try again.'));
             }
         }
-        $pessoas = $this->CaixasDiarios->Pessoas->find('list', ['limit' => 200]);
+        $pessoas = $this->CaixasDiarios->Pessoas->find('list');
         $this->set(compact('caixasDiario', 'pessoas'));
         $this->set('_serialize', ['caixasDiario']);
     }

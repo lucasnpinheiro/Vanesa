@@ -31,6 +31,27 @@ class ProdutosController extends AppController {
         $this->set('_serialize', ['produtos']);
     }
 
+    public function verifica() {
+
+        $find = $this->Produtos->find('all', [
+                    'conditions' => [
+                        $this->request->data('tipo') => $this->request->data('valor')
+                    ]
+                ])->first();
+        if (empty($find)) {
+            $retorno = [
+                'cod' => 111
+            ];
+        } else {
+            $retorno = [
+                'cod' => 999,
+                'id' => $find->id,
+            ];
+        }
+        echo json_encode($retorno);
+        exit;
+    }
+
     /**
      * View method
      *
@@ -63,7 +84,7 @@ class ProdutosController extends AppController {
                 $this->Flash->error(__('The produto could not be saved. Please, try again.'));
             }
         }
-        $gruposEstoques = $this->Produtos->GruposEstoques->find('list', ['limit' => 200]);
+        $gruposEstoques = $this->Produtos->GruposEstoques->find('list');
         $this->set(compact('produto', 'gruposEstoques'));
         $this->set('_serialize', ['produto']);
     }
@@ -88,7 +109,7 @@ class ProdutosController extends AppController {
                 $this->Flash->error(__('The produto could not be saved. Please, try again.'));
             }
         }
-        $gruposEstoques = $this->Produtos->GruposEstoques->find('list', ['limit' => 200]);
+        $gruposEstoques = $this->Produtos->GruposEstoques->find('list');
         $this->set(compact('produto', 'gruposEstoques'));
         $this->set('_serialize', ['produto']);
     }

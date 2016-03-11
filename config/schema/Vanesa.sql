@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
 --
--- Host: 127.0.0.1    Database: vanessa
+-- Host: 127.0.0.1    Database: vanesa
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.0.23-MariaDB
 
@@ -183,7 +183,7 @@ CREATE TABLE `grupos_estoques` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='	';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='	';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,6 +193,7 @@ CREATE TABLE `grupos_estoques` (
 
 LOCK TABLES `grupos_estoques` WRITE;
 /*!40000 ALTER TABLE `grupos_estoques` DISABLE KEYS */;
+INSERT  IGNORE INTO `grupos_estoques` (`id`, `nome`, `estoque_global`, `created`, `modified`) VALUES (1,'Sorvetes',NULL,'2016-03-11 00:42:08','2016-03-11 00:42:08'),(2,'Açai',NULL,'2016-03-11 00:43:07','2016-03-11 00:43:07');
 /*!40000 ALTER TABLE `grupos_estoques` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,6 +377,7 @@ DROP TABLE IF EXISTS `produtos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `produtos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `barra` varchar(13) DEFAULT NULL,
   `nome` varchar(255) DEFAULT NULL,
   `unidade` varchar(2) DEFAULT NULL,
   `status` int(1) DEFAULT NULL COMMENT '1 - Ativo | 2 - Inativo | 9 - Excluido',
@@ -394,7 +396,7 @@ CREATE TABLE `produtos` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -404,6 +406,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
+INSERT  IGNORE INTO `produtos` (`id`, `barra`, `nome`, `unidade`, `status`, `grupos_estoque_id`, `peso_baixa_estoque`, `desconto_pedido`, `quantidade_pedido`, `compra`, `margem`, `venda`, `promocao`, `estoque_minimo`, `estoque_atual`, `atalho`, `nome_atalho`, `created`, `modified`) VALUES (1,'1','Sorvete 1 bola','KG',1,1,0.5000,0,0,1.50,50.0000,3.00,NULL,10.0000,50.0000,1,'1 bola','2016-03-11 01:13:14','2016-03-11 01:36:06');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -447,4 +450,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-09  0:41:57
+-- Dump completed on 2016-03-10 22:37:45

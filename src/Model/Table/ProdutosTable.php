@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Produto;
@@ -14,8 +15,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\HasMany $PedidosItens
  * @property \Cake\ORM\Association\HasMany $Requisicoes
  */
-class ProdutosTable extends Table
-{
+class ProdutosTable extends Table {
 
     /**
      * Initialize method
@@ -23,12 +23,11 @@ class ProdutosTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('produtos');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -50,64 +49,63 @@ class ProdutosTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('nome');
+                ->allowEmpty('nome');
 
         $validator
-            ->allowEmpty('unidade');
+                ->allowEmpty('unidade');
 
         $validator
-            ->integer('status')
-            ->allowEmpty('status');
+                ->integer('status')
+                ->allowEmpty('status');
 
         $validator
-            ->numeric('peso_baixa_estoque')
-            ->allowEmpty('peso_baixa_estoque');
+                ->decimal('peso_baixa_estoque')
+                ->allowEmpty('peso_baixa_estoque');
 
         $validator
-            ->integer('desconto_pedido')
-            ->allowEmpty('desconto_pedido');
+                ->decimal('desconto_pedido')
+                ->allowEmpty('desconto_pedido');
 
         $validator
-            ->integer('quantidade_pedido')
-            ->allowEmpty('quantidade_pedido');
+                ->decimal('quantidade_pedido')
+                ->allowEmpty('quantidade_pedido');
 
         $validator
-            ->numeric('compra')
-            ->allowEmpty('compra');
+                ->decimal('compra')
+                ->allowEmpty('compra');
 
         $validator
-            ->numeric('margem')
-            ->allowEmpty('margem');
+                ->decimal('margem')
+                ->allowEmpty('margem');
 
         $validator
-            ->numeric('venda')
-            ->allowEmpty('venda');
+                ->decimal('venda')
+                ->allowEmpty('venda');
 
         $validator
-            ->numeric('promocao')
-            ->allowEmpty('promocao');
+                ->decimal('promocao')
+                ->allowEmpty('promocao');
 
         $validator
-            ->numeric('estoque_minimo')
-            ->allowEmpty('estoque_minimo');
+                ->decimal('estoque_minimo')
+                ->allowEmpty('estoque_minimo');
 
         $validator
-            ->numeric('estoque_atual')
-            ->allowEmpty('estoque_atual');
+                ->decimal('estoque_atual')
+                ->allowEmpty('estoque_atual');
 
         $validator
-            ->integer('atalho')
-            ->allowEmpty('atalho');
+                ->integer('atalho')
+                ->allowEmpty('atalho');
 
         $validator
-            ->allowEmpty('nome_atalho');
+                ->allowEmpty('nome_atalho');
 
         return $validator;
     }
@@ -119,9 +117,22 @@ class ProdutosTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['grupos_estoque_id'], 'GruposEstoques'));
         return $rules;
     }
+
+    public function beforeSave(\Cake\Event\Event $event, \Cake\ORM\Entity $entity) {
+        if (!empty($entity->compra) AND ! empty($entity->venda)) {
+            $entity->margem = ((($entity->venda - $entity->compra) / $entity->venda) * 100);
+        }
+        return true;
+    }
+
+    public function afterSave(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options) {
+        if (empty($entity->barra)) {
+            $this->updateAll(['barra' => $entity->id], ['id' => $entity->id]);
+        }
+    }
+
 }
