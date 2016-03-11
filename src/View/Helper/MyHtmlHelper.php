@@ -172,6 +172,14 @@ class MyHtmlHelper extends BootstrapHtmlHelper {
         return $this->label($r[$id]['text'], $r[$id]['class']);
     }
 
+    public function tipo($id) {
+        $r = [
+            1 => ['text' => __('Entrada'), 'class' => 'success'],
+            2 => ['text' => __('Saída'), 'class' => 'danger'],
+        ];
+        return $this->label($r[$id]['text'], $r[$id]['class']);
+    }
+
     public function tzd($id) {
         $r = [
             '-01:00' => ['text' => '-01:00', 'class' => 'defautl'],

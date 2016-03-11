@@ -22,9 +22,8 @@ class GruposEstoquesController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $gruposEstoques = $this->paginate($this->GruposEstoques);
-
-        $this->set(compact('gruposEstoques'));
+        $query = $this->GruposEstoques->find('search', $this->GruposEstoques->filterParams($this->request->query))->contain(['Produtos']);
+        $this->set('gruposEstoques', $this->paginate($query));
         $this->set('_serialize', ['gruposEstoques']);
     }
 
@@ -60,7 +59,9 @@ class GruposEstoquesController extends AppController {
                 $this->Flash->error(__('The grupos estoque could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('gruposEstoque'));
+        $this->loadModel('Produtos');
+        $produto = $this->Produtos->find('list');
+        $this->set(compact('gruposEstoque', 'produto'));
         $this->set('_serialize', ['gruposEstoque']);
     }
 
@@ -84,7 +85,9 @@ class GruposEstoquesController extends AppController {
                 $this->Flash->error(__('The grupos estoque could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('gruposEstoque'));
+        $this->loadModel('Produtos');
+        $produto = $this->Produtos->find('list');
+        $this->set(compact('gruposEstoque', 'produto'));
         $this->set('_serialize', ['gruposEstoque']);
     }
 

@@ -10,8 +10,8 @@
     <div class="panel-body">
         <?= $this->Form->create($gruposEstoque) ?>
         <?php
-        echo $this->Form->input('nome', ['div' => ['class' => 'col-xs-12 col-md-9']]);
-        echo $this->Form->input('estoque_global', ['div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->input('nome', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-9']]);
+        echo $this->Form->input('estoque_global', ['options' => $produto, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

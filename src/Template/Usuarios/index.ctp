@@ -25,7 +25,7 @@
         </div><!-- /.row -->
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped font-12">
+        <table class="table table-bordered table-striped font-12 table-hover">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('nome') ?></th>

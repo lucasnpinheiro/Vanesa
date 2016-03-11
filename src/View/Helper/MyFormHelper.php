@@ -623,6 +623,18 @@ class MyFormHelper extends BootstrapFormHelper {
         return $this->input($fieldName, $options);
     }
 
+    public function tipo($fieldName, array $options = []) {
+        $options += [
+            'type' => 'select',
+            'options' => [
+                1 => __('Entrada'),
+                2 => __('Saída'),
+            ],
+            'empty' => __('Selecionar uma opção')
+        ];
+        return $this->input($fieldName, $options);
+    }
+
     public function tzd($fieldName, array $options = []) {
         $options += [
             'type' => 'select',

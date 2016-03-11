@@ -23,7 +23,7 @@
         </div><!-- /.row -->
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped font-12">
+        <table class="table table-bordered table-striped font-12 table-hover">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('nome') ?></th>
@@ -34,10 +34,12 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($gruposEstoques as $gruposEstoque): ?>
+                <?php
+                foreach ($gruposEstoques as $gruposEstoque):
+                    ?>
                     <tr>
                         <td><?= h($gruposEstoque->nome) ?></td>
-                        <td><?= $this->Number->format($gruposEstoque->estoque_global) ?></td>
+                        <td><?= h(!empty($gruposEstoque->produto) ? $gruposEstoque->produto->nome : 'Sem referências') ?></td>
                         <td><?= h($gruposEstoque->created) ?></td>
                         <td><?= h($gruposEstoque->modified) ?></td>
                         <td class="actions text-right">

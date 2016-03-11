@@ -22,29 +22,11 @@ class RequisicoesController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->paginate = [
-            'contain' => ['Produtos']
-        ];
-        $requisicoes = $this->paginate($this->Requisicoes);
 
-        $this->set(compact('requisicoes'));
+        $query = $this->Requisicoes->find('search', $this->Requisicoes->filterParams($this->request->query))->contain(['Produtos']);
+        $this->set('requisicoes', $this->paginate($query));
         $this->set('_serialize', ['requisicoes']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Requisico id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null) {
-        $requisico = $this->Requisicoes->get($id, [
-            'contain' => ['Produtos']
-        ]);
-
-        $this->set('requisico', $requisico);
-        $this->set('_serialize', ['requisico']);
+        $this->set('produtos', $this->Requisicoes->Produtos->find('list'));
     }
 
     /**
@@ -66,49 +48,6 @@ class RequisicoesController extends AppController {
         $produtos = $this->Requisicoes->Produtos->find('list');
         $this->set(compact('requisico', 'produtos'));
         $this->set('_serialize', ['requisico']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Requisico id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null) {
-        $requisico = $this->Requisicoes->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $requisico = $this->Requisicoes->patchEntity($requisico, $this->request->data);
-            if ($this->Requisicoes->save($requisico)) {
-                $this->Flash->success(__('The requisico has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The requisico could not be saved. Please, try again.'));
-            }
-        }
-        $produtos = $this->Requisicoes->Produtos->find('list');
-        $this->set(compact('requisico', 'produtos'));
-        $this->set('_serialize', ['requisico']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Requisico id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $requisico = $this->Requisicoes->get($id);
-        if ($this->Requisicoes->delete($requisico)) {
-            $this->Flash->success(__('The requisico has been deleted.'));
-        } else {
-            $this->Flash->error(__('The requisico could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
     }
 
 }

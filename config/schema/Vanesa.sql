@@ -193,7 +193,7 @@ CREATE TABLE `grupos_estoques` (
 
 LOCK TABLES `grupos_estoques` WRITE;
 /*!40000 ALTER TABLE `grupos_estoques` DISABLE KEYS */;
-INSERT  IGNORE INTO `grupos_estoques` (`id`, `nome`, `estoque_global`, `created`, `modified`) VALUES (1,'Sorvetes',NULL,'2016-03-11 00:42:08','2016-03-11 00:42:08'),(2,'Açai',NULL,'2016-03-11 00:43:07','2016-03-11 00:43:07');
+INSERT  IGNORE INTO `grupos_estoques` (`id`, `nome`, `estoque_global`, `created`, `modified`) VALUES (1,'Sorvetes',1,'2016-03-11 00:42:08','2016-03-11 01:51:09'),(2,'Açai',NULL,'2016-03-11 00:43:07','2016-03-11 00:43:07');
 /*!40000 ALTER TABLE `grupos_estoques` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,7 +354,7 @@ CREATE TABLE `pessoas_tipos` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,7 +364,7 @@ CREATE TABLE `pessoas_tipos` (
 
 LOCK TABLES `pessoas_tipos` WRITE;
 /*!40000 ALTER TABLE `pessoas_tipos` DISABLE KEYS */;
-INSERT  IGNORE INTO `pessoas_tipos` (`id`, `pessoa_id`, `tipo`, `created`, `modified`) VALUES (1,2,2,'2016-03-08 03:20:37','2016-03-08 03:20:37');
+INSERT  IGNORE INTO `pessoas_tipos` (`id`, `pessoa_id`, `tipo`, `created`, `modified`) VALUES (1,1,1,'2016-03-08 03:20:37','2016-03-08 03:20:37'),(2,2,2,'2016-03-08 03:20:37','2016-03-08 03:20:37');
 /*!40000 ALTER TABLE `pessoas_tipos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,7 +406,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT  IGNORE INTO `produtos` (`id`, `barra`, `nome`, `unidade`, `status`, `grupos_estoque_id`, `peso_baixa_estoque`, `desconto_pedido`, `quantidade_pedido`, `compra`, `margem`, `venda`, `promocao`, `estoque_minimo`, `estoque_atual`, `atalho`, `nome_atalho`, `created`, `modified`) VALUES (1,'1','Sorvete 1 bola','KG',1,1,0.5000,0,0,1.50,50.0000,3.00,NULL,10.0000,50.0000,1,'1 bola','2016-03-11 01:13:14','2016-03-11 01:36:06');
+INSERT  IGNORE INTO `produtos` (`id`, `barra`, `nome`, `unidade`, `status`, `grupos_estoque_id`, `peso_baixa_estoque`, `desconto_pedido`, `quantidade_pedido`, `compra`, `margem`, `venda`, `promocao`, `estoque_minimo`, `estoque_atual`, `atalho`, `nome_atalho`, `created`, `modified`) VALUES (1,'1','Sorvete 1 bola','KG',1,1,0.5000,0,0,1.50,50.0000,3.00,NULL,10.0000,1000.0000,1,'1 bola','2016-03-11 01:13:14','2016-03-11 02:15:21');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,12 +423,12 @@ CREATE TABLE `requisicoes` (
   `data` date DEFAULT NULL,
   `produto_id` int(11) DEFAULT NULL,
   `tipo` int(1) DEFAULT NULL COMMENT '1 - Entradas | 2 - Saidas',
-  `quantidade` float(6,4) DEFAULT NULL,
-  `motivo` varchar(85) DEFAULT NULL,
+  `quantidade` float(12,4) DEFAULT NULL,
+  `motivo` varchar(255) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -438,6 +438,7 @@ CREATE TABLE `requisicoes` (
 
 LOCK TABLES `requisicoes` WRITE;
 /*!40000 ALTER TABLE `requisicoes` DISABLE KEYS */;
+INSERT  IGNORE INTO `requisicoes` (`id`, `numero_documento`, `data`, `produto_id`, `tipo`, `quantidade`, `motivo`, `created`, `modified`) VALUES (1,'1','2016-03-10',1,1,1000.0000,'','2016-03-11 02:13:32','2016-03-11 02:13:32'),(2,'2','2016-03-10',1,2,50.0000,'','2016-03-11 02:15:21','2016-03-11 02:15:21');
 /*!40000 ALTER TABLE `requisicoes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -450,4 +451,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-10 22:37:45
+-- Dump completed on 2016-03-10 23:25:18

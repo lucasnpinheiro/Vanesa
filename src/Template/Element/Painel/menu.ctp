@@ -6,7 +6,7 @@
             <div class="collapse navbar-collapse" id="topNavbarCollapse">
                 <ul class="nav navbar-nav magic-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parametros</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parâmetros</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
                             <li><?php echo $this->Html->link('Configurações', ['controller' => 'Parametros', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Usuários', ['controller' => 'Usuarios', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>

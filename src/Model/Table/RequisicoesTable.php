@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Requisico;
@@ -6,14 +7,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Search\Manager;
 
 /**
  * Requisicoes Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Produtos
  */
-class RequisicoesTable extends Table
-{
+class RequisicoesTable extends Table {
 
     /**
      * Initialize method
@@ -21,8 +22,7 @@ class RequisicoesTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('requisicoes');
@@ -34,6 +34,26 @@ class RequisicoesTable extends Table
         $this->belongsTo('Produtos', [
             'foreignKey' => 'produto_id'
         ]);
+        $this->addBehavior('Search.Search');
+    }
+
+    public function searchConfiguration() {
+        return $this->searchConfigurationDynamic();
+    }
+
+    private function searchConfigurationDynamic() {
+        $search = new Manager($this);
+        $c = $this->schema()->columns();
+        foreach ($c as $key => $value) {
+            $t = $this->schema()->columnType($value);
+            if ($t != 'string' AND $t != 'text') {
+                $search->value($value, ['field' => $this->aliasField($value)]);
+            } else {
+                $search->like($value, ['before' => true, 'after' => true, 'field' => $this->aliasField($value)]);
+            }
+        }
+
+        return $search;
     }
 
     /**
@@ -42,29 +62,28 @@ class RequisicoesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('numero_documento');
+                ->allowEmpty('numero_documento');
 
         $validator
-            ->date('data')
-            ->allowEmpty('data');
+                ->date('data', ['dmy'])
+                ->allowEmpty('data');
 
         $validator
-            ->integer('tipo')
-            ->allowEmpty('tipo');
+                ->integer('tipo')
+                ->allowEmpty('tipo');
 
         $validator
-            ->numeric('quantidade')
-            ->allowEmpty('quantidade');
+                ->decimal('quantidade')
+                ->allowEmpty('quantidade');
 
         $validator
-            ->allowEmpty('motivo');
+                ->allowEmpty('motivo');
 
         return $validator;
     }
@@ -76,9 +95,28 @@ class RequisicoesTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['produto_id'], 'Produtos'));
         return $rules;
     }
+
+    public function afterSave(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options) {
+        if (empty($entity->numero_documento)) {
+            $this->updateAll(['numero_documento' => $entity->id], ['id' => $entity->id]);
+        }
+        $GruposEstoques = \Cake\ORM\TableRegistry::get('GruposEstoques');
+        $Produtos = \Cake\ORM\TableRegistry::get('Produtos');
+        $produto = $Produtos->get((int) $entity->produto_id);
+        $gruposEstoque = $GruposEstoques->get($produto->grupos_estoque_id);
+        if ($gruposEstoque->estoque_global > 0) {
+            $produto = $Produtos->findByBarra((int) $gruposEstoque->estoque_global)->first();
+        }
+        if ($entity->tipo == 1) {
+            $produto->estoque_atual += (double) $entity->quantidade;
+        } else if ($entity->tipo == 2) {
+            $produto->estoque_atual -= (double) $entity->quantidade;
+        }
+        $Produtos->save($produto);
+    }
+
 }
