@@ -203,6 +203,37 @@ class MyFormHelper extends BootstrapFormHelper {
         return $this->input($fieldName, $options);
     }
 
+    public function pessoas($fieldName, array $options = []) {
+        $pessoas = TableRegistry::get('Pessoas');
+
+        $find = $pessoas->find()->contain('PessoasTipos')->all();
+        $_pessoas = [];
+        $_lista_tipos = [
+            '1' => 'Usuário',
+            '2' => 'Cliente',
+            '3' => 'Fornecedor',
+            '4' => 'Vendedor',
+            '5' => 'Operador Caixa',
+            '6' => 'Funcionário'
+        ];
+        if (!empty($find)) {
+            foreach ($find as $key => $value) {
+                foreach ($value->pessoas_tipos as $k => $v) {
+                    if (empty($_pessoas[$_lista_tipos[$v->tipo]])) {
+                        $_pessoas[$_lista_tipos[$v->tipo]] = [];
+                    }
+                    $_pessoas[$_lista_tipos[$v->tipo]][$value->id] = $value->nome;
+                }
+            }
+        }
+        $options += [
+            'type' => 'select',
+            'options' => $_pessoas,
+            'empty' => __('Selecionar uma Pessoa')
+        ];
+        return $this->input($fieldName, $options);
+    }
+
     public function impostos($fieldName, array $options = [], $tipo_imposto = null) {
         $impostos = TableRegistry::get('Impostos');
 

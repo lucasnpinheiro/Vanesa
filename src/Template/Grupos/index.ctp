@@ -40,7 +40,7 @@
                     <tr>
                         <td><?= $this->Number->format($grupo->id) ?></td>
                         <td><?= h($grupo->nome) ?></td>
-                        <td><?= $this->Number->format($grupo->status) ?></td>
+                        <td><?= $this->Html->status($grupo->status) ?></td>
                         <td><?= h($grupo->created) ?></td>
                         <td><?= h($grupo->modified) ?></td>
                         <td class="actions text-right">

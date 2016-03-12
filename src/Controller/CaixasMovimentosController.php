@@ -57,10 +57,10 @@ class CaixasMovimentosController extends AppController {
         if ($this->request->is('post')) {
             $caixasMovimento = $this->CaixasMovimentos->patchEntity($caixasMovimento, $this->request->data);
             if ($this->CaixasMovimentos->save($caixasMovimento)) {
-                $this->Flash->success(__('The caixas movimento has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The caixas movimento could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list');
@@ -83,10 +83,10 @@ class CaixasMovimentosController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $caixasMovimento = $this->CaixasMovimentos->patchEntity($caixasMovimento, $this->request->data);
             if ($this->CaixasMovimentos->save($caixasMovimento)) {
-                $this->Flash->success(__('The caixas movimento has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The caixas movimento could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list');
@@ -106,9 +106,9 @@ class CaixasMovimentosController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $caixasMovimento = $this->CaixasMovimentos->get($id);
         if ($this->CaixasMovimentos->delete($caixasMovimento)) {
-            $this->Flash->success(__('The caixas movimento has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The caixas movimento could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

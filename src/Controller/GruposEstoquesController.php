@@ -53,10 +53,10 @@ class GruposEstoquesController extends AppController {
         if ($this->request->is('post')) {
             $gruposEstoque = $this->GruposEstoques->patchEntity($gruposEstoque, $this->request->data);
             if ($this->GruposEstoques->save($gruposEstoque)) {
-                $this->Flash->success(__('The grupos estoque has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The grupos estoque could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->loadModel('Produtos');
@@ -79,10 +79,10 @@ class GruposEstoquesController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $gruposEstoque = $this->GruposEstoques->patchEntity($gruposEstoque, $this->request->data);
             if ($this->GruposEstoques->save($gruposEstoque)) {
-                $this->Flash->success(__('The grupos estoque has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The grupos estoque could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->loadModel('Produtos');
@@ -102,9 +102,9 @@ class GruposEstoquesController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $gruposEstoque = $this->GruposEstoques->get($id);
         if ($this->GruposEstoques->delete($gruposEstoque)) {
-            $this->Flash->success(__('The grupos estoque has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The grupos estoque could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

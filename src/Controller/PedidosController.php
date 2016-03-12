@@ -55,10 +55,10 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
         if ($this->request->is('post')) {
             $pedido = $this->Pedidos->patchEntity($pedido, $this->request->data);
             if ($this->Pedidos->save($pedido)) {
-                $this->Flash->success(__('The pedido has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The pedido could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->set(compact('pedido'));
@@ -80,10 +80,10 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
         if ($this->request->is(['patch', 'post', 'put'])) {
             $pedido = $this->Pedidos->patchEntity($pedido, $this->request->data);
             if ($this->Pedidos->save($pedido)) {
-                $this->Flash->success(__('The pedido has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The pedido could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->set(compact('pedido'));
@@ -102,9 +102,9 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
         $this->request->allowMethod(['post', 'delete']);
         $pedido = $this->Pedidos->get($id);
         if ($this->Pedidos->delete($pedido)) {
-            $this->Flash->success(__('The pedido has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The pedido could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

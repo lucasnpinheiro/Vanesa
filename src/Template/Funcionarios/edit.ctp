@@ -13,7 +13,7 @@
         echo $this->Form->input('tipos', ['type' => 'hidden', 'value' => 6]);
         echo $this->Form->input('nome', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-6']]);
         echo $this->Form->status('status', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
-        echo $this->Form->cep('cep', ['label' => 'CEP', 'div' => ['class' => 'col-xs-12 col-md-3'], 'onchange' => 'cake.util.getCep(this.value)']);
+        echo $this->Form->cep('cep', ['label' => 'CEP', 'div' => ['class' => 'col-xs-12 col-md-3'], 'onchange' => 'cake.util.getCep(this)']);
 
         echo $this->Form->input('endereco', ['label' => 'Endereço', 'div' => ['class' => 'col-xs-12 col-md-10']]);
         echo $this->Form->numero('numero', ['label' => 'Número', 'div' => ['class' => 'col-xs-12 col-md-2']]);
@@ -34,3 +34,4 @@
         <?= $this->Form->end() ?>
     </div>
 </div>
+<?php $this->Html->script('/js/pessoas.js', ['block' => 'script']); ?>

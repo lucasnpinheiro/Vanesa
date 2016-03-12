@@ -57,10 +57,10 @@ class CaixasDiariosController extends AppController {
         if ($this->request->is('post')) {
             $caixasDiario = $this->CaixasDiarios->patchEntity($caixasDiario, $this->request->data);
             if ($this->CaixasDiarios->save($caixasDiario)) {
-                $this->Flash->success(__('The caixas diario has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The caixas diario could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $pessoas = $this->CaixasDiarios->Pessoas->find('list');
@@ -82,10 +82,10 @@ class CaixasDiariosController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $caixasDiario = $this->CaixasDiarios->patchEntity($caixasDiario, $this->request->data);
             if ($this->CaixasDiarios->save($caixasDiario)) {
-                $this->Flash->success(__('The caixas diario has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The caixas diario could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $pessoas = $this->CaixasDiarios->Pessoas->find('list');
@@ -104,9 +104,9 @@ class CaixasDiariosController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $caixasDiario = $this->CaixasDiarios->get($id);
         if ($this->CaixasDiarios->delete($caixasDiario)) {
-            $this->Flash->success(__('The caixas diario has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The caixas diario could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

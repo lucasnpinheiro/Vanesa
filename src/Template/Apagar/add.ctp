@@ -12,10 +12,10 @@
         <?php
         echo $this->Form->input('numero_documento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->status('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('pessoa_id', ['options' => $pessoas, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->pessoas('pessoa_id', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->data('data_vencimento', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->moeda('valor_codumento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('tipo', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->moeda('valor_documento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('tipo', ['div' => ['empty' => true, 'options' => $tipos, 'class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->data('data_pagamento', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->moeda('valor_pagamento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->moeda('valor_acrescimo', ['div' => ['class' => 'col-xs-12 col-md-4']]);

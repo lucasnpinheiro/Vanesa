@@ -39,10 +39,10 @@ class RequisicoesController extends AppController {
         if ($this->request->is('post')) {
             $requisico = $this->Requisicoes->patchEntity($requisico, $this->request->data);
             if ($this->Requisicoes->save($requisico)) {
-                $this->Flash->success(__('The requisico has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The requisico could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $produtos = $this->Requisicoes->Produtos->find('list');

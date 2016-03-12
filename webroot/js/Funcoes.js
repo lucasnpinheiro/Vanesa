@@ -1,5 +1,10 @@
 var cake = {};
 cake.util = {};
+cake.util.string = {
+    'underscore': function (str) {
+        return str.replace(/[-\s]+/g, '_').replace(/([A-Z\d]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z\d])([A-Z])/g, '$1_$2').toLowerCase();
+    }
+};
 
 cake.util.rotinas = function () {
     cake.util.mascaras();
@@ -54,7 +59,7 @@ cake.util.convertFloat = function (valor) {
 cake.util.loading = {
     show: function (input) {
         $(input).remove('img.img-loading');
-        $(input).closest('div').prepend('<img src="' + router.url + 'img/loading.gif" class="img-loading" style="margin-top: 28px; position: absolute; right: 20px;" />');
+        $(input).closest('div').prepend('<img src="' + router.url + 'img/loading.gif" class="img-loading" style="margin-top: 1px; position: absolute; right: 50px; z-index: 999999;" />');
     },
     hide: function (input) {
         $(input).closest('div').find('.img-loading').remove();
@@ -75,10 +80,11 @@ cake.util.pularCampo = function () {
     });
 };
 cake.util.getCep = function (cep, before) {
+    cake.util.loading.show(cep);
     if (!before) {
         before = '';
     }
-    $.getJSON(router.url + "utilits/cep/" + cep, function (data) {
+    $.getJSON(router.url + "utilits/cep/" + cep.value, function (data) {
         if (data.retorno.result.status == 'OK') {
             $('#' + before + 'endereco').val(data.retorno.result.Cep.logradouro);
             $('#' + before + 'bairro').val(data.retorno.result.Cep.bairro);
@@ -86,6 +92,9 @@ cake.util.getCep = function (cep, before) {
             $('#' + before + 'estado').val(data.retorno.result.Cep.uf);
             $('#' + before + 'numero').focus();
         }
+        cake.util.loading.hide(cep);
+    }, function () {
+        cake.util.loading.hide(cep);
     });
 }
 
@@ -247,6 +256,7 @@ cake.util.mascaras = function () {
 
 $(function () {
     cake.util.rotinas();
+    cake.util.pularCampo();
     /*$('form').submit(function(e){
      e.preventDefault();
      });*/

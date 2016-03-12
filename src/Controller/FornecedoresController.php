@@ -17,6 +17,22 @@ class FornecedoresController extends AppController {
         $this->loadModel('Pessoas');
     }
 
+    public function verifica() {
+        $retorno = [
+            'cod' => 111,
+            'id' => ''
+        ];
+        $find = $this->Pessoas->find()->where([$this->request->data('tipo') => $this->request->data('valor')])->first();
+        if (!empty($find)) {
+            $retorno = [
+                'cod' => 999,
+                'id' => $find->id
+            ];
+        }
+        echo json_encode($retorno);
+        exit;
+    }
+
     /**
      * Index method
      *
@@ -45,7 +61,6 @@ class FornecedoresController extends AppController {
         $this->set('_serialize', ['pessoas']);
     }
 
-
     /**
      * Add method
      *
@@ -56,10 +71,10 @@ class FornecedoresController extends AppController {
         if ($this->request->is('post')) {
             $pessoa = $this->Pessoas->patchEntity($pessoa, $this->request->data);
             if ($this->Pessoas->save($pessoa)) {
-                $this->Flash->success(__('The pessoa has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The pessoa could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->set(compact('pessoa'));
@@ -80,10 +95,10 @@ class FornecedoresController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $pessoa = $this->Pessoas->patchEntity($pessoa, $this->request->data);
             if ($this->Pessoas->save($pessoa)) {
-                $this->Flash->success(__('The pessoa has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The pessoa could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->set(compact('pessoa'));
@@ -101,9 +116,9 @@ class FornecedoresController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $pessoa = $this->Pessoas->get($id);
         if ($this->Pessoas->delete($pessoa)) {
-            $this->Flash->success(__('The pessoa has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The pessoa could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

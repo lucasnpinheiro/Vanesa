@@ -22,7 +22,7 @@ class ApagarController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $query = $this->{$this->modelClass}->find('search', $this->{$this->modelClass}->filterParams($this->request->query))->contain('Pessoas');
+        $query = $this->{$this->modelClass}->find('search', $this->{$this->modelClass}->filterParams($this->request->query))->contain(['Pessoas', 'Grupos']);
         $this->set('apagar', $this->paginate($query));
         $this->set('_serialize', ['apagar']);
     }
@@ -53,14 +53,15 @@ class ApagarController extends AppController {
         if ($this->request->is('post')) {
             $apagar = $this->Apagar->patchEntity($apagar, $this->request->data);
             if ($this->Apagar->save($apagar)) {
-                $this->Flash->success(__('The apagar has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The apagar could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $pessoas = $this->Apagar->Pessoas->find('list');
-        $this->set(compact('apagar', 'pessoas'));
+        $this->loadModel('Grupos');
+        $tipos = $this->Grupos->find('list');
+        $this->set(compact('apagar', 'tipos'));
         $this->set('_serialize', ['apagar']);
     }
 
@@ -78,14 +79,15 @@ class ApagarController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $apagar = $this->Apagar->patchEntity($apagar, $this->request->data);
             if ($this->Apagar->save($apagar)) {
-                $this->Flash->success(__('The apagar has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The apagar could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $pessoas = $this->Apagar->Pessoas->find('list');
-        $this->set(compact('apagar', 'pessoas'));
+        $this->loadModel('Grupos');
+        $tipos = $this->Grupos->find('list');
+        $this->set(compact('apagar', 'tipos'));
         $this->set('_serialize', ['apagar']);
     }
 
@@ -100,9 +102,9 @@ class ApagarController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $apagar = $this->Apagar->get($id);
         if ($this->Apagar->delete($apagar)) {
-            $this->Flash->success(__('The apagar has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The apagar could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

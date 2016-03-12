@@ -12,20 +12,20 @@
         <?php
         echo $this->Form->input('tipos', ['type' => 'hidden', 'value' => 1]);
         echo $this->Form->input('nome', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-6']]);
-        echo $this->Form->status('status', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
-        echo $this->Form->cep('cep', ['label' => 'CEP', 'div' => ['class' => 'col-xs-12 col-md-3'], 'onchange' => 'cake.util.getCep(this.value)']);
+        echo $this->Form->status('status', ['value' => 1, 'required' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->cep('cep', ['label' => 'CEP', 'div' => ['class' => 'col-xs-12 col-md-3'], 'onchange' => 'cake.util.getCep(this)']);
 
         echo $this->Form->input('endereco', ['label' => 'Endereço', 'div' => ['class' => 'col-xs-12 col-md-10']]);
         echo $this->Form->numero('numero', ['label' => 'Número', 'div' => ['class' => 'col-xs-12 col-md-2']]);
         echo $this->Form->input('bairro', ['div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('cidade', ['div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('estado', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('fone1', ['label' => 'Telefone 1', 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('fone2', ['label' => 'Telefone 2', 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->telefone('fone1', ['label' => 'Telefone 1', 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->telefone('fone2', ['label' => 'Telefone 2', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->cnpj('cnpj', ['label' => 'CNPJ', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->numero('incricao', ['maxlength' => 20, 'label' => 'Inscrição', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('username', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('senha', ['required' => true, 'type' => 'password', 'value' => '', 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('senha', ['type' => 'password', 'value' => '', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">
@@ -34,3 +34,4 @@
         <?= $this->Form->end() ?>
     </div>
 </div>
+<?php $this->Html->script('/js/pessoas.js', ['block' => 'script']); ?>

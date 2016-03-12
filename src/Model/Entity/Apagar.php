@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property int $pessoa_id
  * @property \App\Model\Entity\Pessoa $pessoa
  * @property \Cake\I18n\Time $data_vencimento
- * @property float $valor_codumento
+ * @property float $valor_documento
  * @property int $tipo
  * @property string $historico
  * @property \Cake\I18n\Time $data_pagamento

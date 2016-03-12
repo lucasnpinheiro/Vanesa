@@ -30,7 +30,7 @@
                     <th><?= $this->Paginator->sort('status') ?></th>
                     <th><?= $this->Paginator->sort('pessoa_id') ?></th>
                     <th><?= $this->Paginator->sort('data_vencimento') ?></th>
-                    <th><?= $this->Paginator->sort('valor_codumento') ?></th>
+                    <th><?= $this->Paginator->sort('valor_documento') ?></th>
                     <th><?= $this->Paginator->sort('tipo') ?></th>
                     <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
@@ -39,11 +39,11 @@
                 <?php foreach ($apagar as $apagar): ?>
                     <tr>
                         <td><?= h($apagar->numero_documento) ?></td>
-                        <td><?= $this->Number->format($apagar->status) ?></td>
-                        <td><?= $apagar->has('pessoa') ? $this->Html->link($apagar->pessoa->id, ['controller' => 'Pessoas', 'action' => 'view', $apagar->pessoa->id]) : '' ?></td>
+                        <td><?= $this->Html->status($apagar->status) ?></td>
+                        <td><?= h($apagar->pessoa->nome) ?></td>
                         <td><?= h($apagar->data_vencimento) ?></td>
-                        <td><?= $this->Number->format($apagar->valor_codumento) ?></td>
-                        <td><?= $this->Number->format($apagar->tipo) ?></td>
+                        <td><?= $this->Html->moeda($apagar->valor_documento) ?></td>
+                        <td><?= h($apagar->grupo->nome) ?></td>
                         <td class="actions text-right">
                             <?= $this->Html->link(null, ['action' => 'edit', $apagar->id], ['title' => __('Edit')]) ?>
                             <?= $this->Form->postLink(null, ['action' => 'delete', $apagar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apagar->id), 'title' => __('Delete')]) ?>

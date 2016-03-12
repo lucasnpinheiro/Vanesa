@@ -78,10 +78,10 @@ class ProdutosController extends AppController {
         if ($this->request->is('post')) {
             $produto = $this->Produtos->patchEntity($produto, $this->request->data);
             if ($this->Produtos->save($produto)) {
-                $this->Flash->success(__('The produto has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The produto could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $gruposEstoques = $this->Produtos->GruposEstoques->find('list');
@@ -103,10 +103,10 @@ class ProdutosController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $produto = $this->Produtos->patchEntity($produto, $this->request->data);
             if ($this->Produtos->save($produto)) {
-                $this->Flash->success(__('The produto has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The produto could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $gruposEstoques = $this->Produtos->GruposEstoques->find('list');
@@ -125,9 +125,9 @@ class ProdutosController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $produto = $this->Produtos->get($id);
         if ($this->Produtos->delete($produto)) {
-            $this->Flash->success(__('The produto has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The produto could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

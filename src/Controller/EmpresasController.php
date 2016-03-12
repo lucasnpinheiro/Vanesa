@@ -16,6 +16,21 @@ class EmpresasController extends AppController {
         $this->set('titulo_pagina', 'Empresas');
     }
 
+     public function verifica() {
+        $retorno = [
+            'cod' => 111,
+            'id' => ''
+        ];
+        $find = $this->Empresas->find()->where([$this->request->data('tipo') => $this->request->data('valor')])->first();
+        if (!empty($find)) {
+            $retorno = [
+                'cod' => 999,
+                'id' => $find->id
+            ];
+        }
+        echo json_encode($retorno);
+        exit;
+    }
     /**
      * Index method
      *
@@ -54,10 +69,10 @@ class EmpresasController extends AppController {
         if ($this->request->is('post')) {
             $empresa = $this->Empresas->patchEntity($empresa, $this->request->data);
             if ($this->Empresas->save($empresa)) {
-                $this->Flash->success(__('The empresa has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The empresa could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->set(compact('empresa'));
@@ -78,10 +93,10 @@ class EmpresasController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $empresa = $this->Empresas->patchEntity($empresa, $this->request->data);
             if ($this->Empresas->save($empresa)) {
-                $this->Flash->success(__('The empresa has been saved.'));
+                $this->Flash->success(__('Registro Salvo com Sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The empresa could not be saved. Please, try again.'));
+                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
         $this->set(compact('empresa'));
@@ -99,9 +114,9 @@ class EmpresasController extends AppController {
         $this->request->allowMethod(['post', 'delete']);
         $empresa = $this->Empresas->get($id);
         if ($this->Empresas->delete($empresa)) {
-            $this->Flash->success(__('The empresa has been deleted.'));
+            $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
-            $this->Flash->error(__('The empresa could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
     }

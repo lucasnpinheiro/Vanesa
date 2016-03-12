@@ -34,6 +34,9 @@ class ApagarTable extends Table {
         $this->belongsTo('Pessoas', [
             'foreignKey' => 'pessoa_id'
         ]);
+        $this->belongsTo('Grupos', [
+            'foreignKey' => 'tipo'
+        ]);
         $this->addBehavior('Search.Search');
     }
 
@@ -75,12 +78,12 @@ class ApagarTable extends Table {
                 ->allowEmpty('status');
 
         $validator
-                ->date('data_vencimento')
+                ->date('data_vencimento', ['dmy'])
                 ->allowEmpty('data_vencimento');
 
         $validator
-                ->numeric('valor_codumento')
-                ->allowEmpty('valor_codumento');
+                ->decimal('valor_documento')
+                ->allowEmpty('valor_documento');
 
         $validator
                 ->integer('tipo')
@@ -90,15 +93,15 @@ class ApagarTable extends Table {
                 ->allowEmpty('historico');
 
         $validator
-                ->date('data_pagamento')
+                ->date('data_pagamento', ['dmy'])
                 ->allowEmpty('data_pagamento');
 
         $validator
-                ->numeric('valor_pagamento')
+                ->decimal('valor_pagamento')
                 ->allowEmpty('valor_pagamento');
 
         $validator
-                ->numeric('valor_acrescimo')
+                ->decimal('valor_acrescimo')
                 ->allowEmpty('valor_acrescimo');
 
         return $validator;
