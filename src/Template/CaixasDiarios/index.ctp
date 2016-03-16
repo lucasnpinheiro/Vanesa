@@ -38,8 +38,8 @@
                 <?php foreach ($caixasDiarios as $caixasDiario): ?>
                     <tr>
                         <td><?= h($caixasDiario->data) ?></td>
-                        <td><?= $this->Number->format($caixasDiario->terminal) ?></td>
-                        <td><?= $caixasDiario->has('pessoa') ? $this->Html->link($caixasDiario->pessoa->id, ['controller' => 'Pessoas', 'action' => 'view', $caixasDiario->pessoa->id]) : '' ?></td>
+                        <td><?= h($caixasDiario->terminai->nome) ?></td>
+                        <td><?= h($caixasDiario->pessoa->nome) ?></td>
                         <td><?= h($caixasDiario->created) ?></td>
                         <td><?= h($caixasDiario->modified) ?></td>
                         <td class="actions text-right">

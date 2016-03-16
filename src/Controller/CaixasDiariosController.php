@@ -23,7 +23,7 @@ class CaixasDiariosController extends AppController {
      */
     public function index() {
         $this->paginate = [
-            'contain' => ['Pessoas']
+            'contain' => ['Pessoas', 'Terminais']
         ];
         $caixasDiarios = $this->paginate($this->CaixasDiarios);
 
@@ -64,7 +64,8 @@ class CaixasDiariosController extends AppController {
             }
         }
         $pessoas = $this->CaixasDiarios->Pessoas->find('list');
-        $this->set(compact('caixasDiario', 'pessoas'));
+        $terminais = $this->CaixasDiarios->Terminais->find('list');
+        $this->set(compact('caixasDiario', 'pessoas', 'terminais'));
         $this->set('_serialize', ['caixasDiario']);
     }
 
@@ -89,7 +90,8 @@ class CaixasDiariosController extends AppController {
             }
         }
         $pessoas = $this->CaixasDiarios->Pessoas->find('list');
-        $this->set(compact('caixasDiario', 'pessoas'));
+        $terminais = $this->CaixasDiarios->Terminais->find('list');
+        $this->set(compact('caixasDiario', 'pessoas', 'terminais'));
         $this->set('_serialize', ['caixasDiario']);
     }
 

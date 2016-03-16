@@ -8,11 +8,10 @@
 
     </div>
     <div class="panel-body">
-        <?= $this->Form->create($caixasDiario) ?>
+        <?= $this->Form->create($terminai) ?>
         <?php
-        echo $this->Form->data('data', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('terminal', ['options' => $terminais, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->pessoas('pessoa_id', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']], [3, 4, 5, 6]);
+        echo $this->Form->input('nome', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-8']]);
+        echo $this->Form->input('ip', ['div' => ['class' => 'col-xs-12 col-md-4']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">
@@ -21,4 +20,3 @@
         <?= $this->Form->end() ?>
     </div>
 </div>
-

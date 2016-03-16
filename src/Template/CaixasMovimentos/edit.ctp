@@ -8,13 +8,13 @@
 
     </div>
     <div class="panel-body">
-        <?= $this->Form->create($caixasDiario) ?>
+        <?= $this->Form->create($caixasMovimento) ?>
         <?php
-        echo $this->Form->input('caixas_diario_id', ['options' => $caixasDiarios, 'empty' => true]);
-        echo $this->Form->status('status');
-        echo $this->Form->moeda('valor');
-        echo $this->Form->input('descricao');
-        echo $this->Form->input('grupo_id', ['options' => $grupos, 'empty' => true]);
+        echo $this->Form->input('caixas_diario_id', ['options' => $caixasDiarios, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->status('status', ['div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->moeda('valor', ['div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->input('grupo_id', ['options' => $grupos, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
+        echo $this->Form->input('descricao', ['label' => 'Descrição', 'type' => 'textarea', 'div' => ['class' => 'col-xs-12 col-md-12']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

@@ -66,7 +66,7 @@ CREATE TABLE `caixas_diarios` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,6 +76,7 @@ CREATE TABLE `caixas_diarios` (
 
 LOCK TABLES `caixas_diarios` WRITE;
 /*!40000 ALTER TABLE `caixas_diarios` DISABLE KEYS */;
+INSERT  IGNORE INTO `caixas_diarios` (`id`, `data`, `terminal`, `pessoa_id`, `created`, `modified`) VALUES (1,'2016-03-16',1,2,'2016-03-16 20:42:22','2016-03-16 20:42:22');
 /*!40000 ALTER TABLE `caixas_diarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +97,7 @@ CREATE TABLE `caixas_movimentos` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,6 +107,7 @@ CREATE TABLE `caixas_movimentos` (
 
 LOCK TABLES `caixas_movimentos` WRITE;
 /*!40000 ALTER TABLE `caixas_movimentos` DISABLE KEYS */;
+INSERT  IGNORE INTO `caixas_movimentos` (`id`, `caixas_diario_id`, `status`, `valor`, `descricao`, `grupo_id`, `created`, `modified`) VALUES (1,1,1,1.00,'Pagamentos efetuados',1,'2016-03-16 20:52:59','2016-03-16 20:52:59');
 /*!40000 ALTER TABLE `caixas_movimentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,6 +446,34 @@ LOCK TABLES `requisicoes` WRITE;
 INSERT  IGNORE INTO `requisicoes` (`id`, `numero_documento`, `data`, `produto_id`, `tipo`, `quantidade`, `motivo`, `created`, `modified`) VALUES (1,'1','2016-03-10',1,1,1000.0000,'','2016-03-11 02:13:32','2016-03-11 02:13:32'),(2,'2','2016-03-10',1,2,50.0000,'','2016-03-11 02:15:21','2016-03-11 02:15:21');
 /*!40000 ALTER TABLE `requisicoes` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `terminais`
+--
+
+DROP TABLE IF EXISTS `terminais`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `terminais` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(500) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `terminais`
+--
+-- ORDER BY:  `id`
+
+LOCK TABLES `terminais` WRITE;
+/*!40000 ALTER TABLE `terminais` DISABLE KEYS */;
+INSERT  IGNORE INTO `terminais` (`id`, `nome`, `ip`, `created`, `modified`) VALUES (1,'Default','','2016-03-16 20:23:56','2016-03-16 20:23:56');
+/*!40000 ALTER TABLE `terminais` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -454,4 +484,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-12 14:12:19
+-- Dump completed on 2016-03-16 20:57:12

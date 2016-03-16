@@ -203,7 +203,7 @@ class MyFormHelper extends BootstrapFormHelper {
         return $this->input($fieldName, $options);
     }
 
-    public function pessoas($fieldName, array $options = []) {
+    public function pessoas($fieldName, array $options = [], array $tipo = []) {
         $pessoas = TableRegistry::get('Pessoas');
 
         $find = $pessoas->find()->contain('PessoasTipos')->all();
@@ -219,10 +219,19 @@ class MyFormHelper extends BootstrapFormHelper {
         if (!empty($find)) {
             foreach ($find as $key => $value) {
                 foreach ($value->pessoas_tipos as $k => $v) {
-                    if (empty($_pessoas[$_lista_tipos[$v->tipo]])) {
-                        $_pessoas[$_lista_tipos[$v->tipo]] = [];
+                    if (!empty($tipo)) {
+                        if (in_array($v->tipo, $tipo)) {
+                            if (empty($_pessoas[$_lista_tipos[$v->tipo]])) {
+                                $_pessoas[$_lista_tipos[$v->tipo]] = [];
+                            }
+                            $_pessoas[$_lista_tipos[$v->tipo]][$value->id] = $value->nome;
+                        }
+                    } else {
+                        if (empty($_pessoas[$_lista_tipos[$v->tipo]])) {
+                            $_pessoas[$_lista_tipos[$v->tipo]] = [];
+                        }
+                        $_pessoas[$_lista_tipos[$v->tipo]][$value->id] = $value->nome;
                     }
-                    $_pessoas[$_lista_tipos[$v->tipo]][$value->id] = $value->nome;
                 }
             }
         }

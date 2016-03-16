@@ -35,6 +35,9 @@ class CaixasDiariosTable extends Table
         $this->belongsTo('Pessoas', [
             'foreignKey' => 'pessoa_id'
         ]);
+        $this->belongsTo('Terminais', [
+            'foreignKey' => 'terminal'
+        ]);
         $this->hasMany('CaixasMovimentos', [
             'foreignKey' => 'caixas_diario_id'
         ]);
@@ -53,7 +56,7 @@ class CaixasDiariosTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->date('data')
+            ->date('data',['dmy'])
             ->allowEmpty('data');
 
         $validator

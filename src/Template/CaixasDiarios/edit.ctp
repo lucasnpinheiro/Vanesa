@@ -10,9 +10,9 @@
     <div class="panel-body">
         <?= $this->Form->create($caixasDiario) ?>
         <?php
-        echo $this->Form->data('data', ['empty' => true]);
-        echo $this->Form->input('terminal');
-        echo $this->Form->input('pessoa_id', ['options' => $pessoas, 'empty' => true]);
+        echo $this->Form->data('data', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->input('terminal', ['options' => $terminais, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->pessoas('pessoa_id', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']], [3, 4, 5, 6]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

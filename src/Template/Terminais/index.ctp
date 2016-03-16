@@ -15,7 +15,7 @@
                     'inline' => true,
                     'label' => false
                 ]);
-                echo $this->Form->input('data', ['label' => false, 'placeholder' => 'Data']);
+                echo $this->Form->input('nome', ['label' => false, 'placeholder' => 'Nome']);
                 echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
                 echo $this->Form->end();
                 ?>
@@ -26,25 +26,23 @@
         <table class="table table-bordered table-striped font-12 table-hover">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('caixas_diario_id') ?></th>
-                    <th><?= $this->Paginator->sort('status') ?></th>
-                    <th><?= $this->Paginator->sort('valor') ?></th>
-                    <th><?= $this->Paginator->sort('descricao', 'Descrição') ?></th>
-                    <th><?= $this->Paginator->sort('grupo_id') ?></th>
-                    <th class="actions text-right"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('nome') ?></th>
+                    <th><?= $this->Paginator->sort('ip', 'IP') ?></th>
+                    <th><?= $this->Paginator->sort('created') ?></th>
+                    <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($caixasMovimentos as $caixasMovimento): ?>
+                <?php foreach ($terminais as $terminai): ?>
                     <tr>
-                        <td><?= h($caixasMovimento->caixas_diario->data) ?></td>
-                        <td><?= $this->Html->status($caixasMovimento->status) ?></td>
-                        <td><?= $this->Html->moeda($caixasMovimento->valor) ?></td>
-                        <td><?= h($caixasMovimento->descricao) ?></td>
-                        <td><?= h($caixasMovimento->grupo->nome) ?></td>
-                        <td class="actions text-right">
-                            <?= $this->Html->link(null, ['action' => 'edit', $caixasMovimento->id], ['title' => __('Edit')]) ?>
-                            <?= $this->Form->postLink(null, ['action' => 'delete', $caixasMovimento->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasMovimento->id), 'title' => __('Delete')]) ?>
+                        <td><?= h($terminai->nome) ?></td>
+                        <td><?= h($terminai->ip) ?></td>
+                        <td><?= h($terminai->created) ?></td>
+                        <td><?= h($terminai->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(null, ['action' => 'edit', $terminai->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $terminai->id], ['confirm' => __('Are you sure you want to delete # {0}?', $terminai->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

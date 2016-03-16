@@ -57,7 +57,7 @@ class CaixasMovimentosTable extends Table
             ->allowEmpty('status');
 
         $validator
-            ->numeric('valor')
+            ->decimal('valor')
             ->allowEmpty('valor');
 
         $validator
