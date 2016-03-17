@@ -1,67 +1,65 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Pedido'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Pedidos Itens'), ['controller' => 'PedidosItens', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pedidos Iten'), ['controller' => 'PedidosItens', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="pedidos index large-9 medium-8 columns content">
-    <h3><?= __('Pedidos') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('ficha') ?></th>
-                <th><?= $this->Paginator->sort('data_pedido') ?></th>
-                <th><?= $this->Paginator->sort('status') ?></th>
-                <th><?= $this->Paginator->sort('nome_cliente') ?></th>
-                <th><?= $this->Paginator->sort('valor_total') ?></th>
-                <th><?= $this->Paginator->sort('valor_desconto') ?></th>
-                <th><?= $this->Paginator->sort('valor_liquido') ?></th>
-                <th><?= $this->Paginator->sort('valor_dinheiro') ?></th>
-                <th><?= $this->Paginator->sort('valor_cheque') ?></th>
-                <th><?= $this->Paginator->sort('valor_cartao') ?></th>
-                <th><?= $this->Paginator->sort('valor_recebe') ?></th>
-                <th><?= $this->Paginator->sort('valor_troco') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
-                <th class="actions text-right"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($pedidos as $pedido): ?>
-            <tr>
-                <td><?= $this->Number->format($pedido->id) ?></td>
-                <td><?= $this->Number->format($pedido->ficha) ?></td>
-                <td><?= h($pedido->data_pedido) ?></td>
-                <td><?= $this->Number->format($pedido->status) ?></td>
-                <td><?= h($pedido->nome_cliente) ?></td>
-                <td><?= $this->Number->format($pedido->valor_total) ?></td>
-                <td><?= $this->Number->format($pedido->valor_desconto) ?></td>
-                <td><?= $this->Number->format($pedido->valor_liquido) ?></td>
-                <td><?= $this->Number->format($pedido->valor_dinheiro) ?></td>
-                <td><?= $this->Number->format($pedido->valor_cheque) ?></td>
-                <td><?= $this->Number->format($pedido->valor_cartao) ?></td>
-                <td><?= $this->Number->format($pedido->valor_recebe) ?></td>
-                <td><?= $this->Number->format($pedido->valor_troco) ?></td>
-                <td><?= h($pedido->created) ?></td>
-                <td><?= h($pedido->modified) ?></td>
-                <td class="actions text-right">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $pedido->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $pedido->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+<div class="panel panel-primary">
+    <div class="panel-heading font-header">
+        <?php echo $titulo_pagina . ' - ' . __('View') ?>
+        <ul class="panel-toolbar list-unstyled font-12 m-d-3">
+            <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
+            <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
         </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 text-right">
+                <?php
+                echo $this->Form->create(null, [
+                    'inline' => true,
+                    'label' => false
+                ]);
+                echo $this->Form->input('nome', ['label' => false, 'placeholder' => 'Nome']);
+                echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
+                echo $this->Form->end();
+                ?>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped font-12 table-hover">
+            <thead>
+                <tr>
+                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('ficha') ?></th>
+                    <th><?= $this->Paginator->sort('data_pedido') ?></th>
+                    <th><?= $this->Paginator->sort('status') ?></th>
+                    <th><?= $this->Paginator->sort('nome_cliente', 'Cliente') ?></th>
+                    <th><?= $this->Paginator->sort('valor_liquido', 'Valor') ?></th>
+                    <th><?= $this->Paginator->sort('created') ?></th>
+                    <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th class="actions text-right"><?= __('Actions') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($pedidos as $pedido): ?>
+                    <tr>
+                        <td><?= $this->Number->format($pedido->id) ?></td>
+                        <td><?= $this->Number->format($pedido->ficha) ?></td>
+                        <td><?= h($pedido->data_pedido) ?></td>
+                        <td><?= $this->Html->status($pedido->status) ?></td>
+                        <td><?= h($pedido->nome_cliente) ?></td>
+                        <td><?= $this->Html->valor($pedido->valor_liquido) ?></td>
+                        <td><?= h($pedido->created) ?></td>
+                        <td><?= h($pedido->modified) ?></td>
+                        <td class="actions text-right">
+                            <?= $this->Html->link(null, ['action' => 'edit', $pedido->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id), 'title' => __('Delete')]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+    <div class="panel-footer">
+        <div class="row font-12 text-center-xs">
+            <?php echo $this->element('Painel/paginacao') ?>
+        </div><!-- /.row -->
     </div>
 </div>
