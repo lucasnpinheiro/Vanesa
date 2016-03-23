@@ -401,7 +401,7 @@ CREATE TABLE `produtos` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -411,7 +411,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT  IGNORE INTO `produtos` (`id`, `barra`, `nome`, `unidade`, `status`, `grupos_estoque_id`, `peso_baixa_estoque`, `desconto_pedido`, `quantidade_pedido`, `compra`, `margem`, `venda`, `promocao`, `estoque_minimo`, `estoque_atual`, `atalho`, `nome_atalho`, `created`, `modified`) VALUES (1,'1','Sorvete 1 bola','KG',1,1,0.5000,0,0,1.50,50.0000,3.00,NULL,10.0000,1000.0000,1,'1 bola','2016-03-11 01:13:14','2016-03-11 02:15:21');
+INSERT  IGNORE INTO `produtos` (`id`, `barra`, `nome`, `unidade`, `status`, `grupos_estoque_id`, `peso_baixa_estoque`, `desconto_pedido`, `quantidade_pedido`, `compra`, `margem`, `venda`, `promocao`, `estoque_minimo`, `estoque_atual`, `atalho`, `nome_atalho`, `created`, `modified`) VALUES (1,'1','Sorvete 1 bola','KG',1,1,0.5000,0,0,1.50,50.0000,3.00,NULL,10.0000,1000.0000,1,'1 bola','2016-03-11 01:13:14','2016-03-11 02:15:21'),(2,'2','Sorvete 2 bola','KG',1,1,0.7500,1,1,0.50,66.6667,1.50,0.00,20.0000,50.0000,0,'','2016-03-21 21:30:30','2016-03-21 21:41:16');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -484,4 +484,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-16 20:57:12
+-- Dump completed on 2016-03-21 22:14:38

@@ -17,6 +17,8 @@ use Cake\Validation\Validator;
  */
 class ProdutosTable extends Table {
 
+    use \App\Model\ExtraTrait;
+
     /**
      * Initialize method
      *
@@ -123,8 +125,16 @@ class ProdutosTable extends Table {
     }
 
     public function beforeSave(\Cake\Event\Event $event, \Cake\ORM\Entity $entity) {
+        $entity->compra = $this->convertMoney($entity->compra);
+        $entity->venda = $this->convertMoney($entity->venda);
+        $entity->promocao = $this->convertMoney($entity->promocao);
+        $entity->peso_baixa_estoque = $this->convertMoney($entity->peso_baixa_estoque);
+        $entity->estoque_minimo = $this->convertMoney($entity->estoque_minimo);
+        $entity->estoque_atual = $this->convertMoney($entity->estoque_atual);
+        $entity->margem = $this->convertMoney($entity->margem);
+
         if (!empty($entity->compra) AND ! empty($entity->venda)) {
-            $entity->margem = ((($entity->venda - $entity->compra) / $entity->venda) * 100);
+            $entity->margem = floatval((($entity->venda - $entity->compra) / $entity->venda) * 100);
         }
         return true;
     }

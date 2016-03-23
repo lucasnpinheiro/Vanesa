@@ -17,7 +17,7 @@
         ?>
         <div class="col-xs-12 col-md-7">
             <div>
-                <?php echo $this->Form->input('produto_id', ['div' => ['class' => 'col-xs-12 col-md-12']]); ?>
+                <?php echo $this->Form->input('produto_id', ['options' => $produtos, 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
                 <div>
                     <table class="table table-bordered table-condensed table-hover table-striped">
                         <thead>
@@ -34,135 +34,7 @@
                     <div class="clearfix"></div>
                     <div style="max-height: 225px; overflow: auto;">
                         <table class="table table-bordered table-condensed table-hover table-striped">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 27%"></td>
-                                    <td style="width: 10%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 20%"></td>
-                                    <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;"><?= $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'bt-item-remover']) ?></td>
-                                </tr>
+                            <tbody class="add-itens-produtos">
                             </tbody>
                         </table>
                     </div>
@@ -183,7 +55,7 @@
             ?>
         </div>
         <div class="col-xs-12">
-            
+
         </div>
         <div class="clearfix"></div>
         <div class="text-right">
@@ -194,3 +66,11 @@
         <?= $this->Form->end() ?>
     </div>
 </div>
+
+
+<?php
+$this->Html->script('/js/select2.min.js', ['block' => 'script']);
+$this->Html->css('/css/select2.min.css', ['block' => 'css']);
+$this->Html->script('/js/pedidos.js', ['block' => 'script']);
+?>
+<?php $this->Html->scriptBlock('cake.pedidos.itens = ' . json_encode($lista_produtos) . ';', ['block' => 'script']); ?>

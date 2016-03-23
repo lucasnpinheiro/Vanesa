@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -8,19 +9,19 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\PedidosTable $Pedidos
  */
-class PedidosController extends AppController
-{
-public function __construct(\Cake\Network\Request $request = null, \Cake\Network\Response $response = null, $name = null, $eventManager = null, $components = null) {
+class PedidosController extends AppController {
+
+    public function __construct(\Cake\Network\Request $request = null, \Cake\Network\Response $response = null, $name = null, $eventManager = null, $components = null) {
         parent::__construct($request, $response, $name, $eventManager, $components);
         $this->set('titulo_pagina', 'Pedidos');
     }
+
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $pedidos = $this->paginate($this->Pedidos);
 
         $this->set(compact('pedidos'));
@@ -34,8 +35,7 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $pedido = $this->Pedidos->get($id, [
             'contain' => ['PedidosItens']
         ]);
@@ -49,8 +49,7 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $pedido = $this->Pedidos->newEntity();
         if ($this->request->is('post')) {
             $pedido = $this->Pedidos->patchEntity($pedido, $this->request->data);
@@ -61,7 +60,16 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
                 $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $this->set(compact('pedido'));
+        $this->loadModel('Produtos');
+        $produtos = [];
+        $_lista_produtos = $this->Produtos->find()->all();
+        $lista_produtos = [];
+        foreach ($_lista_produtos as $key => $value) {
+            $lista_produtos[(int) $value->id] = $value;
+            $produtos[(int) $value->id] = $value->barra . ' - ' . $value->nome;
+        }
+        unset($_lista_produtos);
+        $this->set(compact('pedido', 'lista_produtos', 'produtos'));
         $this->set('_serialize', ['pedido']);
     }
 
@@ -72,8 +80,7 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $pedido = $this->Pedidos->get($id, [
             'contain' => []
         ]);
@@ -97,8 +104,7 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $pedido = $this->Pedidos->get($id);
         if ($this->Pedidos->delete($pedido)) {
@@ -108,4 +114,5 @@ public function __construct(\Cake\Network\Request $request = null, \Cake\Network
         }
         return $this->redirect(['action' => 'index']);
     }
+
 }
