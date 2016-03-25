@@ -53,7 +53,7 @@ class PedidosController extends AppController {
      */
     public function verifica($id = null) {
         $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
-        if (!empty($pedido) && $pedido->status === 0) { 
+        if (!empty($pedido) && $pedido->status === 0) {
             $retorno = [
                 'cod' => 999,
                 'id' => $pedido->id
@@ -87,6 +87,7 @@ class PedidosController extends AppController {
         $this->Pedidos->save($pedido);
         $this->redirect(['action' => 'add']);
     }
+
     /**
      * View method
      *
@@ -179,8 +180,6 @@ class PedidosController extends AppController {
                     $pedidoItens->quantidade = (float) $this->request->data('quantidade');
                     if ($this->request->data('acao') == 'desconto') {
                         $pedidoItens->perc_desconto = (float) str_replace(',', '.', str_replace('.', '', $this->request->data('desconto')));
-
-
                         if ($pedidoItens->perc_desconto > 0) {
                             $pedidoItens->valor_desconto = (float) number_format((($pedidoItens->perc_desconto * 100) * $pedidoItens->valor_venda) / 100, 2);
                             $pedidoItens->valor_liquido = (float) number_format($pedidoItens->valor_venda - $pedidoItens->valor_desconto, 2);
@@ -191,8 +190,8 @@ class PedidosController extends AppController {
                     } else {
                         $pedidoItens->valor_liquido = $pedidoItens->valor_venda;
                     }
-                    $pedidoItens->valor_liquido = (float) number_format(($pedidoItens->valor_liquido * $pedidoItens->quantidade), 2);
-                    $pedidoItens->valor_total = (float) number_format(($pedidoItens->valor_venda * $pedidoItens->quantidade), 2);
+                    $pedidoItens->valor_liquido = (float) ($pedidoItens->valor_liquido * $pedidoItens->quantidade);
+                    $pedidoItens->valor_total = (float) ($pedidoItens->valor_venda * $pedidoItens->quantidade);
                     $this->PedidosItens->save($pedidoItens);
                 }
                 $pedido = $this->Pedidos->get($pedido->id);

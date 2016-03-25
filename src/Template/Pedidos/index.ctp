@@ -45,7 +45,7 @@
                         <td><?= h($pedido->data_pedido) ?></td>
                         <td><?= $this->Html->status($pedido->status) ?></td>
                         <td><?= h($pedido->nome_cliente) ?></td>
-                        <td><?= $this->Html->valor($pedido->valor_liquido) ?></td>
+                        <td><?= $this->Html->moeda($pedido->valor_liquido) ?></td>
                         <td><?= h($pedido->created) ?></td>
                         <td><?= h($pedido->modified) ?></td>
                         <td class="actions text-right">

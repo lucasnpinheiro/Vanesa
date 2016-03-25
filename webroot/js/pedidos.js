@@ -57,7 +57,7 @@ cake.pedidos.addItem = function (id) {
         } else if (cake.pedidos.editDesc == true) {
             $('.add-itens-produtos tr[rel="' + q + '"] .juros').focus();
         } else {
-            cake.pedidos.saveItens(q, p.id, 1, (p.promocao > 0 ? p.promocao : p.venda), null, 'add');
+            cake.pedidos.saveItens(q, p.id, (p.promocao > 0 ? p.promocao : p.venda), 1, (p.promocao > 0 ? p.promocao : p.venda), null, 'add');
         }
         cake.util.rotinas();
     }
@@ -75,7 +75,7 @@ cake.pedidos.calculaQtd = function (obj) {
     var t = q * v;
     $(tr).find('.td-total').html(cake.util.moeda(t));
     cake.pedidos.editQtd = false;
-    cake.pedidos.saveItens($(tr).attr('rel'), p.id, q, null, null, 'add');
+    cake.pedidos.saveItens($(tr).attr('rel'), p.id, t, q, null, null, 'add');
 }
 
 cake.pedidos.calculaValor = function (obj) {
@@ -91,10 +91,10 @@ cake.pedidos.calculaValor = function (obj) {
     var t = q * v;
     $(tr).find('.td-total').html(cake.util.moeda(t));
     cake.pedidos.editDesc = false;
-    cake.pedidos.saveItens($(tr).attr('rel'), p.id, q, v, obj.value, 'desconto');
+    cake.pedidos.saveItens($(tr).attr('rel'), p.id, t, q, v, obj.value, 'desconto');
 }
 
-cake.pedidos.saveItens = function (sequencia, id, quantidade, valor, desconto, acao) {
+cake.pedidos.saveItens = function (sequencia, id, total, quantidade, valor, desconto, acao) {
     console.log($('.add-itens-produtos').height());
     $('.add-itens-produtos').closest('div').scrollTop($('.add-itens-produtos').height());
     if (cake.pedidos.editQtd == true) {
@@ -111,6 +111,7 @@ cake.pedidos.saveItens = function (sequencia, id, quantidade, valor, desconto, a
                 ficha: $('#ficha').val(),
                 sequencia: sequencia,
                 produto_id: id,
+                total: total,
                 quantidade: quantidade,
                 valor: valor,
                 desconto: desconto,
@@ -203,7 +204,7 @@ $(function () {
     });
     $('.bt-item-remover').click(function (e) {
         e.preventDefault();
-        cake.pedidos.saveItens($(this).closest('tr').attr('rel'), $(this).closest('tr').attr('rel'), null, null, null, 'remove');
+        cake.pedidos.saveItens($(this).closest('tr').attr('rel'), $(this).closest('tr').attr('rel'), null, null, null, null, 'remove');
         $(this).closest('tr').remove();
     });
 
