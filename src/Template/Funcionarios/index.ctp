@@ -16,7 +16,6 @@
                     'label' => false
                 ]);
                 echo $this->Form->input('nome', ['label' => false, 'placeholder' => 'Nome']);
-                echo $this->Form->input('username', ['label' => false, 'placeholder' => 'Username']);
                 echo $this->Form->status('status', ['label' => false, 'placeholder' => 'Situação']);
                 echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
                 echo $this->Form->end();
@@ -33,7 +32,6 @@
                     <th><?= $this->Paginator->sort('fone1', 'Telefone 1') ?></th>
                     <th><?= $this->Paginator->sort('fone2', 'Telefone 2') ?></th>
                     <th><?= $this->Paginator->sort('cnpj', 'CNPJ') ?></th>
-                    <th><?= $this->Paginator->sort('username') ?></th>
                     <th class="actions text-right"><?= __('Actions') ?></th>
                 </tr>
             </thead>

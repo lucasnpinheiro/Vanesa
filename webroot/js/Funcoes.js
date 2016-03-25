@@ -8,7 +8,12 @@ cake.util.string = {
 
 cake.util.rotinas = function () {
     cake.util.mascaras();
-    cake.util.pularCampo();
+    //cake.util.pularCampo();
+    $('.noTab').keydown(function (e) {
+        if (e.which === 9) {
+            return false;
+        }
+    })
 };
 cake.util.numero = function (e) {
     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
@@ -17,6 +22,9 @@ cake.util.numero = function (e) {
 };
 cake.util.moeda = function (valor) {
     return 'R$ ' + cake.util.number_format(valor, 2, ',', '.');
+};
+cake.util.moedaSemMascara = function (valor) {
+    return cake.util.number_format(valor, 2, ',', '.');
 };
 cake.util.number_format = function (number, decimals, dec_point, thousands_sep) {
     number = (number + '')
@@ -250,14 +258,19 @@ cake.util.mascaras = function () {
             }
         });
     });
-
-
 };
 
 $(function () {
     cake.util.rotinas();
-    cake.util.pularCampo();
-    /*$('form').submit(function(e){
-     e.preventDefault();
-     });*/
 });
+
+$.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
+}

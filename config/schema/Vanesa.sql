@@ -258,7 +258,7 @@ CREATE TABLE `pedidos` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,6 +268,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
+INSERT  IGNORE INTO `pedidos` (`id`, `ficha`, `data_pedido`, `status`, `nome_cliente`, `valor_total`, `valor_desconto`, `valor_liquido`, `valor_dinheiro`, `valor_cheque`, `valor_cartao`, `valor_recebe`, `valor_troco`, `created`, `modified`) VALUES (1,1,'2016-03-25',1,'Lucas Nunes Pinto Pinheiro',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-03-25 10:48:24','2016-03-25 10:50:27'),(2,1,'2016-03-25',1,'teste 3',30.38,0.15,30.34,NULL,NULL,NULL,NULL,NULL,'2016-03-25 12:43:36','2016-03-25 13:59:13');
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,16 +283,17 @@ CREATE TABLE `pedidos_itens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pedido_id` int(11) DEFAULT NULL,
   `produto_id` int(11) DEFAULT NULL,
-  `valor_venda` float(10,2) DEFAULT NULL,
-  `quantidade` float(6,4) DEFAULT NULL,
-  `valor_total` float(10,2) DEFAULT NULL,
-  `perc_desconto` float(4,2) DEFAULT NULL,
-  `valor_desconto` float(10,2) DEFAULT NULL,
-  `valor_liquido` float(10,2) DEFAULT NULL,
+  `sequencia` int(11) DEFAULT NULL,
+  `valor_venda` float(12,2) DEFAULT NULL,
+  `quantidade` float(12,4) DEFAULT NULL,
+  `valor_total` float(12,2) DEFAULT NULL,
+  `perc_desconto` float(12,2) DEFAULT NULL,
+  `valor_desconto` float(12,2) DEFAULT NULL,
+  `valor_liquido` float(12,2) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,6 +303,7 @@ CREATE TABLE `pedidos_itens` (
 
 LOCK TABLES `pedidos_itens` WRITE;
 /*!40000 ALTER TABLE `pedidos_itens` DISABLE KEYS */;
+INSERT  IGNORE INTO `pedidos_itens` (`id`, `pedido_id`, `produto_id`, `sequencia`, `valor_venda`, `quantidade`, `valor_total`, `perc_desconto`, `valor_desconto`, `valor_liquido`, `created`, `modified`) VALUES (1,1,1,0,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 11:31:14','2016-03-25 11:31:14'),(2,1,1,2,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 11:31:23','2016-03-25 11:31:23'),(3,1,1,1,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 11:31:24','2016-03-25 11:31:24'),(4,1,1,3,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 11:31:26','2016-03-25 11:31:26'),(5,1,1,5,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 11:31:27','2016-03-25 11:31:27'),(6,1,1,4,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 11:31:27','2016-03-25 11:31:27'),(57,2,2,9,1.50,0.2500,0.38,0.10,0.15,0.34,'2016-03-25 13:57:21','2016-03-25 13:58:33'),(58,2,1,10,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:58:22','2016-03-25 13:58:22'),(59,2,1,11,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:10','2016-03-25 13:59:10'),(60,2,1,13,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:10','2016-03-25 13:59:10'),(61,2,1,12,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:10','2016-03-25 13:59:10'),(62,2,1,15,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:11','2016-03-25 13:59:11'),(63,2,1,14,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:12','2016-03-25 13:59:12'),(64,2,1,16,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:12','2016-03-25 13:59:12'),(65,2,1,17,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:12','2016-03-25 13:59:12'),(66,2,1,18,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:12','2016-03-25 13:59:12'),(67,2,1,19,3.00,1.0000,3.00,NULL,NULL,3.00,'2016-03-25 13:59:12','2016-03-25 13:59:12');
 /*!40000 ALTER TABLE `pedidos_itens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,7 +404,7 @@ CREATE TABLE `produtos` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -411,7 +414,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT  IGNORE INTO `produtos` (`id`, `barra`, `nome`, `unidade`, `status`, `grupos_estoque_id`, `peso_baixa_estoque`, `desconto_pedido`, `quantidade_pedido`, `compra`, `margem`, `venda`, `promocao`, `estoque_minimo`, `estoque_atual`, `atalho`, `nome_atalho`, `created`, `modified`) VALUES (1,'1','Sorvete 1 bola','KG',1,1,0.5000,0,0,1.50,50.0000,3.00,NULL,10.0000,1000.0000,1,'1 bola','2016-03-11 01:13:14','2016-03-11 02:15:21'),(2,'2','Sorvete 2 bola','KG',1,1,0.7500,1,1,0.50,66.6667,1.50,0.00,20.0000,50.0000,0,'','2016-03-21 21:30:30','2016-03-21 21:41:16');
+INSERT  IGNORE INTO `produtos` (`id`, `barra`, `nome`, `unidade`, `status`, `grupos_estoque_id`, `peso_baixa_estoque`, `desconto_pedido`, `quantidade_pedido`, `compra`, `margem`, `venda`, `promocao`, `estoque_minimo`, `estoque_atual`, `atalho`, `nome_atalho`, `created`, `modified`) VALUES (1,'1','Sorvete 1 bola','KG',1,1,0.5000,0,0,1.50,50.0000,3.00,NULL,10.0000,1000.0000,1,'1 bola','2016-03-11 01:13:14','2016-03-11 02:15:21'),(2,'789','Sorvete 2 bola','KG',1,1,0.7500,1,1,0.50,66.6667,1.50,0.00,20.0000,50.0000,1,'2 Bolas','2016-03-21 21:30:30','2016-03-25 10:19:48'),(3,'3','1','kg',1,1,0.0010,0,0,0.00,0.0000,0.01,0.00,0.0000,0.0000,0,'','2016-03-23 06:25:44','2016-03-23 06:26:30');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -484,4 +487,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-21 22:14:38
+-- Dump completed on 2016-03-25 14:07:36

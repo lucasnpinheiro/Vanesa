@@ -49,7 +49,7 @@
                         <td><?= h($pedido->created) ?></td>
                         <td><?= h($pedido->modified) ?></td>
                         <td class="actions text-right">
-                            <?= $this->Html->link(null, ['action' => 'edit', $pedido->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Html->link(null, ['action' => 'add', $pedido->id], ['title' => __('Edit')]) ?>
                             <?= $this->Form->postLink(null, ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>

@@ -24,8 +24,6 @@
         echo $this->Form->input('fone2', ['label' => 'Telefone 2', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->cnpj('cnpj', ['label' => 'CNPJ', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->numero('incricao', ['maxlength' => 20, 'label' => 'Inscrição', 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('username', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('senha', ['required' => true, 'type' => 'password', 'value' => '', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

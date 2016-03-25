@@ -8,60 +8,107 @@
 
     </div>
     <div class="panel-body">
-        <?= $this->Form->create($pedido) ?>
-        <?php
-        echo $this->Form->data('data_pedido', ['empty' => true, 'value' => date('d/m/Y'), 'div' => ['class' => 'col-xs-12 col-md-2']]);
-        echo $this->Form->input('ficha', ['div' => ['autofocus' => true, 'class' => 'col-xs-12 col-md-2']]);
-        echo $this->Form->statusPedido('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-2']]);
-        echo $this->Form->input('nome_cliente', ['div' => ['class' => 'col-xs-12 col-md-6']]);
-        ?>
-        <div class="col-xs-12 col-md-7">
-            <div>
+        <?php //debug($pedido) ?>
+        <?= $this->Form->create($pedido, ['onsubmit' => 'return false;']) ?>
+        <div class="col-xs-12 col-md-8">
+            <?php
+            echo $this->Form->data('data_pedido', ['empty' => true, 'value' => date('d/m/Y'), 'div' => ['class' => 'col-xs-12 col-md-4']]);
+            echo $this->Form->statusPedido('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+            echo $this->Form->input('ficha', ['autofocus' => true, 'div' => [ 'class' => 'col-xs-12 col-md-4']]);
+            echo $this->Form->input('nome_cliente', ['div' => ['class' => 'col-xs-12 col-md-12']]);
+            ?>
+            <div class="col-xs-12 col-md-6">
                 <?php echo $this->Form->input('produto_id', ['options' => $produtos, 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
-                <div>
-                    <table class="table table-bordered table-condensed table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 25%">Produto</th>
-                                <th style="width: 10%">Qtd.</th>
-                                <th style="width: 20%">V. Unitario</th>
-                                <th style="width: 20%">Desconto</th>
-                                <th style="width: 20%">Total</th>
-                                <th style="width: 5%"></th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div class="clearfix"></div>
-                    <div style="max-height: 225px; overflow: auto;">
-                        <table class="table table-bordered table-condensed table-hover table-striped">
-                            <tbody class="add-itens-produtos">
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
             </div>
+
+            <div class="col-xs-12 col-md-6">
+                <?php echo $this->Form->input('produto', ['type' => 'text', 'class' => 'produtos_barra', 'list' => 'codigo_produtos', 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
+                <datalist id="codigo_produtos">
+                    <?php
+                    foreach ($produtos_lista as $key => $value) {
+                        echo '<option value="' . $value . '">';
+                    }
+                    ?>
+                </datalist>
+            </div>
+
+            <div>
+                <table class="table table-bordered table-condensed table-hover table-striped" style="margin: 0; padding: 0;">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%">Produto</th>
+                            <th style="width: 10%">Qtd.</th>
+                            <th style="width: 20%">V. Unitario</th>
+                            <th style="width: 20%">Desconto</th>
+                            <th style="width: 20%">Total</th>
+                            <th style="width: 5%"></th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="clearfix"></div>
+                <div style="max-height: 225px; overflow: auto;">
+                    <table class="table table-bordered table-condensed table-hover table-striped" style="margin: 0; padding: 0;">
+                        <tbody class="add-itens-produtos">
+                            <?php
+                            if (!empty($pedido->pedidos_itens)) {
+                                foreach ($pedido->pedidos_itens as $key => $value) {
+                                    ?>
+                                    <tr rel="<?php echo $value->sequencia ?>" identificacao="<?php echo $value->produto_id ?>">
+                                        <td style="width: 27%"><?php echo $value->produto->nome ?></td>
+                                        <td style="width: 15%" class="td-qtd"><?php echo $this->Html->quantidade($value->quantidade) ?></td>
+                                        <td style="width: 15%"><?php echo $this->Html->moeda($value->valor_venda) ?></td>
+                                        <td style="width: 20%" class="td-desconto"><?php echo $this->Number->toPercentage($value->perc_desconto) ?></td>
+                                        <td style="width: 20%" class="td-total"><?php echo $this->Html->moeda($value->valor_liquido) ?></td>
+                                        <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;">
+                                            <a href="#" icondirection="left" class="bt-item-remover btn btn-xs ">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
         </div>
-        <div class="col-xs-12 col-md-5">
+        <div class="col-xs-12 col-md-4">
             <?php
             echo $this->Form->moeda('valor_total', ['readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4']]);
             echo $this->Form->moeda('valor_desconto', ['readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;']);
             echo $this->Form->moeda('valor_liquido', ['readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;']);
-            echo $this->Form->moeda('valor_dinheiro', ['label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-4']]);
-            echo $this->Form->moeda('valor_cheque', ['label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: green;']);
-            echo $this->Form->moeda('valor_cartao', ['label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: green;']);
-            echo $this->Form->moeda('valor_recebe', ['readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-6'], 'style' => 'color: blue;']);
-            echo $this->Form->moeda('valor_troco', ['readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-6'], 'style' => 'color: red;']);
+            ?>
+
+            <?php
+            if (!empty($produtos_botoes)) {
+                foreach ($produtos_botoes as $key => $value) {
+                    echo $this->Html->link($value->nome_atalho, '', ['rel' => $value->id, 'class' => 'produto-atalho btn btn-default btn-xs', 'role' => "button"]);
+                }
+            }
             ?>
         </div>
-        <div class="col-xs-12">
-
-        </div>
         <div class="clearfix"></div>
-        <div class="text-right">
-            <?= $this->Form->button(__('Finalizar Pedidos')) ?>
-            <?= $this->Form->button(__('Nova Ficha'), ['type' => 'button']) ?>
-            <?= $this->Form->button(__('Cancelar'), ['type' => 'button']) ?>
+        <div style="margin: 20px;"></div>
+        <hr>
+        <div class="col-xs-12 col-md-8 text-left">
+            <?php
+            echo $this->Form->moeda('valor_dinheiro', ['label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3']]);
+            echo $this->Form->moeda('valor_cheque', ['label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'color: green;']);
+            echo $this->Form->moeda('valor_cartao', ['label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'color: green;']);
+            echo $this->Form->moeda('valor_recebe', ['readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'color: blue;']);
+            echo $this->Form->moeda('valor_troco', ['readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'color: red;']);
+            ?>
+        </div>
+        <div class="col-xs-12 col-md-4 text-right" style="padding-top: 20px;">
+            <?php
+            echo $this->Form->button(__('Finalizar Pedidos'));
+            echo $this->Form->button(__('Nova Ficha'), ['type' => 'button']);
+            echo $this->Form->button(__('Cancelar'), ['type' => 'button']);
+            ?>
         </div>
         <?= $this->Form->end() ?>
     </div>
