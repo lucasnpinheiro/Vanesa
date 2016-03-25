@@ -17,9 +17,6 @@
             echo $this->Form->input('ficha', ['autofocus' => true, 'div' => [ 'class' => 'col-xs-12 col-md-2']]);
             echo $this->Form->input('nome_cliente', ['div' => ['class' => 'col-xs-12 col-md-10']]);
             ?>
-            <div class="col-xs-12 col-md-6">
-                <?php echo $this->Form->input('produto_id', ['options' => $produtos, 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
-            </div>
 
             <div class="col-xs-12 col-md-6">
                 <?php echo $this->Form->input('produto', ['type' => 'text', 'class' => 'produtos_barra', 'list' => 'codigo_produtos', 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
@@ -30,6 +27,9 @@
                     }
                     ?>
                 </datalist>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <?php echo $this->Form->input('produto_id', ['options' => $produtos, 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
             </div>
 
             <div>
@@ -78,7 +78,7 @@
         </div>
         <div class="col-xs-12 col-md-5">
             <?php
-            echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'],'style'=>'font-size: 24px;']);
+            echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'font-size: 24px;']);
             echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 24px;']);
             echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 24px;']);
             ?>

@@ -99,17 +99,17 @@ class PedidosController extends AppController {
         $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
         $pedido->status = 1;
         $this->Pedidos->save($pedido);
-        $this->loadModel('ProdutosItens');
+        $this->loadModel('PedidosItens');
         $this->loadModel('GruposEstoques');
         $this->loadModel('Produtos');
-        $itens = $this->ProdutosItens->find()->where(['pedido_id' => $pedido->id])->all();
+        $itens = $this->PedidosItens->find()->where(['pedido_id' => $pedido->id])->all();
 
         if (!empty($itens)) {
             foreach ($itens as $k => $v) {
                 $produto = $this->Produtos->get((int) $v->produto_id);
                 $gruposEstoque = $this->GruposEstoques->get($produto->grupos_estoque_id);
                 if ($gruposEstoque->estoque_global > 0) {
-                    $produto = $this->Produtos->findByBarra((int) $gruposEstoque->estoque_global)->first();
+                    $produto = $this->Produtos->findById((int) $gruposEstoque->estoque_global)->first();
                 }
                 $produto->estoque_atual -= (double) $v->quantidade;
                 $this->Produtos->save($produto);

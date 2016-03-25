@@ -109,7 +109,7 @@ class RequisicoesTable extends Table {
         $produto = $Produtos->get((int) $entity->produto_id);
         $gruposEstoque = $GruposEstoques->get($produto->grupos_estoque_id);
         if ($gruposEstoque->estoque_global > 0) {
-            $produto = $Produtos->findByBarra((int) $gruposEstoque->estoque_global)->first();
+            $produto = $Produtos->findById((int) $gruposEstoque->estoque_global)->first();
         }
         if ($entity->tipo == 1) {
             $produto->estoque_atual += (double) $entity->quantidade;
