@@ -57,7 +57,7 @@
                                     <tr rel="<?php echo $value->sequencia ?>" identificacao="<?php echo $value->produto_id ?>">
                                         <td style="width: 27%"><?php echo $value->produto->nome ?></td>
                                         <td style="width: 15%" class="td-qtd"><?php echo $this->Html->quantidade($value->quantidade) ?></td>
-                                        <td style="width: 15%"><?php echo $this->Html->moeda($value->valor_venda) ?></td>
+                                        <td style="width: 15%"><?php echo $this->Html->moeda($value->valor_venda, ['append' => null]) ?></td>
                                         <td style="width: 20%" class="td-desconto"><?php echo $this->Number->toPercentage($value->perc_desconto) ?></td>
                                         <td style="width: 20%" class="td-total"><?php echo $this->Html->moeda($value->valor_liquido) ?></td>
                                         <td style="width: 3%;margin: 0px; padding: 0px; text-align: center;">
@@ -79,9 +79,9 @@
         </div>
         <div class="col-xs-12 col-md-4">
             <?php
-            echo $this->Form->moeda('valor_total', ['readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4']]);
-            echo $this->Form->moeda('valor_desconto', ['readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;']);
-            echo $this->Form->moeda('valor_liquido', ['readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;']);
+            echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'],'style'=>'font-size: 16px;']);
+            echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 16px;']);
+            echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 16px;']);
             ?>
 
             <?php

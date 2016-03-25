@@ -75,7 +75,7 @@ cake.pedidos.calculaQtd = function (obj) {
     var t = q * v;
     $(tr).find('.td-total').html(cake.util.moeda(t));
     cake.pedidos.editQtd = false;
-    cake.pedidos.saveItens($(tr).attr('rel'), p.id, t, null, null, 'add');
+    cake.pedidos.saveItens($(tr).attr('rel'), p.id, q, null, null, 'add');
 }
 
 cake.pedidos.calculaValor = function (obj) {
