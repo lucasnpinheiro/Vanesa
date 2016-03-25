@@ -10,13 +10,12 @@
     <div class="panel-body">
         <?php //debug($pedido) ?>
         <?= $this->Form->create($pedido, ['onsubmit' => 'return false;']) ?>
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-7">
             <?php
-            echo $this->Form->data('data_pedido', ['empty' => true, 'value' => date('d/m/Y'), 'div' => ['class' => 'col-xs-12 col-md-4']]);
+            echo $this->Form->input('data_pedido', ['value' => date('d/m/Y'), 'type' => 'hidden']);
             echo $this->Form->input('status', ['value' => 0, 'type' => 'hidden']);
-            echo '<div class="form-group text col-xs-12 col-md-4"><label class="col-sm-12 control-label">Situação</label> <div class="col-sm-12"> <p class="form-control-static">Aberto</p> </div></div>';
-            echo $this->Form->input('ficha', ['autofocus' => true, 'div' => [ 'class' => 'col-xs-12 col-md-4']]);
-            echo $this->Form->input('nome_cliente', ['div' => ['class' => 'col-xs-12 col-md-12']]);
+            echo $this->Form->input('ficha', ['autofocus' => true, 'div' => [ 'class' => 'col-xs-12 col-md-2']]);
+            echo $this->Form->input('nome_cliente', ['div' => ['class' => 'col-xs-12 col-md-10']]);
             ?>
             <div class="col-xs-12 col-md-6">
                 <?php echo $this->Form->input('produto_id', ['options' => $produtos, 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
@@ -77,11 +76,11 @@
             </div>
 
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-5">
             <?php
-            echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'],'style'=>'font-size: 16px;']);
-            echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 16px;']);
-            echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 16px;']);
+            echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'],'style'=>'font-size: 24px;']);
+            echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 24px;']);
+            echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 24px;']);
             ?>
 
             <?php
