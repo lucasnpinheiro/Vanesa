@@ -99,6 +99,24 @@ class PedidosController extends AppController {
         $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
         $pedido->status = 1;
         $this->Pedidos->save($pedido);
+        $this->loadModel('ProdutosItens');
+        $itens = $this->ProdutosItens->find()->where(['pedido_id' => $pedido->id])->all();
+
+        $GruposEstoques = \Cake\ORM\TableRegistry::get('GruposEstoques');
+        $Produtos = \Cake\ORM\TableRegistry::get('Produtos');
+        $produto = $Produtos->get((int) $entity->produto_id);
+        $gruposEstoque = $GruposEstoques->get($produto->grupos_estoque_id);
+        if ($gruposEstoque->estoque_global > 0) {
+            $produto = $Produtos->findByBarra((int) $gruposEstoque->estoque_global)->first();
+        }
+        if ($entity->tipo == 1) {
+            $produto->estoque_atual += (double) $entity->quantidade;
+        } else if ($entity->tipo == 2) {
+            $produto->estoque_atual -= (double) $entity->quantidade;
+        }
+        $Produtos->save($produto);
+
+
         $this->redirect(['action' => 'add']);
     }
 
