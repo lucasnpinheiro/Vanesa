@@ -13,7 +13,8 @@
         <div class="col-xs-12 col-md-8">
             <?php
             echo $this->Form->data('data_pedido', ['empty' => true, 'value' => date('d/m/Y'), 'div' => ['class' => 'col-xs-12 col-md-4']]);
-            echo $this->Form->statusPedido('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+            echo $this->Form->input('status', ['value' => 0, 'type' => 'hidden']);
+            echo '<div class="form-group text col-xs-12 col-md-4"><label class="col-sm-12 control-label">Situação</label> <div class="col-sm-12"> <p class="form-control-static">Aberto</p> </div></div>';
             echo $this->Form->input('ficha', ['autofocus' => true, 'div' => [ 'class' => 'col-xs-12 col-md-4']]);
             echo $this->Form->input('nome_cliente', ['div' => ['class' => 'col-xs-12 col-md-12']]);
             ?>
@@ -94,20 +95,20 @@
         <div class="clearfix"></div>
         <div style="margin: 20px;"></div>
         <hr>
-        <div class="col-xs-12 col-md-8 text-left">
+        <div class="col-xs-12 col-md-8 text-left" style="margin: 0px; padding: 0px;">
             <?php
-            echo $this->Form->moeda('valor_dinheiro', ['label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3']]);
-            echo $this->Form->moeda('valor_cheque', ['label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'color: green;']);
-            echo $this->Form->moeda('valor_cartao', ['label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'color: green;']);
-            echo $this->Form->moeda('valor_recebe', ['readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'color: blue;']);
-            echo $this->Form->moeda('valor_troco', ['readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'color: red;']);
+            echo $this->Form->moeda('valor_dinheiro', ['label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3', 'style' => "margin: 0px; padding: 0px;"]]);
+            echo $this->Form->moeda('valor_cheque', ['label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: green;']);
+            echo $this->Form->moeda('valor_cartao', ['label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: green;']);
+            echo $this->Form->moeda('valor_recebe', ['readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: blue;']);
+            echo $this->Form->moeda('valor_troco', ['readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: red;']);
             ?>
         </div>
-        <div class="col-xs-12 col-md-4 text-right" style="padding-top: 20px;">
+        <div class="col-xs-12 col-md-4 text-right" style="padding: 20px 0px 0px 0px; margin: 0px;">
             <?php
-            echo $this->Form->button(__('Finalizar Pedidos'));
-            echo $this->Form->button(__('Nova Ficha'), ['type' => 'button']);
-            echo $this->Form->button(__('Cancelar'), ['type' => 'button']);
+            echo $this->Form->button(__('Finalizar'), ['type' => 'button', 'id' => 'finalizar-pedido']);
+            echo $this->Form->button(__('Nova Ficha'), ['type' => 'button', 'id' => 'novo-pedido']);
+            echo $this->Form->button(__('Cancelar'), ['type' => 'button', 'id' => 'cancelar-pedido']);
             ?>
         </div>
         <?= $this->Form->end() ?>

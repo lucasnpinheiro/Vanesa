@@ -53,7 +53,7 @@ class PedidosController extends AppController {
      */
     public function verifica($id = null) {
         $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
-        if (!empty($pedido) && $pedido->status === 0) {
+        if (!empty($pedido) && $pedido->status === 0) { 
             $retorno = [
                 'cod' => 999,
                 'id' => $pedido->id
@@ -72,6 +72,33 @@ class PedidosController extends AppController {
         }
         echo json_encode($retorno);
         exit;
+    }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Pedido id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function cancelar($id = null) {
+        $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
+        $pedido->status = 2;
+        $this->Pedidos->save($pedido);
+        $this->redirect(['action' => 'add']);
+    }
+    /**
+     * View method
+     *
+     * @param string|null $id Pedido id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function finalizar($id = null) {
+        $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
+        $pedido->status = 1;
+        $this->Pedidos->save($pedido);
+        $this->redirect(['action' => 'add']);
     }
 
     /**

@@ -121,6 +121,7 @@ cake.pedidos.saveItens = function (sequencia, id, quantidade, valor, desconto, a
                 $('#valor-total').val(cake.util.moedaSemMascara(d.valor_total));
                 $('#valor-desconto').val(cake.util.moedaSemMascara(d.valor_desconto));
                 $('#valor-liquido').val(cake.util.moedaSemMascara(d.valor_liquido));
+                cake.pedidos.subTotal();
             }
         });
     }
@@ -162,6 +163,19 @@ cake.pedidos.atualizaFicha = function () {
 
 }
 
+cake.pedidos.subTotal = function () {
+    var d = cake.util.convertFloat($('#valor-dinheiro').val());
+    var c = cake.util.convertFloat($('#valor-cheque').val());
+    var a = cake.util.convertFloat($('#valor-cartao').val());
+    var l = cake.util.convertFloat($('#valor-liquido').val());
+    var t = (d + c + a);
+    $('#valor-recebe').val(cake.util.moedaSemMascara(t));
+    $('#valor-troco').val('');
+    if (t > l) {
+        $('#valor-troco').val(cake.util.moedaSemMascara(t - l));
+    }
+}
+
 $(function () {
     $(".produtos_barra").addClass('noTab');
     var $eventSelect = $("#produto-id").select2({"language": "pt-BR"});
@@ -180,8 +194,10 @@ $(function () {
         cake.pedidos.addItem($(this).attr('rel'));
     });
 
-    cake.pedidos.save();
     cake.pedidos.atualizaFicha();
+    cake.pedidos.save();
+    cake.util.rotinas();
+
     $('.add-itens-produtos').find('tr').each(function () {
         cake.pedidos.sequencia = parseInt($(this).attr('rel')) + 1;
     });
@@ -191,6 +207,38 @@ $(function () {
         $(this).closest('tr').remove();
     });
 
-    cake.util.rotinas();
 
+    $('#valor-dinheiro, #valor-cheque, #valor-cartao').change(function (e) {
+        e.preventDefault();
+        cake.pedidos.subTotal();
+    });
+    $('#novo-pedido').click(function (e) {
+        e.preventDefault();
+        window.location.href = router.url + 'pedidos/add/';
+    });
+
+    $('#cancelar-pedido').click(function (e) {
+        e.preventDefault();
+        if ($('#ficha').val() != '') {
+            if (confirm('Confirma o cancelamento do pedido')) {
+                window.location.href = router.url + 'pedidos/cancelar/' + $('#ficha').val();
+            }
+        } else {
+            alert('Ficha não informada');
+        }
+    });
+    $('#finalizar-pedido').click(function (e) {
+        e.preventDefault();
+        if ($('#ficha').val() != '') {
+            var l = cake.util.convertFloat($('#valor-liquido').val());
+            var r = cake.util.convertFloat($('#valor-recebe').val());
+            if (l <= r) {
+                window.location.href = router.url + 'pedidos/finalizar/' + $('#ficha').val();
+            } else {
+                alert('Verificar o valor recebido.');
+            }
+        } else {
+            alert('Ficha não informada');
+        }
+    });
 });
