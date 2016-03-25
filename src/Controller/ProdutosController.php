@@ -56,10 +56,12 @@ class ProdutosController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $produto = $this->Produtos->get($id, [
-            'contain' => ['GruposEstoques', 'PedidosItens', 'Requisicoes']
-        ]);
-
+        $produto = $this->Produtos->get($id);
+        $this->loadModel('GruposEstoques');
+        $grupo = $this->GruposEstoques->get($produto->grupos_estoque_id);
+        if($grupo->estoque_global > 0){
+            $produto = $this->Produtos->get($grupo->estoque_global);
+        }
         $this->set('produto', $produto);
         $this->set('_serialize', ['produto']);
     }

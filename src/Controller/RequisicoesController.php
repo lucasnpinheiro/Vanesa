@@ -45,7 +45,11 @@ class RequisicoesController extends AppController {
                 $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $produtos = $this->Requisicoes->Produtos->find('list');
+        $_produtos = $this->Requisicoes->Produtos->find()->order(['nome' => 'asc'])->all();
+        $produtos = [];
+        foreach ($_produtos as $key => $value) {
+            $produtos[$value->id] = $value->barra . ' | ' . $value->nome;
+        }
         $this->set(compact('requisico', 'produtos'));
         $this->set('_serialize', ['requisico']);
     }
