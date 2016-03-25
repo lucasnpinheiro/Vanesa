@@ -111,7 +111,13 @@ class PedidosController extends AppController {
                 if ($gruposEstoque->estoque_global > 0) {
                     $produto = $this->Produtos->findById((int) $gruposEstoque->estoque_global)->first();
                 }
-                $produto->estoque_atual -= (double) $v->quantidade;
+
+                if ($produto->peso_baixa_estoque > 0) {
+                    $produto->estoque_atual -= (double) ((double) $produto->peso_baixa_estoque * (double) $v->quantidade);
+                } else {
+                    $produto->estoque_atual -= (double) $v->quantidade;
+                }
+
                 $this->Produtos->save($produto);
             }
         }
