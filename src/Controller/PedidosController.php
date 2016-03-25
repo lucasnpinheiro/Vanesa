@@ -100,23 +100,21 @@ class PedidosController extends AppController {
         $pedido->status = 1;
         $this->Pedidos->save($pedido);
         $this->loadModel('ProdutosItens');
+        $this->loadModel('GruposEstoques');
+        $this->loadModel('Produtos');
         $itens = $this->ProdutosItens->find()->where(['pedido_id' => $pedido->id])->all();
 
-        $GruposEstoques = \Cake\ORM\TableRegistry::get('GruposEstoques');
-        $Produtos = \Cake\ORM\TableRegistry::get('Produtos');
-        $produto = $Produtos->get((int) $entity->produto_id);
-        $gruposEstoque = $GruposEstoques->get($produto->grupos_estoque_id);
-        if ($gruposEstoque->estoque_global > 0) {
-            $produto = $Produtos->findByBarra((int) $gruposEstoque->estoque_global)->first();
+        if (!empty($itens)) {
+            foreach ($itens as $k => $v) {
+                $produto = $this->Produtos->get((int) $v->produto_id);
+                $gruposEstoque = $this->GruposEstoques->get($produto->grupos_estoque_id);
+                if ($gruposEstoque->estoque_global > 0) {
+                    $produto = $this->Produtos->findByBarra((int) $gruposEstoque->estoque_global)->first();
+                }
+                $produto->estoque_atual -= (double) $v->quantidade;
+                $this->Produtos->save($produto);
+            }
         }
-        if ($entity->tipo == 1) {
-            $produto->estoque_atual += (double) $entity->quantidade;
-        } else if ($entity->tipo == 2) {
-            $produto->estoque_atual -= (double) $entity->quantidade;
-        }
-        $Produtos->save($produto);
-
-
         $this->redirect(['action' => 'add']);
     }
 
