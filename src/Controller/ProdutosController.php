@@ -59,7 +59,7 @@ class ProdutosController extends AppController {
         $produto = $this->Produtos->get($id);
         $this->loadModel('GruposEstoques');
         $grupo = $this->GruposEstoques->get($produto->grupos_estoque_id);
-        if($grupo->estoque_global > 0){
+        if ($grupo->estoque_global > 0) {
             $produto = $this->Produtos->get($grupo->estoque_global);
         }
         $this->set('produto', $produto);
@@ -128,6 +128,19 @@ class ProdutosController extends AppController {
             $this->Flash->error(__('Erro ao excluir o registro.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function relatorios() {
+        if (!empty($this->request->data)) {
+            $this->redirect($this->request->data);
+        }
+        $this->loadModel('GruposEstoques');
+
+        $produto = $this->Produtos->find('search', $this->Produtos->filterParams($this->request->query))->where(['status' => 1])->order(['nome' => 'asc'])->all();
+
+        $gruposEstoques = $this->GruposEstoques->find()->order(['nome' => 'asc'])->all();
+        $this->set(compact('produto', 'gruposEstoques'));
+        $this->set('_serialize', ['produto']);
     }
 
 }

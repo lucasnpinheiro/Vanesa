@@ -106,14 +106,13 @@ class PedidosController extends AppController {
 
         if (!empty($itens)) {
             foreach ($itens as $k => $v) {
-                $produto = $this->Produtos->get((int) $v->produto_id);
+                $produtoBaixa = $produto = $this->Produtos->get((int) $v->produto_id);
                 $gruposEstoque = $this->GruposEstoques->get($produto->grupos_estoque_id);
                 if ($gruposEstoque->estoque_global > 0) {
-                    $produto = $this->Produtos->findById((int) $gruposEstoque->estoque_global)->first();
+                    $produto = $this->Produtos->get((int) $gruposEstoque->estoque_global);
                 }
-
-                if ($produto->peso_baixa_estoque > 0) {
-                    $produto->estoque_atual -= (double) ((double) $produto->peso_baixa_estoque * (double) $v->quantidade);
+                if ($produtoBaixa->peso_baixa_estoque > 0) {
+                    $produto->estoque_atual -= (double) ((double) $produtoBaixa->peso_baixa_estoque * (double) $v->quantidade);
                 } else {
                     $produto->estoque_atual -= (double) $v->quantidade;
                 }
@@ -199,21 +198,21 @@ class PedidosController extends AppController {
                     $pedidoItens->produto_id = (int) $this->request->data('produto_id');
                     $pedidoItens->sequencia = (int) $this->request->data('sequencia');
                     $pedidoItens->valor_venda = ($produto->promocao > 0 ? $produto->promocao : $produto->venda);
-                    $pedidoItens->quantidade = (float) $this->request->data('quantidade');
+                    $pedidoItens->quantidade = (double) $this->request->data('quantidade');
                     if ($this->request->data('acao') == 'desconto') {
-                        $pedidoItens->perc_desconto = (float) str_replace(',', '.', str_replace('.', '', $this->request->data('desconto')));
+                        $pedidoItens->perc_desconto = (double) str_replace(',', '.', str_replace('.', '', $this->request->data('desconto')));
                         if ($pedidoItens->perc_desconto > 0) {
-                            $pedidoItens->valor_desconto = (float) number_format((($pedidoItens->perc_desconto * 100) * $pedidoItens->valor_venda) / 100, 2);
-                            $pedidoItens->valor_liquido = (float) number_format($pedidoItens->valor_venda - $pedidoItens->valor_desconto, 2);
+                            $pedidoItens->valor_desconto = (double) number_format((($pedidoItens->perc_desconto * 100) * $pedidoItens->valor_venda) / 100, 2);
+                            $pedidoItens->valor_liquido = (double) number_format($pedidoItens->valor_venda - $pedidoItens->valor_desconto, 2);
                         } else {
-                            $pedidoItens->valor_desconto = (float) 0;
-                            $pedidoItens->valor_liquido = (float) $pedidoItens->valor_venda;
+                            $pedidoItens->valor_desconto = (double) 0;
+                            $pedidoItens->valor_liquido = (double) $pedidoItens->valor_venda;
                         }
                     } else {
                         $pedidoItens->valor_liquido = $pedidoItens->valor_venda;
                     }
-                    $pedidoItens->valor_liquido = (float) ($pedidoItens->valor_liquido * $pedidoItens->quantidade);
-                    $pedidoItens->valor_total = (float) ($pedidoItens->valor_venda * $pedidoItens->quantidade);
+                    $pedidoItens->valor_liquido = (double) ($pedidoItens->valor_liquido * $pedidoItens->quantidade);
+                    $pedidoItens->valor_total = (double) ($pedidoItens->valor_venda * $pedidoItens->quantidade);
                     $this->PedidosItens->save($pedidoItens);
                 }
                 $pedido = $this->Pedidos->get($pedido->id);
@@ -224,9 +223,9 @@ class PedidosController extends AppController {
                 if (count($itens) > 0) {
                     //`valor_venda`, `quantidade`, ``, `perc_desconto`, `valor_desconto`, `valor_liquido`, `created`, `modified`
                     foreach ($itens as $key => $value) {
-                        $pedido->valor_total += (float) number_format($value->valor_total, 2);
-                        $pedido->valor_desconto += (float) number_format($value->valor_desconto, 2);
-                        $pedido->valor_liquido += (float) number_format($value->valor_liquido, 2);
+                        $pedido->valor_total += (double) $value->valor_total;
+                        $pedido->valor_desconto += (double) $value->valor_desconto;
+                        $pedido->valor_liquido += (double) $value->valor_liquido;
                     }
                 }
                 $this->Pedidos->save($pedido);

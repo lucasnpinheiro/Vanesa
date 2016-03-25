@@ -46,11 +46,12 @@ class RequisicoesController extends AppController {
             }
         }
         $_produtos = $this->Requisicoes->Produtos->find()->order(['nome' => 'asc'])->all();
-        $produtos = [];
+        $produtos = $produtos_lista = [];
         foreach ($_produtos as $key => $value) {
             $produtos[$value->id] = $value->barra . ' | ' . $value->nome;
+            $produtos_lista[$value->id] = $value->barra;
         }
-        $this->set(compact('requisico', 'produtos'));
+        $this->set(compact('requisico', 'produtos', 'produtos_lista'));
         $this->set('_serialize', ['requisico']);
     }
 

@@ -19,5 +19,8 @@ $(function () {
     $eventSelect.on("select2:select", function (e) {
         cake.requisicoes.findProduto(e.params.data.id);
     });
-
+    $('#produto').change(function (e) {
+        e.preventDefault();
+        cake.requisicoes.findProduto($(this).val());
+    });
 });

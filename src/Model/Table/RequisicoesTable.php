@@ -106,20 +106,20 @@ class RequisicoesTable extends Table {
         }
         $GruposEstoques = \Cake\ORM\TableRegistry::get('GruposEstoques');
         $Produtos = \Cake\ORM\TableRegistry::get('Produtos');
-        $produto = $Produtos->get((int) $entity->produto_id);
+        $produtoBaixa = $produto = $Produtos->get((int) $entity->produto_id);
         $gruposEstoque = $GruposEstoques->get($produto->grupos_estoque_id);
         if ($gruposEstoque->estoque_global > 0) {
             $produto = $Produtos->get($gruposEstoque->estoque_global);
         }
         if ($entity->tipo == 1) {
-            if ($produto->peso_baixa_estoque > 0) {
-                $produto->estoque_atual += ((double) $produto->peso_baixa_estoque * (double) $entity->quantidade);
+            if ($produtoBaixa->peso_baixa_estoque > 0) {
+                $produto->estoque_atual += ((double) $produtoBaixa->peso_baixa_estoque * (double) $entity->quantidade);
             } else {
                 $produto->estoque_atual += (double) $entity->quantidade;
             }
         } else if ($entity->tipo == 2) {
-            if ($produto->peso_baixa_estoque > 0) {
-                $produto->estoque_atual -= ((double) $produto->peso_baixa_estoque * (double) $entity->quantidade);
+            if ($produtoBaixa->peso_baixa_estoque > 0) {
+                $produto->estoque_atual -= ((double) $produtoBaixa->peso_baixa_estoque * (double) $entity->quantidade);
             } else {
                 $produto->estoque_atual -= (double) $entity->quantidade;
             }
