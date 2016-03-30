@@ -11,14 +11,14 @@
         <?= $this->Form->create($apagar) ?>
         <?php
         echo $this->Form->input('numero_documento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->status('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->pessoas('pessoa_id', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->data('data_vencimento', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->moeda('valor_documento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('tipo', ['div' => ['empty' => true, 'options' => $tipos, 'class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->statusContas('status', ['required' => true, 'value' => 1, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->pessoas('pessoa_id', ['required' => true, 'label' => 'Fornecedores', 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']], [3]);
+        echo $this->Form->data('data_vencimento', ['required' => true, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->moeda('valor_documento', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->tiposPagamentos('tipo', ['required' => true, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->data('data_pagamento', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->moeda('valor_pagamento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->moeda('valor_acrescimo', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->moeda('valor_acrescimo', ['disabled' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
 
         echo $this->Form->input('historico', ['div' => ['class' => 'col-xs-12 col-md-12'], 'type' => 'textarea']);
         ?>
@@ -30,3 +30,6 @@
     </div>
 </div>
 
+<?php
+$this->Html->script('/js/apagar.js', ['block' => 'script']);
+?>

@@ -19,11 +19,14 @@ trait ExtraTrait {
     //put your code here
 
     public function convertMoney($str) {
-        if (stripos($str, ',') !== false) {
-            $str = str_replace('.', '', $str);
-            $str = str_replace(',', '.', $str);
+        if (!empty($str)) {
+            if (stripos($str, ',') !== false) {
+                $str = str_replace('.', '', $str);
+                $str = str_replace(',', '.', $str);
+            }
+            return floatval($str);
         }
-        return floatval($str);
+        return $str;
     }
 
 }

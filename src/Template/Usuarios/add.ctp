@@ -26,6 +26,9 @@
         echo $this->Form->numero('incricao', ['maxlength' => 20, 'label' => 'Inscrição', 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('username', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->input('senha', ['required' => true, 'type' => 'password', 'value' => '', 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        if ($this->request->session()->read('Auth.User.root') == 1) {
+            echo $this->Form->simNao('root', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-12']]);
+        }
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

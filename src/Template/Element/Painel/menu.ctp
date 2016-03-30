@@ -30,7 +30,7 @@
                             <li><?php echo $this->Html->link('Grupos Estoques', ['controller' => 'GruposEstoques', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Produtos', ['controller' => 'Produtos', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Requisições', ['controller' => 'Requisicoes', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link('Relatórios', ['controller' => 'Requisicoes', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Relatórios', ['controller' => 'Produtos', 'action' => 'relatorios'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown">

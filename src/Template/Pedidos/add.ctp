@@ -96,11 +96,11 @@
         <hr>
         <div class="col-xs-12 col-md-8 text-left" style="margin: 0px; padding: 0px;">
             <?php
-            echo $this->Form->moeda('valor_dinheiro', ['label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3', 'style' => "margin: 0px; padding: 0px;"]]);
-            echo $this->Form->moeda('valor_cheque', ['label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: green;']);
-            echo $this->Form->moeda('valor_cartao', ['label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: green;']);
-            echo $this->Form->moeda('valor_recebe', ['readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: blue;']);
-            echo $this->Form->moeda('valor_troco', ['readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2', 'style' => "margin: 0px; padding: 0px;"], 'style' => 'color: red;']);
+            echo $this->Form->moeda('valor_dinheiro', ['append' => null, 'label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px;']);
+            echo $this->Form->moeda('valor_cheque', ['append' => null, 'label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
+            echo $this->Form->moeda('valor_cartao', ['append' => null, 'label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px; color: green;']);
+            echo $this->Form->moeda('valor_recebe', ['append' => null, 'readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: blue;']);
+            echo $this->Form->moeda('valor_troco', ['append' => null, 'readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: red;']);
             ?>
         </div>
         <div class="col-xs-12 col-md-4 text-right" style="padding: 20px 0px 0px 0px; margin: 0px;">

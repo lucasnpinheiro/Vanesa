@@ -12,7 +12,7 @@ foreach ($produto as $key => $value) {
 
 <div class="panel panel-primary">
     <div class="panel-heading font-header">
-        <?php echo $titulo_pagina . ' - ' . __('View') ?>
+        <?php echo $titulo_pagina . ' - Relatório' ?>
         <ul class="panel-toolbar list-unstyled font-12 m-d-3">
             <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
             <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
@@ -46,10 +46,10 @@ foreach ($produto as $key => $value) {
                     <table class="table table-bordered table-striped font-12 table-hover">
                         <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Produto</th>
-                                <th>Estoque Atual</th>
-                                <th>Estoque Novo</th>
+                                <th style="width: 20%;">Código</th>
+                                <th style="width: 50%;">Produto</th>
+                                <th style="width: 15%;">Estoque Atual</th>
+                                <th style="width: 15%;">Estoque Novo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,9 +57,9 @@ foreach ($produto as $key => $value) {
                             foreach ($gruposProdutos[$key] as $k => $v) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $v->barra; ?></td>
+                                    <td class="text-right"><?php echo $v->barra; ?></td>
                                     <td><?php echo $v->nome; ?></td>
-                                    <td><?php echo $v->estoque_atual; ?></td>
+                                    <td class="text-center"><?php echo $v->estoque_atual; ?></td>
                                     <td></td>
                                 </tr>
                                 <?php
@@ -76,8 +76,9 @@ foreach ($produto as $key => $value) {
 
     </div><!-- /.table-responsive -->
     <div class="panel-footer">
-        <div class="row font-12 text-center-xs">
-            <button onclick="print();">Imprimir</button>
+        <div class="col-xs-12 font-12 text-center-xs text-right">
+            <button onclick="print();" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
         </div><!-- /.row -->
+        <div class="clearfix"></div>
     </div>
 </div>

@@ -38,6 +38,13 @@
                             'required' => $value->required,
                             'type' => 'text',
                         ];
+
+                        if ($this->request->session()->read('Auth.User.root') != 1) {
+                            if ($value->root === 1) {
+                                $options['disabled'] = true;
+                            }
+                        }
+
                         if ($value->opcoes) {
                             $options['options'] = json_decode($value->opcoes, true);
                         }

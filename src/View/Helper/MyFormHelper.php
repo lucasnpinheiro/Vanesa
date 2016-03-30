@@ -118,10 +118,8 @@ class MyFormHelper extends BootstrapFormHelper {
         $options += [
             'type' => 'select',
             'options' => [
-                1 => __('Dinheiro'),
-                2 => __('Cheque'),
-                3 => __('Cartão'),
-                4 => __('Prazo'),
+                1 => __('Avista'),
+                2 => __('Prazo'),
             ],
             'empty' => __('Selecionar um Tipo')
         ];
@@ -206,7 +204,7 @@ class MyFormHelper extends BootstrapFormHelper {
     public function pessoas($fieldName, array $options = [], array $tipo = []) {
         $pessoas = TableRegistry::get('Pessoas');
 
-        $find = $pessoas->find()->contain('PessoasTipos')->all();
+        $find = $pessoas->find()->contain('PessoasTipos')->order(['Pessoas.nome' => 'asc'])->all();
         $_pessoas = [];
         $_lista_tipos = [
             '1' => 'Usuário',
@@ -233,6 +231,14 @@ class MyFormHelper extends BootstrapFormHelper {
                         $_pessoas[$_lista_tipos[$v->tipo]][$value->id] = $value->nome;
                     }
                 }
+            }
+        }
+        if (count($_pessoas) < 2) {
+            $p = $_pessoas;
+            $k = array_keys($p);
+            $_pessoas = [];
+            if (!empty($p) AND ! empty($k)) {
+                $_pessoas = $p[$k[0]];
             }
         }
         $options += [

@@ -153,6 +153,7 @@ class ProdutosTable extends Table {
         $entity->estoque_minimo = $this->convertMoney($entity->estoque_minimo);
         $entity->estoque_atual = $this->convertMoney($entity->estoque_atual);
         $entity->margem = $this->convertMoney($entity->margem);
+        $entity->unidade = strtoupper($entity->unidade);
 
         if (!empty($entity->compra) AND ! empty($entity->venda)) {
             $entity->margem = floatval((($entity->venda - $entity->compra) / $entity->venda) * 100);

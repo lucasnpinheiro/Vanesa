@@ -22,7 +22,7 @@ class ApagarController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $query = $this->{$this->modelClass}->find('search', $this->{$this->modelClass}->filterParams($this->request->query))->contain(['Pessoas', 'Grupos']);
+        $query = $this->{$this->modelClass}->find('search', $this->{$this->modelClass}->filterParams($this->request->query))->contain(['Pessoas']);
         $this->set('apagar', $this->paginate($query));
         $this->set('_serialize', ['apagar']);
     }
@@ -59,9 +59,7 @@ class ApagarController extends AppController {
                 $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $this->loadModel('Grupos');
-        $tipos = $this->Grupos->find('list');
-        $this->set(compact('apagar', 'tipos'));
+        $this->set(compact('apagar'));
         $this->set('_serialize', ['apagar']);
     }
 
@@ -85,9 +83,7 @@ class ApagarController extends AppController {
                 $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $this->loadModel('Grupos');
-        $tipos = $this->Grupos->find('list');
-        $this->set(compact('apagar', 'tipos'));
+        $this->set(compact('apagar'));
         $this->set('_serialize', ['apagar']);
     }
 

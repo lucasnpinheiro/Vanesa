@@ -16,6 +16,8 @@
                     'label' => false
                 ]);
                 echo $this->Form->input('nome', ['label' => false, 'placeholder' => 'Nome']);
+                echo $this->Form->statusContas('status', ['label' => false, 'placeholder' => 'Situação']);
+                echo $this->Form->tiposPagamentos('tipo', ['label' => false, 'placeholder' => 'Tipo']);
                 echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
                 echo $this->Form->end();
                 ?>
@@ -39,11 +41,11 @@
                 <?php foreach ($apagar as $apagar): ?>
                     <tr>
                         <td><?= h($apagar->numero_documento) ?></td>
-                        <td><?= $this->Html->status($apagar->status) ?></td>
+                        <td><?= $this->Html->statusContas($apagar->status) ?></td>
                         <td><?= h($apagar->pessoa->nome) ?></td>
                         <td><?= h($apagar->data_vencimento) ?></td>
                         <td><?= $this->Html->moeda($apagar->valor_documento) ?></td>
-                        <td><?= h($apagar->grupo->nome) ?></td>
+                        <td><?= $this->Html->pagamentos($apagar->tipo) ?></td>
                         <td class="actions text-right">
                             <?= $this->Html->link(null, ['action' => 'edit', $apagar->id], ['title' => __('Edit')]) ?>
                             <?= $this->Form->postLink(null, ['action' => 'delete', $apagar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $apagar->id), 'title' => __('Delete')]) ?>

@@ -18,12 +18,12 @@
         echo $this->Form->quantidade('peso_baixa_estoque', [ 'div' => ['class' => 'col-sx-12 col-md-3']]);
         echo $this->Form->simNao('desconto_pedido', ['div' => [ 'class' => 'col-sx-12 col-md-3']]);
         echo $this->Form->simNao('quantidade_pedido', ['div' => ['class' => 'col-sx-12 col-md-3']]);
-        echo $this->Form->moeda('compra', ['class' => 'calcular-procentagem',  'div' => ['class' => 'col-sx-12 col-md-3']]);
-        echo $this->Form->moeda('venda', ['class' => 'calcular-procentagem',  'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->moeda('compra', ['class' => 'calcular-procentagem', 'div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->moeda('venda', ['class' => 'calcular-procentagem', 'div' => ['class' => 'col-sx-12 col-md-3']]);
         echo $this->Form->juros('margem', ['disabled' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
         echo $this->Form->moeda('promocao', ['label' => 'Promoção', 'div' => ['class' => 'col-sx-12 col-md-3']]);
         echo $this->Form->quantidade('estoque_minimo', ['div' => ['class' => 'col-sx-12 col-md-3']]);
-        echo $this->Form->quantidade('estoque_atual', ['div' => ['class' => 'col-sx-12 col-md-3']]);
+        echo $this->Form->quantidade('estoque_atual', ['disabled' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
         echo $this->Form->simNao('atalho', ['required' => true, 'div' => ['class' => 'col-sx-12 col-md-3']]);
         echo $this->Form->input('nome_atalho', ['div' => ['class' => 'col-sx-12 col-md-3']]);
         ?>

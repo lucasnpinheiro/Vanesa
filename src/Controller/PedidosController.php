@@ -162,8 +162,8 @@ class PedidosController extends AppController {
                 $this->loadModel('Produtos');
                 $produtos = [];
                 $produtos_lista = [];
-                $_lista_produtos = $this->Produtos->find()->all();
-                $produtos_botoes = $this->Produtos->find()->where(['atalho' => 1])->all();
+                $_lista_produtos = $this->Produtos->find()->where(['status' => 1])->all();
+                $produtos_botoes = $this->Produtos->find()->where(['status' => 1, 'atalho' => 1])->all();
                 $lista_produtos = [];
                 foreach ($_lista_produtos as $key => $value) {
                     $lista_produtos[(int) $value->id] = $value;

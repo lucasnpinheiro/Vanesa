@@ -24,6 +24,9 @@ class ParametrosController extends AppController {
     public function index() {
         $parametro = $this->Parametros->newEntity();
         $query = $this->Parametros->find('search', $this->Parametros->filterParams($this->request->query));
+        if ($this->Auth->user('root') != 1) {
+            $query->where(['root' => 0]);
+        }
         $this->set('parametros', $this->paginate($query));
         $this->set('parametro', $parametro);
         $this->set('_serialize', ['parametros']);
@@ -64,6 +67,34 @@ class ParametrosController extends AppController {
             $this->Flash->error(__('Erro ao Excluir o Registro. Tente Novamente.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function gerarDadosAcesso() {
+        if ($this->Auth->user('root') === 1) {
+            $this->loadModel('Empresas');
+            $Empresas = $this->Empresas->find()->first();
+            $dados = [
+                'data_geracao' => date('Y-m-d'),
+                'data_validade' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 45)),
+                'cliente' => $Empresas->nome,
+                'cnpj' => $Empresas->cnpj,
+                'ativo' => 1,
+                'md5' => '',
+                'token' => '',
+            ];
+            $dados['md5'] = md5(serialize($dados));
+            $dados['token'] = base64_encode(serialize($dados));
+            $parametro = $this->Parametros->get(5);
+            $parametro->valor = serialize($dados);
+            $this->Parametros->save($parametro);
+            $parametro = $this->Parametros->get(7);
+            $parametro->valor = $dados['md5'];
+            $this->Parametros->save($parametro);
+            $parametro = $this->Parametros->get(11);
+            $parametro->valor = $dados['data_validade'];
+            $this->Parametros->save($parametro);
+            return $this->redirect(['action' => 'index']);
+        }
     }
 
 }

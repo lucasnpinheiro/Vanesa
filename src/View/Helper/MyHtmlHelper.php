@@ -359,10 +359,8 @@ class MyHtmlHelper extends BootstrapHtmlHelper {
 
     public function tiposPagamentos() {
         return [
-            1 => 'Dinheiro',
-            2 => 'Cheque',
-            3 => 'Cartão',
-            4 => 'Prazo'
+            1 => 'Avista',
+            2 => 'Prazo',
         ];
     }
 

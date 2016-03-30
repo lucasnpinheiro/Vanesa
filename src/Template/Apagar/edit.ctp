@@ -10,16 +10,33 @@
     <div class="panel-body">
         <?= $this->Form->create($apagar) ?>
         <?php
-        $apagar->data_vencimento->format('dmy');
-        echo $this->Form->input('numero_documento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->status('status', ['value' => 1, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->pessoas('pessoa_id', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->data('data_vencimento', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->moeda('valor_documento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->input('tipo', ['div' => ['empty' => true, 'options' => $tipos, 'class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->data('data_pagamento', ['empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->moeda('valor_pagamento', ['div' => ['class' => 'col-xs-12 col-md-4']]);
-        echo $this->Form->moeda('valor_acrescimo', ['div' => ['class' => 'col-xs-12 col-md-4']]);
+        if (!empty($apagar->data_vencimento)) {
+            $apagar->data_vencimento->format('dmy');
+        }
+        if (!empty($apagar->data_pagamento)) {
+            $apagar->data_pagamento->format('dmy');
+        }
+        $required = true;
+        $disabled = false;
+        $disabledStatus = false;
+        if ($apagar->tipo === 1) {
+            $required = false;
+            $disabled = true;
+             $disabledStatus = true;
+        }
+        
+        if($apagar->status === 2){
+            $disabledStatus = true;
+        }
+        echo $this->Form->input('numero_documento', ['disabled' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->statusContas('status', ['disabled' => $disabledStatus, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->pessoas('pessoa_id', ['disabled' => true, 'label' => 'Fornecedores', 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']], [3]);
+        echo $this->Form->data('data_vencimento', ['disabled' => true, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->moeda('valor_documento', ['disabled' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->tiposPagamentos('tipo', ['disabled' => true, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->data('data_pagamento', ['required' => $required, 'disabled' => $disabled, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->moeda('valor_pagamento', ['required' => $required, 'disabled' => $disabled, 'div' => ['class' => 'col-xs-12 col-md-4']]);
+        echo $this->Form->moeda('valor_acrescimo', ['disabled' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
 
         echo $this->Form->input('historico', ['div' => ['class' => 'col-xs-12 col-md-12'], 'type' => 'textarea']);
         ?>
@@ -31,3 +48,6 @@
     </div>
 </div>
 
+<?php
+$this->Html->script('/js/apagar.js', ['block' => 'script']);
+?>

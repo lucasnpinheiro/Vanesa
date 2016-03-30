@@ -16,6 +16,8 @@ use Search\Manager;
  */
 class ApagarTable extends Table {
 
+    use \App\Model\ExtraTrait;
+
     /**
      * Initialize method
      *
@@ -33,9 +35,6 @@ class ApagarTable extends Table {
 
         $this->belongsTo('Pessoas', [
             'foreignKey' => 'pessoa_id'
-        ]);
-        $this->belongsTo('Grupos', [
-            'foreignKey' => 'tipo'
         ]);
         $this->addBehavior('Search.Search');
     }
@@ -117,6 +116,28 @@ class ApagarTable extends Table {
     public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['pessoa_id'], 'Pessoas'));
         return $rules;
+    }
+
+    public function beforeSave(\Cake\Event\Event $event, \Cake\ORM\Entity $entity) {
+        if ($entity->tipo === 1) {
+            if (empty($entity->data_pagamento)) {
+                $entity->data_pagamento = $entity->data_vencimento;
+            }
+            if (empty($entity->valor_pagamento)) {
+                $entity->valor_pagamento = $entity->valor_documento;
+            }
+        }
+
+        if (!empty($entity->data_pagamento)) {
+            $entity->valor_acrescimo = ($this->convertMoney($entity->valor_pagamento) - $this->convertMoney($entity->valor_documento));
+            $entity->status = 2;
+        }
+    }
+
+    public function afterSave(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options) {
+        if (empty($entity->numero_documento)) {
+            $this->updateAll(['numero_documento' => $entity->id], ['id' => $entity->id]);
+        }
     }
 
 }
