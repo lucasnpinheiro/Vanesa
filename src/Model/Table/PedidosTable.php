@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\Pedido;
@@ -6,14 +7,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Search\Manager;
 
 /**
  * Pedidos Model
  *
  * @property \Cake\ORM\Association\HasMany $PedidosItens
  */
-class PedidosTable extends Table
-{
+class PedidosTable extends Table {
 
     /**
      * Initialize method
@@ -21,8 +22,7 @@ class PedidosTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('pedidos');
@@ -34,6 +34,26 @@ class PedidosTable extends Table
         $this->hasMany('PedidosItens', [
             'foreignKey' => 'pedido_id'
         ]);
+        $this->addBehavior('Search.Search');
+    }
+
+    public function searchConfiguration() {
+        return $this->searchConfigurationDynamic();
+    }
+
+    private function searchConfigurationDynamic() {
+        $search = new Manager($this);
+        $c = $this->schema()->columns();
+        foreach ($c as $key => $value) {
+            $t = $this->schema()->columnType($value);
+            if ($t != 'string' AND $t != 'text') {
+                $search->value($value, ['field' => $this->aliasField($value)]);
+            } else {
+                $search->like($value, ['before' => true, 'after' => true, 'field' => $this->aliasField($value)]);
+            }
+        }
+
+        return $search;
     }
 
     /**
@@ -42,59 +62,59 @@ class PedidosTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('ficha')
-            ->allowEmpty('ficha');
+                ->integer('ficha')
+                ->allowEmpty('ficha');
 
         $validator
-            ->date('data_pedido')
-            ->allowEmpty('data_pedido');
+                ->date('data_pedido')
+                ->allowEmpty('data_pedido');
 
         $validator
-            ->integer('status')
-            ->allowEmpty('status');
+                ->integer('status')
+                ->allowEmpty('status');
 
         $validator
-            ->allowEmpty('nome_cliente');
+                ->allowEmpty('nome_cliente');
 
         $validator
-            ->numeric('valor_total')
-            ->allowEmpty('valor_total');
+                ->numeric('valor_total')
+                ->allowEmpty('valor_total');
 
         $validator
-            ->numeric('valor_desconto')
-            ->allowEmpty('valor_desconto');
+                ->numeric('valor_desconto')
+                ->allowEmpty('valor_desconto');
 
         $validator
-            ->numeric('valor_liquido')
-            ->allowEmpty('valor_liquido');
+                ->numeric('valor_liquido')
+                ->allowEmpty('valor_liquido');
 
         $validator
-            ->numeric('valor_dinheiro')
-            ->allowEmpty('valor_dinheiro');
+                ->numeric('valor_dinheiro')
+                ->allowEmpty('valor_dinheiro');
 
         $validator
-            ->numeric('valor_cheque')
-            ->allowEmpty('valor_cheque');
+                ->numeric('valor_cheque')
+                ->allowEmpty('valor_cheque');
 
         $validator
-            ->numeric('valor_cartao')
-            ->allowEmpty('valor_cartao');
+                ->numeric('valor_cartao')
+                ->allowEmpty('valor_cartao');
 
         $validator
-            ->numeric('valor_recebe')
-            ->allowEmpty('valor_recebe');
+                ->numeric('valor_recebe')
+                ->allowEmpty('valor_recebe');
 
         $validator
-            ->numeric('valor_troco')
-            ->allowEmpty('valor_troco');
+                ->numeric('valor_troco')
+                ->allowEmpty('valor_troco');
 
         return $validator;
     }
+
 }

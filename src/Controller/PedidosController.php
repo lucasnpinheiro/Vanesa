@@ -22,10 +22,14 @@ class PedidosController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $pedidos = $this->paginate($this->Pedidos);
+        if ($this->request->query('data_pedido')) {
+            $this->request->query['data_pedido'] = implode('-', array_reverse(explode('/', $this->request->query('data_pedido'))));
+        }
+        $query = $this->Pedidos->find('search', $this->Pedidos->filterParams($this->request->query));
 
-        $this->set(compact('pedidos'));
+        $this->set('pedidos', $this->paginate($query));
         $this->set('_serialize', ['pedidos']);
+        $this->set('status', $this->request->query('status'));
     }
 
     /**

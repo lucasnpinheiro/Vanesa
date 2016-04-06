@@ -3,7 +3,7 @@
         <?php echo $titulo_pagina . ' - ' . __('View') ?>
         <ul class="panel-toolbar list-unstyled font-12 m-d-3">
             <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
-            <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+            <li><?php echo $this->Html->link('Consultas', ['action' => 'index', '?' => ['status' => $status]], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
         </ul>
     </div>
     <div class="panel-body">
@@ -15,6 +15,8 @@
                     'inline' => true,
                     'label' => false
                 ]);
+                echo $this->Form->numero('ficha', ['label' => false, 'placeholder' => 'Ficha']);
+                echo $this->Form->data('data_pedido', ['label' => false, 'placeholder' => 'Data do Pedido']);
                 echo $this->Form->input('nome', ['label' => false, 'placeholder' => 'Nome']);
                 echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
                 echo $this->Form->end();
@@ -43,23 +45,27 @@
                         <td><?= $this->Number->format($pedido->id) ?></td>
                         <td><?= $this->Number->format($pedido->ficha) ?></td>
                         <td><?= h($pedido->data_pedido) ?></td>
-                        <td><?= $this->Html->status($pedido->status) ?></td>
+                        <td><?= $this->Html->statusPedido($pedido->status) ?></td>
                         <td><?= h($pedido->nome_cliente) ?></td>
                         <td><?= $this->Html->moeda($pedido->valor_liquido) ?></td>
                         <td><?= h($pedido->created) ?></td>
                         <td><?= h($pedido->modified) ?></td>
                         <td class="actions text-right">
-                            <?= $this->Html->link(null, ['action' => 'add', $pedido->id], ['title' => __('Edit')]) ?>
-                            <?= $this->Form->postLink(null, ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id), 'title' => __('Delete')]) ?>
+                            <?php
+                            if ($pedido->status === 0) {
+                                $this->Html->link(null, ['action' => 'add', $pedido->id], ['class' => ' btn-warning  btn btn-xs ', 'icon' => 'pencil', 'title' => __('Edit')]);
+                            }
+                            ?>
+    <?= $this->Form->postLink(null, ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+<?php endforeach; ?>
             </tbody>
         </table>
     </div><!-- /.table-responsive -->
     <div class="panel-footer">
         <div class="row font-12 text-center-xs">
-            <?php echo $this->element('Painel/paginacao') ?>
+<?php echo $this->element('Painel/paginacao') ?>
         </div><!-- /.row -->
     </div>
 </div>

@@ -74,13 +74,9 @@ class MyFormHelper extends BootstrapFormHelper {
         $options += [
             'type' => 'select',
             'options' => [
-                1 => __('Aberto'),
-                2 => __('Emitido'),
-                3 => __('Recebido'),
-                4 => __('Orçamento'),
-                5 => __('Nota Fiscal'),
-                6 => __('Cancelado'),
-                7 => __('Em Recebimento'),
+                0 => __('Aberto'),
+                1 => __('Recebido'),
+                2 => __('Cancelado'),
             ],
             'empty' => __('Selecionar uma Situação')
         ];

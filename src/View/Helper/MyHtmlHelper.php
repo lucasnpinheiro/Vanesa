@@ -53,15 +53,12 @@ class MyHtmlHelper extends BootstrapHtmlHelper {
     }
 
     public function statusPedido($id) {
-        //1 - Aberto | 2 - Emitido | 3 - Recebido | 4 - Orcamento | 5 - Nota Fiscal | 6 - Cancelado
+        //0 - Aberto | 1 - Recebido | 2 - Cancelado | 9 - Excluido
         $r = [
-            1 => ['text' => __('Aberto'), 'class' => 'default'],
-            2 => ['text' => __('Emitido'), 'class' => 'info'],
-            3 => ['text' => __('Recebido'), 'class' => 'primary'],
-            4 => ['text' => __('Orçamento'), 'class' => 'warning'],
-            5 => ['text' => __('Nota Fiscal'), 'class' => 'success'],
-            6 => ['text' => __('Cancelado'), 'class' => 'danger'],
-            7 => ['text' => __('Em Recebimento'), 'class' => 'info'],
+            0 => ['text' => __('Aberto'), 'class' => 'info'],
+            1 => ['text' => __('Recebido'), 'class' => 'success'],
+            2 => ['text' => __('Cancelado'), 'class' => 'warning'],
+            9 => ['text' => __('Excluido'), 'class' => 'danger'],
         ];
         return $this->label($r[$id]['text'], $r[$id]['class']);
     }

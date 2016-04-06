@@ -3,7 +3,7 @@
         <?php echo $titulo_pagina . ' - ' . __('Add') ?>
         <ul class="panel-toolbar list-unstyled font-12 m-d-3">
             <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
-            <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+            <li><?php echo $this->Html->link('Consultas', ['action' => 'index', '?' => ['status' => 0]], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
         </ul>
 
     </div>
@@ -86,7 +86,7 @@
             <?php
             if (!empty($produtos_botoes)) {
                 foreach ($produtos_botoes as $key => $value) {
-                    echo $this->Html->link($value->nome_atalho, '', ['rel' => $value->id, 'class' => 'produto-atalho btn btn-default btn-xs', 'role' => "button"]);
+                    echo $this->Html->link($value->nome_atalho, '', ['rel' => $value->id, 'class' => 'produto-atalho btn btn-info btn-xs', 'style' => 'padding: 2px; margin: 0.5%; width: 23.5%;', 'role' => "button"]);
                 }
             }
             ?>
@@ -105,9 +105,9 @@
         </div>
         <div class="col-xs-12 col-md-4 text-right" style="padding: 20px 0px 0px 0px; margin: 0px;">
             <?php
-            echo $this->Form->button(__('Finalizar'), ['type' => 'button', 'id' => 'finalizar-pedido']);
-            echo $this->Form->button(__('Nova Ficha'), ['type' => 'button', 'id' => 'novo-pedido']);
-            echo $this->Form->button(__('Cancelar'), ['type' => 'button', 'id' => 'cancelar-pedido']);
+            echo $this->Form->button(__('Finalizar'), ['type' => 'button', 'id' => 'finalizar-pedido', 'class' => 'btn-success']);
+            echo $this->Form->button(__('Nova Ficha'), ['type' => 'button', 'id' => 'novo-pedido', 'icon' => 'file-o', 'class' => 'btn-primary']);
+            echo $this->Form->button(__('Cancelar'), ['type' => 'button', 'id' => 'cancelar-pedido', 'icon' => 'close', 'class' => 'btn-danger']);
             ?>
         </div>
         <?= $this->Form->end() ?>
