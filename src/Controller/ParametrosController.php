@@ -9,9 +9,11 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\ParametrosTable $Parametros
  */
-class ParametrosController extends AppController {
+class ParametrosController extends AppController
+{
 
-    public function __construct(\Cake\Network\Request $request = null, \Cake\Network\Response $response = null, $name = null, $eventManager = null, $components = null) {
+    public function __construct(\Cake\Network\Request $request = null, \Cake\Network\Response $response = null, $name = null, $eventManager = null, $components = null)
+    {
         parent::__construct($request, $response, $name, $eventManager, $components);
         $this->set('titulo_pagina', 'Parametros');
     }
@@ -21,10 +23,12 @@ class ParametrosController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function index()
+    {
         $parametro = $this->Parametros->newEntity();
         $query = $this->Parametros->find('search', $this->Parametros->filterParams($this->request->query));
-        if ($this->Auth->user('root') != 1) {
+        if ($this->Auth->user('root') != 1)
+        {
             $query->where(['root' => 0]);
         }
         $this->set('parametros', $this->paginate($query));
@@ -39,9 +43,12 @@ class ParametrosController extends AppController {
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function save() {
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            foreach ($this->request->data('paramentros') as $key => $value) {
+    public function save()
+    {
+        if ($this->request->is(['patch', 'post', 'put']))
+        {
+            foreach ($this->request->data('paramentros') as $key => $value)
+            {
                 $parametro = $this->Parametros->get($key);
                 $parametro->valor = $value['valor'];
                 $this->Parametros->save($parametro);
@@ -58,24 +65,30 @@ class ParametrosController extends AppController {
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
         $this->request->allowMethod(['post', 'delete']);
         $parametro = $this->Parametros->get($id);
-        if ($this->Parametros->delete($parametro)) {
+        if ($this->Parametros->delete($parametro))
+        {
             $this->Flash->success(__('Registro Excluido com Sucesso.'));
-        } else {
+        } else
+        {
             $this->Flash->error(__('Erro ao Excluir o Registro. Tente Novamente.'));
         }
         return $this->redirect(['action' => 'index']);
     }
 
-    public function gerarDadosAcesso() {
-        if ($this->Auth->user('root') === 1) {
+    public function gerarDadosAcesso()
+    {
+        if ($this->Auth->user('root') === 1)
+        {
             $this->loadModel('Empresas');
             $Empresas = $this->Empresas->find()->first();
             $dados = [
                 'data_geracao' => date('Y-m-d'),
-                'data_validade' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 45)),
+                //'data_validade' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 45)),
+                'data_validade' => date('Y-m-d', mktime(0, 0, 0, date('m') + 1, 30)),
                 'cliente' => $Empresas->nome,
                 'cnpj' => $Empresas->cnpj,
                 'ativo' => 1,

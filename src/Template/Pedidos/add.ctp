@@ -22,7 +22,8 @@
                 <?php echo $this->Form->input('produto', ['type' => 'text', 'class' => 'produtos_barra', 'list' => 'codigo_produtos', 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
                 <datalist id="codigo_produtos">
                     <?php
-                    foreach ($produtos_lista as $key => $value) {
+                    foreach ($produtos_lista as $key => $value)
+                    {
                         echo '<option value="' . $value . '">';
                     }
                     ?>
@@ -50,8 +51,10 @@
                     <table class="table table-bordered table-condensed table-hover table-striped" style="margin: 0; padding: 0;">
                         <tbody class="add-itens-produtos">
                             <?php
-                            if (!empty($pedido->pedidos_itens)) {
-                                foreach ($pedido->pedidos_itens as $key => $value) {
+                            if (!empty($pedido->pedidos_itens))
+                            {
+                                foreach ($pedido->pedidos_itens as $key => $value)
+                                {
                                     ?>
                                     <tr rel="<?php echo $value->sequencia ?>" identificacao="<?php echo $value->produto_id ?>">
                                         <td style="width: 27%"><?php echo $value->produto->nome ?></td>
@@ -84,8 +87,10 @@
             ?>
 
             <?php
-            if (!empty($produtos_botoes)) {
-                foreach ($produtos_botoes as $key => $value) {
+            if (!empty($produtos_botoes))
+            {
+                foreach ($produtos_botoes as $key => $value)
+                {
                     echo $this->Html->link($value->nome_atalho, '', ['rel' => $value->id, 'class' => 'produto-atalho btn btn-info btn-xs', 'style' => 'padding: 2px; margin: 0.5%; width: 23.5%;', 'role' => "button"]);
                 }
             }
@@ -105,8 +110,8 @@
         </div>
         <div class="col-xs-12 col-md-4 text-right" style="padding: 20px 0px 0px 0px; margin: 0px;">
             <?php
-            echo $this->Form->button(__('Finalizar'), ['type' => 'button', 'id' => 'finalizar-pedido', 'class' => 'btn-success']);
-            echo $this->Form->button(__('Nova Ficha'), ['type' => 'button', 'id' => 'novo-pedido', 'icon' => 'file-o', 'class' => 'btn-primary']);
+            echo $this->Form->button(__('Manter Aberto'), ['type' => 'button', 'id' => 'novo-pedido', 'icon' => 'file-o', 'class' => 'btn-success']);
+            echo $this->Form->button(__('Finalizar'), ['type' => 'button', 'id' => 'finalizar-pedido', 'class' => 'btn-primary']);
             echo $this->Form->button(__('Cancelar'), ['type' => 'button', 'id' => 'cancelar-pedido', 'icon' => 'close', 'class' => 'btn-danger']);
             ?>
         </div>
