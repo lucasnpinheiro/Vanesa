@@ -15,7 +15,7 @@ foreach ($produto as $key => $value) {
         <?php echo $titulo_pagina . ' - Relatório' ?>
         <ul class="panel-toolbar list-unstyled font-12 m-d-3">
             <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
-            <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
+            <li><?php echo $this->Html->link('Relatórios', ['action' => 'relatorios'], ['icon' => 'fa fa-list-alt', 'title' => 'Relatórios']); ?></li>
         </ul>
     </div>
     <div class="panel-body">
@@ -27,7 +27,7 @@ foreach ($produto as $key => $value) {
                     'inline' => true,
                     'label' => false
                 ]);
-                echo $this->Form->input('grupos_estoque_id', ['options' => $grupos, 'empty' => 'Selecione um grupo', 'label' => false, 'placeholder' => 'Grupos']);
+                echo $this->Form->input('grupos_estoque_id', ['options' => $grupos, 'value' => $this->request->query('grupos_estoque_id'), 'empty' => 'Selecione um grupo', 'label' => false, 'placeholder' => 'Grupos']);
                 echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
                 echo $this->Form->end();
                 ?>
@@ -47,9 +47,9 @@ foreach ($produto as $key => $value) {
                         <thead>
                             <tr>
                                 <th style="width: 20%;">Código</th>
-                                <th style="width: 50%;">Produto</th>
-                                <th style="width: 15%;">Estoque Atual</th>
-                                <th style="width: 15%;">Estoque Novo</th>
+                                <th style="width: 40%;">Produto</th>
+                                <th style="width: 10%;">Estoque Atual</th>
+                                <th style="width: 30%;">Estoque Novo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,7 +77,8 @@ foreach ($produto as $key => $value) {
     </div><!-- /.table-responsive -->
     <div class="panel-footer">
         <div class="col-xs-12 font-12 text-center-xs text-right">
-            <button onclick="print();" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
+            <!-- button onclick="print();" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button -->
+            <?php echo $this->Html->link('<i class="fa fa-print"></i> Imprimir', array_merge($this->request->query, ['imprimir' => 'S']), ['class' => 'btn btn-primary']); ?>
         </div><!-- /.row -->
         <div class="clearfix"></div>
     </div>

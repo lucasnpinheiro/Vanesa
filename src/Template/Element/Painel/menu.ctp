@@ -46,7 +46,6 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
-                            <li><?php echo $this->Html->link( 'Grupos', ['controller' => 'Grupos', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link( 'A Pagar', ['controller' => 'Apagar', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
@@ -54,7 +53,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Caixa</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
                             <li><?php echo $this->Html->link( 'Caixas Diários', ['controller' => 'CaixasDiarios', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link( 'Caixas Movimentos', ['controller' => 'CaixasMovimentos', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link( 'Terminais', ['controller' => 'Terminais', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>

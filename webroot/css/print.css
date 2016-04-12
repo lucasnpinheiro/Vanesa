@@ -1,0 +1,6 @@
+.panel-heading, .panel-body, .panel-footer{
+    display: none;
+}
+.panel-primary{
+    border: none;
+}

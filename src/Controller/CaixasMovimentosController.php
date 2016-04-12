@@ -21,30 +21,16 @@ class CaixasMovimentosController extends AppController {
      *
      * @return \Cake\Network\Response|null
      */
-    public function index() {
-        $this->paginate = [
-            'contain' => ['CaixasDiarios', 'Grupos']
-        ];
+    public function index($id = null) {
+        $this->loadModel('CaixasDiarios');
+        $caixasDiarios = $this->CaixasDiarios->get($id);
+        $caixasMovimento = $this->CaixasMovimentos->newEntity();
+        $this->paginate = [];
         $caixasMovimentos = $this->paginate($this->CaixasMovimentos);
 
-        $this->set(compact('caixasMovimentos'));
+        $this->set(compact('caixasDiarios', 'caixasMovimento', 'caixasMovimentos'));
+        $this->set('caixas_diario_id', $id);
         $this->set('_serialize', ['caixasMovimentos']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Caixas Movimento id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null) {
-        $caixasMovimento = $this->CaixasMovimentos->get($id, [
-            'contain' => ['CaixasDiarios', 'Grupos']
-        ]);
-
-        $this->set('caixasMovimento', $caixasMovimento);
-        $this->set('_serialize', ['caixasMovimento']);
     }
 
     /**
@@ -52,65 +38,19 @@ class CaixasMovimentosController extends AppController {
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add($id = null) {
         $caixasMovimento = $this->CaixasMovimentos->newEntity();
         if ($this->request->is('post')) {
             $caixasMovimento = $this->CaixasMovimentos->patchEntity($caixasMovimento, $this->request->data);
             if ($this->CaixasMovimentos->save($caixasMovimento)) {
                 $this->Flash->success(__('Registro Salvo com Sucesso.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', $caixasMovimento->caixas_diario_id]);
             } else {
                 $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list');
-        $grupos = $this->CaixasMovimentos->Grupos->find('list');
-        $this->set(compact('caixasMovimento', 'caixasDiarios', 'grupos'));
+        $this->set(compact('caixasMovimento'));
         $this->set('_serialize', ['caixasMovimento']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Caixas Movimento id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null) {
-        $caixasMovimento = $this->CaixasMovimentos->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $caixasMovimento = $this->CaixasMovimentos->patchEntity($caixasMovimento, $this->request->data);
-            if ($this->CaixasMovimentos->save($caixasMovimento)) {
-                $this->Flash->success(__('Registro Salvo com Sucesso.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
-            }
-        }
-        $caixasDiarios = $this->CaixasMovimentos->CaixasDiarios->find('list');
-        $grupos = $this->CaixasMovimentos->Grupos->find('list');
-        $this->set(compact('caixasMovimento', 'caixasDiarios', 'grupos'));
-        $this->set('_serialize', ['caixasMovimento']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Caixas Movimento id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $caixasMovimento = $this->CaixasMovimentos->get($id);
-        if ($this->CaixasMovimentos->delete($caixasMovimento)) {
-            $this->Flash->success(__('Registro excluido com sucesso.'));
-        } else {
-            $this->Flash->error(__('Erro ao excluir o registro.'));
-        }
-        return $this->redirect(['action' => 'index']);
     }
 
 }

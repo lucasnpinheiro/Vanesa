@@ -44,6 +44,7 @@
                         <td><?= h($caixasDiario->modified) ?></td>
                         <td class="actions text-right">
                             <?= $this->Html->link(null, ['action' => 'edit', $caixasDiario->id], ['title' => __('Edit')]) ?>
+                            <?= $this->Html->link(null, ['controller' => 'CaixasMovimentos', 'action' => 'index', $caixasDiario->id], ['icon' => 'list', 'class' => ' btn-info btn btn-xs ', 'title' => __('Movimentos')]) ?>
                             <?= $this->Form->postLink(null, ['action' => 'delete', $caixasDiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasDiario->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>

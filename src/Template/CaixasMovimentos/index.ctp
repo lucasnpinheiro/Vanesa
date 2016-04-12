@@ -1,51 +1,41 @@
 <div class="panel panel-primary">
     <div class="panel-heading font-header">
-        <?php echo $titulo_pagina . ' - ' . __('View') ?>
-        <ul class="panel-toolbar list-unstyled font-12 m-d-3">
-            <li><?php echo $this->Html->link('Novo cadastro', ['action' => 'add'], ['icon' => 'fa fa-plus-circle', 'title' => 'Novo cadastro']); ?></li>
-            <li><?php echo $this->Html->link('Consultas', ['action' => 'index'], ['icon' => 'fa fa-list-alt', 'title' => 'Consultas']); ?></li>
-        </ul>
+        <?php echo $titulo_pagina . ' - ' . $caixasDiarios->data; ?>
     </div>
+
     <div class="panel-body">
         <div class="row">
-
-            <div class="col-sm-12 col-md-12 text-right">
-                <?php
-                echo $this->Form->create(null, [
-                    'inline' => true,
-                    'label' => false
-                ]);
-                echo $this->Form->input('data', ['label' => false, 'placeholder' => 'Data']);
-                echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
-                echo $this->Form->end();
-                ?>
-            </div><!-- /.col -->
+            <?php echo $this->Form->create($caixasMovimento, ['url' => ['action' => 'add', $caixas_diario_id]]); ?>
+            <?php
+            echo $this->Form->input('caixas_diario_id', ['type' => 'hidden', 'value' => $caixas_diario_id]);
+            echo $this->Form->input('status', ['type' => 'hidden', 'value' => 1]);
+            echo $this->Form->statusMovimentos('grupo_id', ['required' => true, 'label' => 'Tipo', 'options' => [1 => 'Abertura', 2 => 'Entrada', 3 => 'Saída', 4 => 'Sangria'], 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-2']]);
+            echo $this->Form->moeda('valor', ['div' => ['required' => true, 'class' => 'col-xs-12 col-md-3']]);
+            echo $this->Form->input('descricao', ['required' => true, 'label' => 'Descrição', 'type' => 'text', 'div' => ['class' => 'col-xs-12 col-md-7']]);
+            ?>
+            <div class="clearfix"></div>
+            <div class="text-right">
+                <?= $this->Form->button(__('Submit')) ?>
+            </div>
+            <?= $this->Form->end() ?>
         </div><!-- /.row -->
     </div>
+    <hr>
     <div class="table-responsive">
         <table class="table table-bordered table-striped font-12 table-hover">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('caixas_diario_id') ?></th>
-                    <th><?= $this->Paginator->sort('status') ?></th>
                     <th><?= $this->Paginator->sort('valor') ?></th>
                     <th><?= $this->Paginator->sort('descricao', 'Descrição') ?></th>
-                    <th><?= $this->Paginator->sort('grupo_id') ?></th>
-                    <th class="actions text-right"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('grupo_id', 'Tipo') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($caixasMovimentos as $caixasMovimento): ?>
                     <tr>
-                        <td><?= h($caixasMovimento->caixas_diario->data) ?></td>
-                        <td><?= $this->Html->status($caixasMovimento->status) ?></td>
                         <td><?= $this->Html->moeda($caixasMovimento->valor) ?></td>
                         <td><?= h($caixasMovimento->descricao) ?></td>
-                        <td><?= h($caixasMovimento->grupo->nome) ?></td>
-                        <td class="actions text-right">
-                            <?= $this->Html->link(null, ['action' => 'edit', $caixasMovimento->id], ['title' => __('Edit')]) ?>
-                            <?= $this->Form->postLink(null, ['action' => 'delete', $caixasMovimento->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasMovimento->id), 'title' => __('Delete')]) ?>
-                        </td>
+                        <td><?= $this->Html->statusMovimentos($caixasMovimento->grupo_id) ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\CaixasMovimento;
@@ -13,8 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $CaixasDiarios
  * @property \Cake\ORM\Association\BelongsTo $Grupos
  */
-class CaixasMovimentosTable extends Table
-{
+class CaixasMovimentosTable extends Table {
 
     /**
      * Initialize method
@@ -22,8 +22,7 @@ class CaixasMovimentosTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('caixas_movimentos');
@@ -35,9 +34,6 @@ class CaixasMovimentosTable extends Table
         $this->belongsTo('CaixasDiarios', [
             'foreignKey' => 'caixas_diario_id'
         ]);
-        $this->belongsTo('Grupos', [
-            'foreignKey' => 'grupo_id'
-        ]);
     }
 
     /**
@@ -46,23 +42,7 @@ class CaixasMovimentosTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        $validator
-            ->integer('status')
-            ->allowEmpty('status');
-
-        $validator
-            ->decimal('valor')
-            ->allowEmpty('valor');
-
-        $validator
-            ->allowEmpty('descricao');
-
+    public function validationDefault(Validator $validator) {
         return $validator;
     }
 
@@ -73,10 +53,14 @@ class CaixasMovimentosTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['caixas_diario_id'], 'CaixasDiarios'));
-        $rules->add($rules->existsIn(['grupo_id'], 'Grupos'));
         return $rules;
     }
+
+    public function beforeSave(\Cake\Event\Event $event, \Cake\ORM\Entity $entity) {
+        $entity->valor = str_replace('.', '', $entity->valor);
+        $entity->valor = (float) str_replace(',', '.', $entity->valor);
+    }
+
 }

@@ -39,6 +39,7 @@ class MyHtmlHelper extends BootstrapHtmlHelper {
             1 => ['text' => __('Abertura'), 'class' => 'warning'],
             2 => ['text' => __('Entrada'), 'class' => 'success'],
             3 => ['text' => __('Saída'), 'class' => 'danger'],
+            4 => ['text' => __('Sangria'), 'class' => 'info'],
         ];
         return $this->label($r[$id]['text'], $r[$id]['class']);
     }

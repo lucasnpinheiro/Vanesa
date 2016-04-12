@@ -104,6 +104,7 @@ class MyFormHelper extends BootstrapFormHelper {
                 1 => __('Abertura'),
                 2 => __('Entrada'),
                 3 => __('Saída'),
+                4 => __('Sangria'),
             ],
             'empty' => __('Selecionar uma Situação')
         ];

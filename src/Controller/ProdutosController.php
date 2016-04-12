@@ -141,6 +141,12 @@ class ProdutosController extends AppController {
         $gruposEstoques = $this->GruposEstoques->find()->order(['nome' => 'asc'])->all();
         $this->set(compact('produto', 'gruposEstoques'));
         $this->set('_serialize', ['produto']);
+        if ($this->request->query('imprimir') === 'S') {
+            $this->viewBuilder()->layout('print');
+            $redirect = $this->request->query;
+            unset($redirect['imprimir']);
+            $this->set('redirect', \Cake\Routing\Router::url($redirect, true));
+        }
     }
 
 }
