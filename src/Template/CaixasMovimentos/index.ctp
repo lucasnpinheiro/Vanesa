@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
     <div class="panel-heading font-header">
-        <?php echo $titulo_pagina . ' - ' . $caixasDiarios->data; ?>
+        <?php echo $titulo_pagina . ' - ' . $caixasDiarios->data . ' | Operador: ' . $caixasDiarios->pessoa->nome . ' | Terminal: ' . $caixasDiarios->terminai->nome; ?>
     </div>
 
     <div class="panel-body">
@@ -10,13 +10,9 @@
             echo $this->Form->input('caixas_diario_id', ['type' => 'hidden', 'value' => $caixas_diario_id]);
             echo $this->Form->input('status', ['type' => 'hidden', 'value' => 1]);
             echo $this->Form->statusMovimentos('grupo_id', ['required' => true, 'label' => 'Tipo', 'options' => [1 => 'Abertura', 2 => 'Entrada', 3 => 'Saída', 4 => 'Sangria'], 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-2']]);
-            echo $this->Form->moeda('valor', ['div' => ['required' => true, 'class' => 'col-xs-12 col-md-3']]);
-            echo $this->Form->input('descricao', ['required' => true, 'label' => 'Descrição', 'type' => 'text', 'div' => ['class' => 'col-xs-12 col-md-7']]);
+            echo $this->Form->moeda('valor', ['div' => ['required' => true, 'class' => 'col-xs-12 col-md-2']]);
+            echo $this->Form->input('descricao', ['required' => true, 'label' => 'Descrição', 'type' => 'text', 'div' => ['class' => 'col-xs-12 col-md-8'], 'append' => $this->Form->button(__('Submit'), ['class' => 'btn btn-primary'])]);
             ?>
-            <div class="clearfix"></div>
-            <div class="text-right">
-                <?= $this->Form->button(__('Submit')) ?>
-            </div>
             <?= $this->Form->end() ?>
         </div><!-- /.row -->
     </div>
@@ -25,9 +21,9 @@
         <table class="table table-bordered table-striped font-12 table-hover">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('valor') ?></th>
-                    <th><?= $this->Paginator->sort('descricao', 'Descrição') ?></th>
-                    <th><?= $this->Paginator->sort('grupo_id', 'Tipo') ?></th>
+                    <th>Valor</th>
+                    <th>Descrição</th>
+                    <th>Tipo</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,8 +38,6 @@
         </table>
     </div><!-- /.table-responsive -->
     <div class="panel-footer">
-        <div class="row font-12 text-center-xs">
-            <?php echo $this->element('Painel/paginacao') ?>
-        </div><!-- /.row -->
+
     </div>
 </div>

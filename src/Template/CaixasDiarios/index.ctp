@@ -28,7 +28,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('data') ?></th>
                     <th><?= $this->Paginator->sort('terminal') ?></th>
-                    <th><?= $this->Paginator->sort('pessoa_id') ?></th>
+                    <th><?= $this->Paginator->sort('pessoa_id', 'Operador') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions text-right"><?= __('Actions') ?></th>
@@ -45,6 +45,7 @@
                         <td class="actions text-right">
                             <?= $this->Html->link(null, ['action' => 'edit', $caixasDiario->id], ['title' => __('Edit')]) ?>
                             <?= $this->Html->link(null, ['controller' => 'CaixasMovimentos', 'action' => 'index', $caixasDiario->id], ['icon' => 'list', 'class' => ' btn-info btn btn-xs ', 'title' => __('Movimentos')]) ?>
+                            <?= $this->Html->link(null, ['controller' => 'CaixasMovimentos', 'action' => 'fechar', $caixasDiario->id], ['icon' => 'calculator', 'class' => ' btn-default btn btn-xs ', 'title' => __('Relatorio de Fechamento')]) ?>
                             <?= $this->Form->postLink(null, ['action' => 'delete', $caixasDiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $caixasDiario->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>

@@ -22,30 +22,11 @@ class CaixasDiariosController extends AppController {
      * @return \Cake\Network\Response|null
      */
     public function index() {
-        $this->paginate = [
-            'contain' => ['Pessoas', 'Terminais']
-        ];
-        $caixasDiarios = $this->paginate($this->CaixasDiarios);
-
-        $this->set(compact('caixasDiarios'));
+        $query = $this->CaixasDiarios->find('search', $this->CaixasDiarios->filterParams($this->request->query))->order(['data' => 'DESC'])->contain(['Pessoas', 'Terminais']);
+        $this->set('caixasDiarios', $this->paginate($query));
         $this->set('_serialize', ['caixasDiarios']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Caixas Diario id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null) {
-        $caixasDiario = $this->CaixasDiarios->get($id, [
-            'contain' => ['Pessoas', 'CaixasMovimentos']
-        ]);
-
-        $this->set('caixasDiario', $caixasDiario);
-        $this->set('_serialize', ['caixasDiario']);
-    }
 
     /**
      * Add method
@@ -63,7 +44,6 @@ class CaixasDiariosController extends AppController {
                 $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $pessoas = $this->CaixasDiarios->Pessoas->find('list');
         $terminais = $this->CaixasDiarios->Terminais->find('list');
         $this->set(compact('caixasDiario', 'pessoas', 'terminais'));
         $this->set('_serialize', ['caixasDiario']);
@@ -89,7 +69,6 @@ class CaixasDiariosController extends AppController {
                 $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
             }
         }
-        $pessoas = $this->CaixasDiarios->Pessoas->find('list');
         $terminais = $this->CaixasDiarios->Terminais->find('list');
         $this->set(compact('caixasDiario', 'pessoas', 'terminais'));
         $this->set('_serialize', ['caixasDiario']);

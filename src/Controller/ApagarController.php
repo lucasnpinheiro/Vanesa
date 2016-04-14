@@ -105,4 +105,23 @@ class ApagarController extends AppController {
         return $this->redirect(['action' => 'index']);
     }
 
+    public function relatorios() {
+        if (!empty($this->request->data)) {
+            $this->redirect($this->request->data);
+        }
+        $this->loadModel('GruposEstoques');
+
+        $produto = $this->Produtos->find('search', $this->Produtos->filterParams($this->request->query))->where(['status' => 1])->order(['nome' => 'asc'])->all();
+
+        $gruposEstoques = $this->GruposEstoques->find()->order(['nome' => 'asc'])->all();
+        $this->set(compact('produto', 'gruposEstoques'));
+        $this->set('_serialize', ['produto']);
+        if ($this->request->query('imprimir') === 'S') {
+            $this->viewBuilder()->layout('print');
+            $redirect = $this->request->query;
+            unset($redirect['imprimir']);
+            $this->set('redirect', \Cake\Routing\Router::url($redirect, true));
+        }
+    }
+
 }

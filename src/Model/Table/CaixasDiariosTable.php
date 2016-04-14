@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use App\Model\Entity\CaixasDiario;
@@ -6,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Search\Manager;
 
 /**
  * CaixasDiarios Model
@@ -13,8 +15,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Pessoas
  * @property \Cake\ORM\Association\HasMany $CaixasMovimentos
  */
-class CaixasDiariosTable extends Table
-{
+class CaixasDiariosTable extends Table {
 
     /**
      * Initialize method
@@ -22,8 +23,7 @@ class CaixasDiariosTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('caixas_diarios');
@@ -41,6 +41,26 @@ class CaixasDiariosTable extends Table
         $this->hasMany('CaixasMovimentos', [
             'foreignKey' => 'caixas_diario_id'
         ]);
+        $this->addBehavior('Search.Search');
+    }
+
+    public function searchConfiguration() {
+        return $this->searchConfigurationDynamic();
+    }
+
+    private function searchConfigurationDynamic() {
+        $search = new Manager($this);
+        $c = $this->schema()->columns();
+        foreach ($c as $key => $value) {
+            $t = $this->schema()->columnType($value);
+            if ($t != 'string' AND $t != 'text') {
+                $search->value($value, ['field' => $this->aliasField($value)]);
+            } else {
+                $search->like($value, ['before' => true, 'after' => true, 'field' => $this->aliasField($value)]);
+            }
+        }
+
+        return $search;
     }
 
     /**
@@ -49,19 +69,18 @@ class CaixasDiariosTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->date('data',['dmy'])
-            ->allowEmpty('data');
+                ->date('data', ['dmy'])
+                ->allowEmpty('data');
 
         $validator
-            ->integer('terminal')
-            ->allowEmpty('terminal');
+                ->integer('terminal')
+                ->allowEmpty('terminal');
 
         return $validator;
     }
@@ -73,9 +92,9 @@ class CaixasDiariosTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['pessoa_id'], 'Pessoas'));
         return $rules;
     }
+
 }
