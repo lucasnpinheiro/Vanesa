@@ -27,7 +27,6 @@ class CaixasDiariosController extends AppController {
         $this->set('_serialize', ['caixasDiarios']);
     }
 
-
     /**
      * Add method
      *
@@ -37,11 +36,16 @@ class CaixasDiariosController extends AppController {
         $caixasDiario = $this->CaixasDiarios->newEntity();
         if ($this->request->is('post')) {
             $caixasDiario = $this->CaixasDiarios->patchEntity($caixasDiario, $this->request->data);
-            if ($this->CaixasDiarios->save($caixasDiario)) {
-                $this->Flash->success(__('Registro Salvo com Sucesso.'));
-                return $this->redirect(['action' => 'index']);
+            $find = $this->CaixasDiarios->findByDataAndTerminalAndPessoaId($caixasDiario->data, $caixasDiario->terminal, $caixasDiario->pessoa_id)->first();
+            if (count($find) > 0) {
+                $this->Flash->error(__('Já existe um caixa aberto com este dados.'));
             } else {
-                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
+                if ($this->CaixasDiarios->save($caixasDiario)) {
+                    $this->Flash->success(__('Registro Salvo com Sucesso.'));
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
+                }
             }
         }
         $terminais = $this->CaixasDiarios->Terminais->find('list');
@@ -62,11 +66,16 @@ class CaixasDiariosController extends AppController {
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $caixasDiario = $this->CaixasDiarios->patchEntity($caixasDiario, $this->request->data);
-            if ($this->CaixasDiarios->save($caixasDiario)) {
-                $this->Flash->success(__('Registro Salvo com Sucesso.'));
-                return $this->redirect(['action' => 'index']);
+            $find = $this->CaixasDiarios->findByDataAndTerminalAndPessoaId($caixasDiario->data, $caixasDiario->terminal, $caixasDiario->pessoa_id)->first();
+            if (count($find) > 0 AND $find->id != $id) {
+                $this->Flash->error(__('Já existe um caixa aberto com este dados.'));
             } else {
-                $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
+                if ($this->CaixasDiarios->save($caixasDiario)) {
+                    $this->Flash->success(__('Registro Salvo com Sucesso.'));
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('O registro não pôde ser salvo. Por favor tente novamente.'));
+                }
             }
         }
         $terminais = $this->CaixasDiarios->Terminais->find('list');

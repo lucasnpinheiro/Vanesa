@@ -40,26 +40,27 @@
                             <li><?php echo $this->Html->link('Novo Pedido', ['controller' => 'Pedidos', 'action' => 'add'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Em aberto', ['controller' => 'Pedidos', 'action' => 'index', '?' => ['status' => 0]], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Recebido', ['controller' => 'Pedidos', 'action' => 'index', '?' => ['status' => 1]], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link('Cancelado', ['controller' => 'Pedidos', 'action' => 'index', '?' => ['status' => 2 ]], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Cancelado', ['controller' => 'Pedidos', 'action' => 'index', '?' => ['status' => 2]], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
-                            <li><?php echo $this->Html->link( 'A Pagar', ['controller' => 'Apagar', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('A Pagar', ['controller' => 'Apagar', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Relatórios', ['controller' => 'Apagar', 'action' => 'relatorios'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Caixa</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
-                            <li><?php echo $this->Html->link( 'Caixas Diários', ['controller' => 'CaixasDiarios', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link( 'Terminais', ['controller' => 'Terminais', 'action' =>  'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Caixas Diários', ['controller' => 'CaixasDiarios', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Terminais', ['controller' => 'Terminais', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <?php echo $this->Html->link( 'Sair', '/sair', ['class' => 'animsition-link', 'icon' => false]); ?>
+                        <?php echo $this->Html->link('Sair', '/sair', ['class' => 'animsition-link', 'icon' => false]); ?>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

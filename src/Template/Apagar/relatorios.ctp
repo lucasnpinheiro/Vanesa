@@ -1,12 +1,17 @@
 <?php
-$grupos = [];
-$gruposProdutos = [];
-foreach ($gruposEstoques as $key => $value) {
-    $grupos[$value->id] = $value->nome;
+$_apagar = [];
+foreach ($apagar as $key => $value) {
+    if (!isset($_apagar[$value->data_vencimento->format('Y-m-d')])) {
+        $_apagar[$value->data_vencimento->format('Y-m-d')]['total'][1] = 0;
+        $_apagar[$value->data_vencimento->format('Y-m-d')]['total'][2] = 0;
+        $_apagar[$value->data_vencimento->format('Y-m-d')]['lista'] = [];
+    }
+    $_apagar[$value->data_vencimento->format('Y-m-d')]['lista'][] = $value;
+    $_apagar[$value->data_vencimento->format('Y-m-d')]['total'][$value->tipo] += $value->valor_documento;
 }
-foreach ($produto as $key => $value) {
-    $gruposProdutos[$value->grupos_estoque_id][] = $value;
-}
+
+//debug($_apagar);
+//exit;
 ?>
 
 
@@ -27,7 +32,10 @@ foreach ($produto as $key => $value) {
                     'inline' => true,
                     'label' => false
                 ]);
-                echo $this->Form->input('grupos_estoque_id', ['options' => $grupos, 'value' => $this->request->query('grupos_estoque_id'), 'empty' => 'Selecione um grupo', 'label' => false, 'placeholder' => 'Grupos']);
+                echo $this->Form->data('data_inicio', ['label' => false, 'placeholder' => 'Data Inicio']);
+                echo $this->Form->data('data_fim', ['label' => false, 'placeholder' => 'Data Fim']);
+                echo $this->Form->statusContas('status', ['label' => false, 'placeholder' => 'Situação']);
+                echo $this->Form->tiposPagamentos('tipo', ['label' => false, 'placeholder' => 'Tipo']);
                 echo $this->Form->button('Consultar', ['type' => 'submit', 'icon' => 'search']);
                 echo $this->Form->end();
                 ?>
@@ -38,39 +46,46 @@ foreach ($produto as $key => $value) {
 
 
         <?php
-        foreach ($grupos as $key => $value) {
-            if (!empty($gruposProdutos[$key])) {
-                ?>
-                <div class="col-xs-12">
-                    <h3><?php echo $value ?></h3>
-                    <table class="table table-bordered table-striped font-12 table-hover">
-                        <thead>
-                            <tr>
-                                <th style="width: 20%;">Código</th>
-                                <th style="width: 40%;">Produto</th>
-                                <th style="width: 10%;">Estoque Atual</th>
-                                <th style="width: 30%;">Estoque Novo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($gruposProdutos[$key] as $k => $v) {
-                                ?>
-                                <tr>
-                                    <td class="text-right"><?php echo $v->barra; ?></td>
-                                    <td><?php echo $v->nome; ?></td>
-                                    <td class="text-center"><?php echo $v->estoque_atual; ?></td>
-                                    <td></td>
-                                </tr>
-                                <?php
-                            }
+        foreach ($_apagar as $key => $value) {
+            ?>
+            <div class="col-xs-12">
+                <table class="table table-bordered table-striped font-12 table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Documento</th>
+                            <th style="width: 10%;">Situação</th>
+                            <th style="width: 10%;">Tipo</th>
+                            <th style="width: 30%;">Fornecedor</th>
+                            <th style="width: 15%;">Data Vencimento</th>
+                            <th style="width: 15%;">Valor Documento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($value['lista'] as $k => $v) {
                             ?>
+                            <tr>
+                                <td><?php echo $v->numero_documento; ?></td>
+                                <td class="text-center"><?php echo $this->Html->statusContas($v->status); ?></td>
+                                <td class="text-center"><?php echo $this->Html->pagamentos($v->tipo); ?></td>
+                                <td><?php echo $v->pessoa->nome; ?></td>
+                                <td><?php echo $v->data_vencimento->format('d/m/Y'); ?></td>
+                                <td class="text-right"><?php echo $this->Html->moeda($v->valor_documento); ?></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
 
-                        </tbody>
-                    </table>
-                </div>
-                <?php
-            }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="text-center" colspan="3">Total a vista: <?php echo $this->Html->moeda($value['total'][1]); ?></td>
+                            <td class="text-center" colspan="3">Total a prazo: <?php echo $this->Html->moeda($value['total'][2]); ?></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <?php
         }
         ?>
 

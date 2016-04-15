@@ -109,13 +109,10 @@ class ApagarController extends AppController {
         if (!empty($this->request->data)) {
             $this->redirect($this->request->data);
         }
-        $this->loadModel('GruposEstoques');
-
-        $produto = $this->Produtos->find('search', $this->Produtos->filterParams($this->request->query))->where(['status' => 1])->order(['nome' => 'asc'])->all();
-
-        $gruposEstoques = $this->GruposEstoques->find()->order(['nome' => 'asc'])->all();
-        $this->set(compact('produto', 'gruposEstoques'));
-        $this->set('_serialize', ['produto']);
+        $this->request->data = $this->request->query;
+        $apagar = $this->Apagar->find('search', $this->Apagar->filterParams($this->request->query))->where(['Apagar.status !=' => 9])->order(['Apagar.data_vencimento' => 'asc'])->contain('Pessoas')->all();
+        $this->set(compact('apagar'));
+        $this->set('_serialize', ['apagar']);
         if ($this->request->query('imprimir') === 'S') {
             $this->viewBuilder()->layout('print');
             $redirect = $this->request->query;

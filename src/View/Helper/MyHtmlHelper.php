@@ -363,8 +363,11 @@ class MyHtmlHelper extends BootstrapHtmlHelper {
     }
 
     public function pagamentos($id) {
-        $r = $this->tiposPagamentos();
-        return $r[$id];
+        $r = [
+            1 => ['text' => __('Avista'), 'class' => 'info'],
+            2 => ['text' => __('Prazo'), 'class' => 'warning'],
+        ];
+        return $this->label($r[$id]['text'], $r[$id]['class']);
     }
 
 }
