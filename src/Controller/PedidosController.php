@@ -100,8 +100,15 @@ class PedidosController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function finalizar($id = null) {
+        $this->loadModel('CaixasDiarios');
+        $findCaixa = $this->CaixasDiarios->find()->where(['terminal' => 1, 'data' => date('Y-m-d'), 'pessoa_id' => $this->Auth->user('id')])->first();
+
         $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
+        $pedido = $this->Pedidos->patchEntity($pedido, $this->request->data);
+        
+        $pedido->data = new \DateTime('Y-m-d');
         $pedido->status = 1;
+        $pedido->caixas_diario_id = $findCaixa->id;
         $this->Pedidos->save($pedido);
         $this->loadModel('PedidosItens');
         $this->loadModel('GruposEstoques');
@@ -124,6 +131,7 @@ class PedidosController extends AppController {
                 $this->Produtos->save($produto);
             }
         }
+        //echo json_encode(['msg' => 'ok']);
         $this->redirect(['action' => 'add']);
     }
 
@@ -154,32 +162,39 @@ class PedidosController extends AppController {
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add($id = null) {
-        if (is_null($id)) {
-            $pedido = $this->Pedidos->newEntity();
-        } else {
-            $pedido = $this->Pedidos->get($id, [
-                'contain' => ['PedidosItens' => function($q) {
-                        return $q->order(['sequencia' => 'asc'])->contain('Produtos');
-                    }]
-                    ]);
+        $this->loadModel('CaixasDiarios');
+        $findCaixa = $this->CaixasDiarios->find()->where(['terminal' => 1, 'data' => date('Y-m-d'), 'pessoa_id' => $this->Auth->user('id')])->first();
+        if (count($findCaixa) > 0) {
+            if (is_null($id)) {
+                $pedido = $this->Pedidos->newEntity();
+            } else {
+                $pedido = $this->Pedidos->get($id, [
+                    'contain' => ['PedidosItens' => function($q) {
+                            return $q->order(['sequencia' => 'asc'])->contain('Produtos');
+                        }]
+                        ]);
+                    }
+                    $this->loadModel('Produtos');
+                    $produtos = [];
+                    $produtos_lista = [];
+                    $_lista_produtos = $this->Produtos->find()->where(['status' => 1])->all();
+                    $produtos_botoes = $this->Produtos->find()->where(['status' => 1, 'atalho' => 1])->all();
+                    $lista_produtos = [];
+                    foreach ($_lista_produtos as $key => $value) {
+                        $lista_produtos[(int) $value->id] = $value;
+                        $lista_produtos[(int) $value->barra] = $value;
+                        $produtos[(int) $value->barra] = $value->barra . ' - ' . $value->nome;
+                        $produtos[(int) $value->id] = $value->barra . ' - ' . $value->nome;
+                        $produtos_lista[(int) $value->barra] = $value->barra;
+                        $produtos_lista[(int) $value->id] = $value->barra;
+                    }
+                    unset($_lista_produtos);
+                    $this->set(compact('pedido', 'lista_produtos', 'produtos', 'produtos_lista', 'produtos_botoes'));
+                    $this->set('_serialize', ['pedido']);
+                } else {
+                    $this->Flash->error(__('Não foi localizado caixa aberto para este dia.'));
+                    $this->redirect(['controller' => 'CaixasDiarios', 'action' => 'add']);
                 }
-                $this->loadModel('Produtos');
-                $produtos = [];
-                $produtos_lista = [];
-                $_lista_produtos = $this->Produtos->find()->where(['status' => 1])->all();
-                $produtos_botoes = $this->Produtos->find()->where(['status' => 1, 'atalho' => 1])->all();
-                $lista_produtos = [];
-                foreach ($_lista_produtos as $key => $value) {
-                    $lista_produtos[(int) $value->id] = $value;
-                    $lista_produtos[(int) $value->barra] = $value;
-                    $produtos[(int) $value->barra] = $value->barra . ' - ' . $value->nome;
-                    $produtos[(int) $value->id] = $value->barra . ' - ' . $value->nome;
-                    $produtos_lista[(int) $value->barra] = $value->barra;
-                    $produtos_lista[(int) $value->id] = $value->barra;
-                }
-                unset($_lista_produtos);
-                $this->set(compact('pedido', 'lista_produtos', 'produtos', 'produtos_lista', 'produtos_botoes'));
-                $this->set('_serialize', ['pedido']);
             }
 
             public function additens() {

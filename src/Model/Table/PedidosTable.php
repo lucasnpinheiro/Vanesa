@@ -72,49 +72,39 @@ class PedidosTable extends Table {
                 ->allowEmpty('ficha');
 
         $validator
-                ->date('data_pedido')
-                ->allowEmpty('data_pedido');
-
-        $validator
                 ->integer('status')
                 ->allowEmpty('status');
 
-        $validator
-                ->allowEmpty('nome_cliente');
-
-        $validator
-                ->numeric('valor_total')
-                ->allowEmpty('valor_total');
-
-        $validator
-                ->numeric('valor_desconto')
-                ->allowEmpty('valor_desconto');
-
-        $validator
-                ->numeric('valor_liquido')
-                ->allowEmpty('valor_liquido');
-
-        $validator
-                ->numeric('valor_dinheiro')
-                ->allowEmpty('valor_dinheiro');
-
-        $validator
-                ->numeric('valor_cheque')
-                ->allowEmpty('valor_cheque');
-
-        $validator
-                ->numeric('valor_cartao')
-                ->allowEmpty('valor_cartao');
-
-        $validator
-                ->numeric('valor_recebe')
-                ->allowEmpty('valor_recebe');
-
-        $validator
-                ->numeric('valor_troco')
-                ->allowEmpty('valor_troco');
 
         return $validator;
+    }
+
+    public function patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = array()) {
+        if (!empty($data['valor_total'])) {
+            $data['valor_total'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_total']));
+        }
+        if (!empty($data['valor_desconto'])) {
+            $data['valor_desconto'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_desconto']));
+        }
+        if (!empty($data['valor_liquido'])) {
+            $data['valor_liquido'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_liquido']));
+        }
+        if (!empty($data['valor_dinheiro'])) {
+            $data['valor_dinheiro'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_dinheiro']));
+        }
+        if (!empty($data['valor_cheque'])) {
+            $data['valor_cheque'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_cheque']));
+        }
+        if (!empty($data['valor_cartao'])) {
+            $data['valor_cartao'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_cartao']));
+        }
+        if (!empty($data['valor_recebe'])) {
+            $data['valor_recebe'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_recebe']));
+        }
+        if (!empty($data['valor_troco'])) {
+            $data['valor_troco'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_troco']));
+        }
+        return parent::patchEntity($entity, $data, $options);
     }
 
 }

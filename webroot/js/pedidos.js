@@ -258,7 +258,28 @@ $(function () {
             var l = cake.util.convertFloat($('#valor-liquido').val());
             var r = cake.util.convertFloat($('#valor-recebe').val());
             if (l <= r) {
-                window.location.href = router.url + 'pedidos/finalizar/' + $('#ficha').val();
+                $('#novo-pedidos').attr('action', router.url + 'pedidos/finalizar/' + $('#ficha').val());
+                $('#novo-pedidos').removeAttr('onsubmit');
+                $('#novo-pedidos').submit();
+                /*$.ajax({
+                 method: "POST",
+                 type: "POST",
+                 dataType: "json",
+                 data: {
+                 valor_liquido: cake.util.convertFloat($('#valor-liquido').val()),
+                 valor_recebe: cake.util.convertFloat($('#valor-recebe').val()),
+                 valor_dinheiro: cake.util.convertFloat($('#valor-dinheiro').val()),
+                 valor_cheque: cake.util.convertFloat($('#valor-cheque').val()),
+                 valor_cartao: cake.util.convertFloat($('#valor-cartao').val()),
+                 valor_recebe: cake.util.convertFloat($('#valor-recebe').val()),
+                 valor_troco: cake.util.convertFloat($('#valor-troco').val()),
+                 valor_total: cake.util.convertFloat($('#valor-total').val())
+                 },
+                 url: router.url + 'pedidos/finalizar/' + $('#ficha').val(),
+                 success: function (d) {
+                 window.location.href = router.url + 'pedidos/add/';
+                 }
+                 });*/
             } else {
                 alert('Verificar o valor recebido.');
             }

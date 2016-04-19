@@ -154,4 +154,11 @@ class PessoasTable extends Table {
         }
     }
 
+    public function patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = array()) {
+        if (!isset($data['senha']) OR empty($data['senha'])) {
+            $entity->senha = null;
+        }
+        return parent::patchEntity($entity, $data, $options);
+    }
+
 }

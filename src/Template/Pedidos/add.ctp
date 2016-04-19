@@ -9,7 +9,7 @@
     </div>
     <div class="panel-body">
         <?php //debug($pedido) ?>
-        <?= $this->Form->create($pedido, ['onsubmit' => 'return false;']) ?>
+        <?= $this->Form->create($pedido, ['onsubmit' => 'return false;', 'id' => 'novo-pedidos']) ?>
         <div class="col-xs-12 col-md-7">
             <?php
             echo $this->Form->input('data_pedido', ['value' => date('d/m/Y'), 'type' => 'hidden']);
@@ -22,8 +22,7 @@
                 <?php echo $this->Form->input('produto', ['type' => 'text', 'class' => 'produtos_barra', 'list' => 'codigo_produtos', 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
                 <datalist id="codigo_produtos">
                     <?php
-                    foreach ($produtos_lista as $key => $value)
-                    {
+                    foreach ($produtos_lista as $key => $value) {
                         echo '<option value="' . $value . '">';
                     }
                     ?>
@@ -51,10 +50,8 @@
                     <table class="table table-bordered table-condensed table-hover table-striped" style="margin: 0; padding: 0;">
                         <tbody class="add-itens-produtos">
                             <?php
-                            if (!empty($pedido->pedidos_itens))
-                            {
-                                foreach ($pedido->pedidos_itens as $key => $value)
-                                {
+                            if (!empty($pedido->pedidos_itens)) {
+                                foreach ($pedido->pedidos_itens as $key => $value) {
                                     ?>
                                     <tr rel="<?php echo $value->sequencia ?>" identificacao="<?php echo $value->produto_id ?>">
                                         <td style="width: 27%"><?php echo $value->produto->nome ?></td>
@@ -68,10 +65,10 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    <?php
-                                }
-                            }
-                            ?>
+        <?php
+    }
+}
+?>
                         </tbody>
                     </table>
                 </div>
@@ -80,17 +77,15 @@
 
         </div>
         <div class="col-xs-12 col-md-5">
-            <?php
-            echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'font-size: 24px;']);
-            echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 24px;']);
-            echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 24px;']);
-            ?>
+<?php
+echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'font-size: 24px;']);
+echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 24px;']);
+echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 24px;']);
+?>
 
             <?php
-            if (!empty($produtos_botoes))
-            {
-                foreach ($produtos_botoes as $key => $value)
-                {
+            if (!empty($produtos_botoes)) {
+                foreach ($produtos_botoes as $key => $value) {
                     echo $this->Html->link($value->nome_atalho, '', ['rel' => $value->id, 'class' => 'produto-atalho btn btn-info btn-xs', 'style' => 'padding: 2px; margin: 0.5%; width: 23.5%;', 'role' => "button"]);
                 }
             }
@@ -100,13 +95,13 @@
         <div style="margin: 20px;"></div>
         <hr>
         <div class="col-xs-12 col-md-8 text-left" style="margin: 0px; padding: 0px;">
-            <?php
-            echo $this->Form->moeda('valor_dinheiro', ['append' => null, 'label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px;']);
-            echo $this->Form->moeda('valor_cheque', ['append' => null, 'label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
-            echo $this->Form->moeda('valor_cartao', ['append' => null, 'label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px; color: green;']);
-            echo $this->Form->moeda('valor_recebe', ['append' => null, 'readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: blue;']);
-            echo $this->Form->moeda('valor_troco', ['append' => null, 'readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: red;']);
-            ?>
+<?php
+echo $this->Form->moeda('valor_dinheiro', ['append' => null, 'label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px;']);
+echo $this->Form->moeda('valor_cheque', ['append' => null, 'label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
+echo $this->Form->moeda('valor_cartao', ['append' => null, 'label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px; color: green;']);
+echo $this->Form->moeda('valor_recebe', ['append' => null, 'readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: blue;']);
+echo $this->Form->moeda('valor_troco', ['append' => null, 'readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: red;']);
+?>
         </div>
         <div class="col-xs-12 col-md-4 text-right" style="padding: 20px 0px 0px 0px; margin: 0px;">
             <?php
@@ -115,14 +110,14 @@
             echo $this->Form->button(__('Cancelar'), ['type' => 'button', 'id' => 'cancelar-pedido', 'icon' => 'close', 'class' => 'btn-danger']);
             ?>
         </div>
-        <?= $this->Form->end() ?>
+            <?= $this->Form->end() ?>
     </div>
 </div>
 
 
-<?php
-$this->Html->script('/js/select2.min.js', ['block' => 'script']);
-$this->Html->css('/css/select2.min.css', ['block' => 'css']);
-$this->Html->script('/js/pedidos.js', ['block' => 'script']);
-?>
+        <?php
+        $this->Html->script('/js/select2.min.js', ['block' => 'script']);
+        $this->Html->css('/css/select2.min.css', ['block' => 'css']);
+        $this->Html->script('/js/pedidos.js', ['block' => 'script']);
+        ?>
 <?php $this->Html->scriptBlock('cake.pedidos.itens = ' . json_encode($lista_produtos) . ';', ['block' => 'script']); ?>
