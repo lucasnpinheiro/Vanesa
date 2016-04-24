@@ -35,7 +35,7 @@
             <div class="clearfix"></div>
             <div class="col-xs-12 col-md-6">Vendas</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendas->total); ?></div>
             <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Saldo</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda((floatval($vendas->total) + floatval($entradas->total) + floatval($saldoInicial->total)) - floatval($saidas->total)); ?></div>
+            <div class="col-xs-12 col-md-6">Saldo Caixa</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda((floatval($vendas->total) + floatval($entradas->total) + floatval($saldoInicial->total)) - floatval($saidas->total)); ?></div>
             <div class="clearfix"></div>
         </div>
         <div class="col-xs-12 col-md-6">
@@ -45,26 +45,33 @@
             <div class="clearfix"></div>
             <div class="col-xs-12 col-md-6">Vendas Cheque</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasCheque->total); ?></div>
             <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Vendas Total</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda(floatval($vendasDinheiro->total) + floatval($vendasCartao->total) + floatval($vendasCheque->total)); ?></div>
+            <div class="col-xs-12 col-md-6">Vendas Prazo</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasPrazo->total); ?></div>
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-md-6">Vendas Total</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda(floatval($vendasDinheiro->total) + floatval($vendasCartao->total) + floatval($vendasCheque->total) + floatval($vendasPrazo->total)); ?></div>
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
 
         <h3>Fechamento do Operador(a)</h3>
-        <div class="col-xs-12 col-md-3"></div>
         <div class="col-xs-12 col-md-6">
             <div><div class="col-xs-2">Troco :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
             <div><div class="col-xs-2">Dinheiro :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
             <div><div class="col-xs-2">Cartão :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
             <div><div class="col-xs-2">Cheque :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
+            <div><div class="col-xs-2">Prazo :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
             <div><div class="col-xs-2">Sangria :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
             <div><div class="col-xs-2">Moedas :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-xs-12 col-md-6">
             <div><div class="col-xs-2">Total :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
             <div><div class="col-xs-2">Saldo CX :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
             <div><div class="col-xs-2">Diferença :</div><div style="border-bottom: 1px solid #000;" class="col-xs-7">&nbsp;</div><div class="col-xs-3 text-right">(  ) - Sobra (  ) - Falta </div></div>
             <div class="clearfix"></div>
-
-            <br />
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 col-md-3"></div>
+        <div class="col-xs-12 col-md-6">
             <br />
             <div><div style="border-bottom: 1px solid #000;" class="col-xs-12">&nbsp;</div></div>
             <div class="clearfix"></div>

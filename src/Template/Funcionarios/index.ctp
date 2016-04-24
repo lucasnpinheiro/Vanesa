@@ -43,7 +43,6 @@
                         <td><?= h($pessoa->fone1) ?></td>
                         <td><?= h($pessoa->fone2) ?></td>
                         <td><?= h($pessoa->cnpj) ?></td>
-                        <td><?= h($pessoa->username) ?></td>
                         <td class="actions text-right">
                             <?= $this->Html->link(null, ['action' => 'edit', $pessoa->id], ['title' => __('Edit')]) ?>
                             <?= $this->Form->postLink(null, ['action' => 'delete', $pessoa->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pessoa->id), 'title' => __('Delete')]) ?>

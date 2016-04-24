@@ -30,7 +30,10 @@ class PedidosTable extends Table {
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
-
+        $this->belongsTo('Funcionarios', [
+            'className' => 'Pessoas',
+            'foreignKey' => 'funcionario_id'
+        ]);
         $this->hasMany('PedidosItens', [
             'foreignKey' => 'pedido_id'
         ]);
@@ -47,64 +50,97 @@ class PedidosTable extends Table {
         foreach ($c as $key => $value) {
             $t = $this->schema()->columnType($value);
             if ($t != 'string' AND $t != 'text') {
-                $search->value($value, ['field' => $this->aliasField($value)]);
-            } else {
-                $search->like($value, ['before' => true, 'after' => true, 'field' => $this->aliasField($value)]);
-            }
-        }
+                if ($t == 'date') {
+                    $search->callback($value, [
+                        'callback' => function ($query, $args, $manager) use($value) {
+                            $d = implode('-', array_reverse(explode('/', $args[$value])));
+                            return $query->where([$value => $d]);
+                        }
+                                    ]
+                            );
+                        } else if ($t == 'datetime') {
+                            $search->callback($value, [
+                                'callback' => function ($query, $args, $manager) use($value) {
+                                    $d = explode(' ', $args[$value]);
+                                    $d[0] = implode('-', array_reverse(explode('/', $d[0])));
+                                    return $query->where([$value => implode(' ', $d)]);
+                                }
+                                            ]
+                                    );
+                                } else {
+                                    $search->value($value, ['field' => $this->aliasField($value)]);
+                                }
+                            } else {
+                                $search->like($value, ['before' => true, 'after' => true, 'field' => $this->aliasField($value)]);
+                            }
+                        }
+                        $search->callback('data_inicio', [
+                            'callback' => function ($query, $args, $manager) {
+                                $d = implode('-', array_reverse(explode('/', $args['data_inicio'])));
+                                return $query->where(['data_pedido >=' => $d]);
+                            }
+                                        ]
+                                );
+                                $search->callback('data_fim', [
+                                    'callback' => function ($query, $args, $manager) {
+                                        $d = implode('-', array_reverse(explode('/', $args['data_fim'])));
+                                        return $query->where(['data_pedido <=' => $d]);
+                                    }
+                                                ]
+                                        );
+                                        return $search;
+                                    }
 
-        return $search;
-    }
+                                    /**
+                                     * Default validation rules.
+                                     *
+                                     * @param \Cake\Validation\Validator $validator Validator instance.
+                                     * @return \Cake\Validation\Validator
+                                     */
+                                    public function validationDefault(Validator $validator) {
+                                        $validator
+                                                ->integer('id')
+                                                ->allowEmpty('id', 'create');
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator) {
-        $validator
-                ->integer('id')
-                ->allowEmpty('id', 'create');
+                                        $validator
+                                                ->integer('ficha')
+                                                ->allowEmpty('ficha');
 
-        $validator
-                ->integer('ficha')
-                ->allowEmpty('ficha');
-
-        $validator
-                ->integer('status')
-                ->allowEmpty('status');
+                                        $validator
+                                                ->integer('status')
+                                                ->allowEmpty('status');
 
 
-        return $validator;
-    }
+                                        return $validator;
+                                    }
 
-    public function patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = array()) {
-        if (!empty($data['valor_total'])) {
-            $data['valor_total'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_total']));
-        }
-        if (!empty($data['valor_desconto'])) {
-            $data['valor_desconto'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_desconto']));
-        }
-        if (!empty($data['valor_liquido'])) {
-            $data['valor_liquido'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_liquido']));
-        }
-        if (!empty($data['valor_dinheiro'])) {
-            $data['valor_dinheiro'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_dinheiro']));
-        }
-        if (!empty($data['valor_cheque'])) {
-            $data['valor_cheque'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_cheque']));
-        }
-        if (!empty($data['valor_cartao'])) {
-            $data['valor_cartao'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_cartao']));
-        }
-        if (!empty($data['valor_recebe'])) {
-            $data['valor_recebe'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_recebe']));
-        }
-        if (!empty($data['valor_troco'])) {
-            $data['valor_troco'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_troco']));
-        }
-        return parent::patchEntity($entity, $data, $options);
-    }
+                                    public function patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = array()) {
+                                        if (!empty($data['valor_total'])) {
+                                            $data['valor_total'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_total']));
+                                        }
+                                        if (!empty($data['valor_desconto'])) {
+                                            $data['valor_desconto'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_desconto']));
+                                        }
+                                        if (!empty($data['valor_liquido'])) {
+                                            $data['valor_liquido'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_liquido']));
+                                        }
+                                        if (!empty($data['valor_dinheiro'])) {
+                                            $data['valor_dinheiro'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_dinheiro']));
+                                        }
+                                        if (!empty($data['valor_cheque'])) {
+                                            $data['valor_cheque'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_cheque']));
+                                        }
+                                        if (!empty($data['valor_cartao'])) {
+                                            $data['valor_cartao'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_cartao']));
+                                        }
+                                        if (!empty($data['valor_recebe'])) {
+                                            $data['valor_recebe'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_recebe']));
+                                        }
+                                        if (!empty($data['valor_troco'])) {
+                                            $data['valor_troco'] = (float) str_replace(',', '.', str_replace('.', '', $data['valor_troco']));
+                                        }
+                                        return parent::patchEntity($entity, $data, $options);
+                                    }
 
-}
+                                }
+                                

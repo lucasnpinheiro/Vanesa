@@ -73,11 +73,13 @@ class CaixasMovimentosController extends AppController {
         $vendasDinheiro = $vendasDinheiro->select(['total' => $vendasDinheiro->func()->sum('valor_dinheiro')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
         $vendasCheque = $this->Pedidos->find();
         $vendasCheque = $vendasCheque->select(['total' => $vendasCheque->func()->sum('valor_cheque')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
+        $vendasPrazo = $this->Pedidos->find();
+        $vendasPrazo = $vendasPrazo->select(['total' => $vendasPrazo->func()->sum('valor_prazo')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
         $vendasCartao = $this->Pedidos->find();
         $vendasCartao = $vendasCartao->select(['total' => $vendasCartao->func()->sum('valor_cartao')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
 
 
-        $this->set(compact('caixasDiarios', 'caixasMovimentos', 'saldoInicial', 'entradas', 'saidas', 'sangrias', 'vendas', 'vendasDinheiro', 'vendasCheque', 'vendasCartao'));
+        $this->set(compact('caixasDiarios', 'caixasMovimentos', 'saldoInicial', 'entradas', 'saidas', 'sangrias', 'vendas', 'vendasDinheiro', 'vendasCheque', 'vendasPrazo', 'vendasCartao'));
         $this->set('caixas_diario_id', $id);
         $this->set('_serialize', ['caixasMovimentos']);
 

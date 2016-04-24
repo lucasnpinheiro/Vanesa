@@ -64,7 +64,7 @@ class AppController extends Controller {
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        if ($this->request->action === 'index') {
+        if (in_array($this->request->action, ['index', 'funcionarios'])) {
             $this->loadComponent('Search.Prg');
         }
         $this->loadComponent('Auth', [

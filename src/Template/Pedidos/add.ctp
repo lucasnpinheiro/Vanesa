@@ -7,15 +7,14 @@
         </ul>
 
     </div>
+    <?= $this->Form->create($pedido, ['onsubmit' => 'return false;', 'id' => 'novo-pedidos']) ?>
     <div class="panel-body">
-        <?php //debug($pedido) ?>
-        <?= $this->Form->create($pedido, ['onsubmit' => 'return false;', 'id' => 'novo-pedidos']) ?>
         <div class="col-xs-12 col-md-7">
             <?php
             echo $this->Form->input('data_pedido', ['value' => date('d/m/Y'), 'type' => 'hidden']);
             echo $this->Form->input('status', ['value' => 0, 'type' => 'hidden']);
-            echo $this->Form->input('ficha', ['autofocus' => true, 'div' => [ 'class' => 'col-xs-12 col-md-2']]);
-            echo $this->Form->input('nome_cliente', ['div' => ['class' => 'col-xs-12 col-md-10']]);
+            echo $this->Form->numero('ficha', ['append' => null, 'prepend' => null, 'required' => true, 'autofocus' => true, 'div' => [ 'class' => 'col-xs-12 col-md-2']]);
+            echo $this->Form->input('nome_cliente', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-10']]);
             ?>
 
             <div class="col-xs-12 col-md-6">
@@ -94,24 +93,38 @@
         <div class="clearfix"></div>
         <div style="margin: 20px;"></div>
         <hr>
-        <div class="col-xs-12 col-md-8 text-left" style="margin: 0px; padding: 0px;">
+        <div class="col-xs-12 col-md-12 text-left">
             <?php
-            echo $this->Form->moeda('valor_dinheiro', ['append' => null, 'label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px;']);
+            echo $this->Form->moeda('valor_dinheiro', ['append' => null, 'label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
             echo $this->Form->moeda('valor_cheque', ['append' => null, 'label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
-            echo $this->Form->moeda('valor_cartao', ['append' => null, 'label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px; color: green;']);
+            echo $this->Form->moeda('valor_cartao', ['append' => null, 'label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
+            echo $this->Form->moeda('valor_prazo', ['append' => null, 'label' => 'Á Prazo', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
             echo $this->Form->moeda('valor_recebe', ['append' => null, 'readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: blue;']);
             echo $this->Form->moeda('valor_troco', ['append' => null, 'readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: red;']);
             ?>
         </div>
-        <div class="col-xs-12 col-md-4 text-right" style="padding: 20px 0px 0px 0px; margin: 0px;">
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-footer">
+        <div class="col-xs-12 col-md-6 text-left">
+            <div class="informe-funcionario" style="display: none;">
+                <?php
+                echo '<div class="col-xs-12 col-md-2 text-left">' . $this->Form->label('funcionario_id', 'Funcionario') . '</div>';
+                echo $this->Form->pessoas('funcionario_id', ['div' => ['class' => 'col-xs-12 col-md-10'], 'label' => false], [6]);
+                ?>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 text-right">
             <?php
             echo $this->Form->button(__('Manter Aberto'), ['type' => 'button', 'id' => 'novo-pedido', 'icon' => 'file-o', 'class' => 'btn-success']);
             echo $this->Form->button(__('Finalizar'), ['type' => 'button', 'id' => 'finalizar-pedido', 'class' => 'btn-primary']);
             echo $this->Form->button(__('Cancelar'), ['type' => 'button', 'id' => 'cancelar-pedido', 'icon' => 'close', 'class' => 'btn-danger']);
             ?>
         </div>
-        <?= $this->Form->end() ?>
+        <div class="clearfix"></div>
     </div>
+    <?= $this->Form->end() ?>
 </div>
 
 

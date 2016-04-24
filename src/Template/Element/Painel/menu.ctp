@@ -18,7 +18,7 @@
                         <ul class="dropdown-menu dropdown-animated fade-effect">
                             <li><?php echo $this->Html->link('Clientes', ['controller' => 'Clientes', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Fornecedores', ['controller' => 'Fornecedores', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link('Funcionarios', ['controller' => 'Funcionarios', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Funcionários', ['controller' => 'Funcionarios', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Operadores de Caixas', ['controller' => 'OperadoresCaixas', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Vendedores', ['controller' => 'Vendedores', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
@@ -47,6 +47,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
                             <li><?php echo $this->Html->link('A Pagar', ['controller' => 'Apagar', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Funcionários', ['controller' => 'Pedidos', 'action' => 'funcionarios'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Relatórios', ['controller' => 'Apagar', 'action' => 'relatorios'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>

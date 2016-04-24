@@ -205,8 +205,15 @@ cake.pedidos.subTotal = function () {
     var d = cake.util.convertFloat($('#valor-dinheiro').val());
     var c = cake.util.convertFloat($('#valor-cheque').val());
     var a = cake.util.convertFloat($('#valor-cartao').val());
+    var p = cake.util.convertFloat($('#valor-prazo').val());
     var l = cake.util.convertFloat($('#valor-liquido').val());
-    var t = (d + c + a);
+    var t = (d + c + a + p);
+    $('.informe-funcionario').hide();
+    $('.informe-funcionario').find(':input').removeAttr('required');
+    if (p > 0) {
+        $('.informe-funcionario').show();
+        $('.informe-funcionario').find(':input').attr('required', 'required');
+    }
     $('#valor-recebe').val(cake.util.moedaSemMascara(t));
     $('#valor-troco').val('');
     if (t > l) {
@@ -260,7 +267,7 @@ $(function () {
     });
 
 
-    $('#valor-dinheiro, #valor-cheque, #valor-cartao').change(function (e) {
+    $('#valor-dinheiro, #valor-cheque, #valor-cartao, #valor-prazo').change(function (e) {
         e.preventDefault();
         cake.pedidos.subTotal();
     });
@@ -285,9 +292,20 @@ $(function () {
             var l = cake.util.convertFloat($('#valor-liquido').val());
             var r = cake.util.convertFloat($('#valor-recebe').val());
             if (l <= r) {
-                $('#novo-pedidos').attr('action', router.url + 'pedidos/finalizar/' + $('#ficha').val());
-                $('#novo-pedidos').removeAttr('onsubmit');
-                $('#novo-pedidos').submit();
+                var p = cake.util.convertFloat($('#valor-prazo').val());
+                if (p > 0) {
+                    if ($('#funcionario-id').val() > 0) {
+                        $('#novo-pedidos').attr('action', router.url + 'pedidos/finalizar/' + $('#ficha').val());
+                        $('#novo-pedidos').removeAttr('onsubmit');
+                        $('#novo-pedidos').submit();
+                    } else {
+                        alert('Informe um funcionario.');
+                    }
+                } else {
+                    $('#novo-pedidos').attr('action', router.url + 'pedidos/finalizar/' + $('#ficha').val());
+                    $('#novo-pedidos').removeAttr('onsubmit');
+                    $('#novo-pedidos').submit();
+                }
                 /*$.ajax({
                  method: "POST",
                  type: "POST",
