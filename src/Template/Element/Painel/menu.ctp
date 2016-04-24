@@ -54,7 +54,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Caixa</a>
                         <ul class="dropdown-menu dropdown-animated fade-effect">
                             <li><?php echo $this->Html->link('Caixas Diários', ['controller' => 'CaixasDiarios', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
-                            <li><?php echo $this->Html->link('Terminais', ['controller' => 'Terminais', 'action' => 'index'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
                 </ul>

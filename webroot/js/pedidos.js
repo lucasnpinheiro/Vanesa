@@ -50,23 +50,32 @@ cake.pedidos.addItem = function (id) {
         $('.add-itens-produtos').append(t);
         cake.pedidos.sequencia++;
         $(".produtos_barra").val('');
-        if (p.unidade.toLowerCase() == 'kg') {
-            $('.add-itens-produtos tr[rel="' + q + '"] .quantidade').enterKey(function () {
-                cake.pedidos.calculaQtd(this);
-            })
-        } else {
-            $('.add-itens-produtos tr[rel="' + q + '"] .numero').enterKey(function () {
-                cake.pedidos.calculaQtd(this);
-            })
-        }
         $('.add-itens-produtos tr[rel="' + q + '"] .juros').enterKey(function () {
             cake.pedidos.calculaValor(this);
         })
         if (cake.pedidos.editQtd == true) {
             if (p.unidade.toLowerCase() == 'kg') {
                 $('.add-itens-produtos tr[rel="' + q + '"] .quantidade').focus();
+                $('.add-itens-produtos tr[rel="' + q + '"] .quantidade').enterKey(function () {
+                    cake.pedidos.calculaQtd(this);
+                });
+                $('.add-itens-produtos tr[rel="' + q + '"] .quantidade').blur(function () {
+                    if ($.trim($(this).val()) == '') {
+                        alert('Informe uma quantidade');
+                        return false;
+                    }
+                });
             } else {
                 $('.add-itens-produtos tr[rel="' + q + '"] .numero').focus();
+                $('.add-itens-produtos tr[rel="' + q + '"] .numero').enterKey(function () {
+                    cake.pedidos.calculaQtd(this);
+                });
+                $('.add-itens-produtos tr[rel="' + q + '"] .numero').blur(function () {
+                    if ($.trim($(this).val()) == '') {
+                        alert('Informe uma quantidade');
+                        return false;
+                    }
+                });
             }
         } else if (cake.pedidos.editDesc == true) {
             $('.add-itens-produtos tr[rel="' + q + '"] .juros').focus();
@@ -79,17 +88,21 @@ cake.pedidos.addItem = function (id) {
 
 cake.pedidos.calculaQtd = function (obj) {
     var q = cake.util.convertFloat(obj.value);
-    var tr = $(obj).closest('tr');
-    var p = cake.pedidos.find($(tr).attr('identificacao'));
-    var v = p.promocao > 0 ? p.promocao : p.venda;
-    if ($(tr).find('.td-desconto').find('.juros').val()) {
-        var d = ((cake.util.convertFloat($(tr).find('.td-desconto').find('.juros').val()) * 100) * v) / 100;
-        var v = v - d;
+    if (q > 0) {
+        var tr = $(obj).closest('tr');
+        var p = cake.pedidos.find($(tr).attr('identificacao'));
+        var v = p.promocao > 0 ? p.promocao : p.venda;
+        if ($(tr).find('.td-desconto').find('.juros').val()) {
+            var d = ((cake.util.convertFloat($(tr).find('.td-desconto').find('.juros').val()) * 100) * v) / 100;
+            var v = v - d;
+        }
+        var t = q * v;
+        $(tr).find('.td-total').html(cake.util.moeda(t));
+        cake.pedidos.editQtd = false;
+        cake.pedidos.saveItens($(tr).attr('rel'), p.id, t, q, null, null, 'add');
+    } else {
+        return false;
     }
-    var t = q * v;
-    $(tr).find('.td-total').html(cake.util.moeda(t));
-    cake.pedidos.editQtd = false;
-    cake.pedidos.saveItens($(tr).attr('rel'), p.id, t, q, null, null, 'add');
 }
 
 cake.pedidos.calculaValor = function (obj) {
@@ -202,6 +215,20 @@ cake.pedidos.subTotal = function () {
 }
 
 $(function () {
+
+    if ($('#MyModal2').length > 0) {
+        $('#MyModal2').modal({
+            keyboard: false
+        })
+        $('#MyModal2').modal('show');
+        $('#MyModal2').on('hidden.bs.modal', function (e) {
+
+            if ($('.caixa_diario_operador').val() == '') {
+                $('#MyModal2').modal('show');
+            }
+        });
+    }
+
     $(".produtos_barra").addClass('noTab');
     var $eventSelect = $("#produto-id").select2({"language": "pt-BR"});
     $eventSelect.on("select2:select", function (e) {

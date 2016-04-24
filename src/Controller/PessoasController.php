@@ -22,6 +22,7 @@ class PessoasController extends AppController {
      * @return void
      */
     public function login() {
+        $this->request->session()->write('operador_pedido',null);
         $this->set('titulo_pagina', 'Vanesa Sorvetes');
 
         $this->viewBuilder()->layout('login');

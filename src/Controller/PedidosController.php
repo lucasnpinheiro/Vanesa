@@ -100,15 +100,13 @@ class PedidosController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function finalizar($id = null) {
-        $this->loadModel('CaixasDiarios');
-        $findCaixa = $this->CaixasDiarios->find()->where(['terminal' => 1, 'data' => date('Y-m-d'), 'pessoa_id' => $this->Auth->user('id')])->first();
-
         $pedido = $this->Pedidos->find()->where(['ficha' => $id])->order(['id' => 'desc'])->first();
         $pedido = $this->Pedidos->patchEntity($pedido, $this->request->data);
-        
-        $pedido->data = new \DateTime('Y-m-d');
+
+        $d = new \Cake\Chronos\Date(date('Y-m-d'));
+        $pedido->data = $d;
         $pedido->status = 1;
-        $pedido->caixas_diario_id = $findCaixa->id;
+        $pedido->caixas_diario_id = (int) $this->request->session()->read('operador_pedido');
         $this->Pedidos->save($pedido);
         $this->loadModel('PedidosItens');
         $this->loadModel('GruposEstoques');
@@ -163,7 +161,7 @@ class PedidosController extends AppController {
      */
     public function add($id = null) {
         $this->loadModel('CaixasDiarios');
-        $findCaixa = $this->CaixasDiarios->find()->where(['terminal' => 1, 'data' => date('Y-m-d'), 'pessoa_id' => $this->Auth->user('id')])->first();
+        $findCaixa = $this->CaixasDiarios->find()->where(['terminal' => 1, 'data' => date('Y-m-d')])->contain(['Pessoas', 'Terminais'])->all();
         if (count($findCaixa) > 0) {
             if (is_null($id)) {
                 $pedido = $this->Pedidos->newEntity();
@@ -189,7 +187,7 @@ class PedidosController extends AppController {
                         $produtos_lista[(int) $value->id] = $value->barra;
                     }
                     unset($_lista_produtos);
-                    $this->set(compact('pedido', 'lista_produtos', 'produtos', 'produtos_lista', 'produtos_botoes'));
+                    $this->set(compact('findCaixa', 'pedido', 'lista_produtos', 'produtos', 'produtos_lista', 'produtos_botoes'));
                     $this->set('_serialize', ['pedido']);
                 } else {
                     $this->Flash->error(__('Não foi localizado caixa aberto para este dia.'));
@@ -268,6 +266,13 @@ class PedidosController extends AppController {
                     $this->Flash->error(__('Erro ao excluir o registro.'));
                 }
                 return $this->redirect(['action' => 'index']);
+            }
+
+            public function selecionaOperador() {
+                if ($this->request->data('caixa_diario') > 0) {
+                    $this->request->session()->write('operador_pedido', $this->request->data('caixa_diario'));
+                }
+                return $this->redirect($this->referer());
             }
 
         }

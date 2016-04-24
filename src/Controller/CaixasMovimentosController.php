@@ -67,14 +67,14 @@ class CaixasMovimentosController extends AppController {
         $sangrias = $sangrias->select(['total' => $sangrias->func()->sum('valor')])->where(['caixas_diario_id' => $id, 'grupo_id' => 4])->first();
 
         $vendas = $this->Pedidos->find();
-        $vendas = $vendas->select(['total' => $vendas->func()->sum('valor_liquido')])->where(['data_pedido' => $caixasDiarios->data, 'status' => 1])->first();
+        $vendas = $vendas->select(['total' => $vendas->func()->sum('valor_liquido')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
 
         $vendasDinheiro = $this->Pedidos->find();
-        $vendasDinheiro = $vendasDinheiro->select(['total' => $vendasDinheiro->func()->sum('valor_dinheiro')])->where(['data_pedido' => $caixasDiarios->data, 'status' => 1])->first();
+        $vendasDinheiro = $vendasDinheiro->select(['total' => $vendasDinheiro->func()->sum('valor_dinheiro')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
         $vendasCheque = $this->Pedidos->find();
-        $vendasCheque = $vendasCheque->select(['total' => $vendasCheque->func()->sum('valor_cheque')])->where(['data_pedido' => $caixasDiarios->data, 'status' => 1])->first();
+        $vendasCheque = $vendasCheque->select(['total' => $vendasCheque->func()->sum('valor_cheque')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
         $vendasCartao = $this->Pedidos->find();
-        $vendasCartao = $vendasCartao->select(['total' => $vendasCartao->func()->sum('valor_cartao')])->where(['data_pedido' => $caixasDiarios->data, 'status' => 1])->first();
+        $vendasCartao = $vendasCartao->select(['total' => $vendasCartao->func()->sum('valor_cartao')])->where(['caixas_diario_id' => $id, 'status' => 1])->first();
 
 
         $this->set(compact('caixasDiarios', 'caixasMovimentos', 'saldoInicial', 'entradas', 'saidas', 'sangrias', 'vendas', 'vendasDinheiro', 'vendasCheque', 'vendasCartao'));

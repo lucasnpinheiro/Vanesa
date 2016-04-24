@@ -114,8 +114,9 @@ class FornecedoresController extends AppController {
      */
     public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
-        $pessoa = $this->Pessoas->get($id);
-        if ($this->Pessoas->delete($pessoa)) {
+        $this->loadModel('PessoasTipos');
+        $pessoa = $this->PessoasTipos->find()->where(['pessoa_id' => $id, 'tipo' => 3])->first();
+        if ($this->PessoasTipos->delete($pessoa)) {
             $this->Flash->success(__('Registro excluido com sucesso.'));
         } else {
             $this->Flash->error(__('Erro ao excluir o registro.'));

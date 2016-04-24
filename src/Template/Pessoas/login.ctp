@@ -5,7 +5,7 @@
 
     <?= $this->Form->create(null, ['url' => '/pessoas/login']) ?>
     <div class="form-group form-input-group m-t-30 m-b-5">
-        <input type="text" class="form-control input-lg font-14" placeholder="Usuario" name="username">
+        <input type="text" class="form-control input-lg font-14" autofocus="autofocus" placeholder="Usuario" name="username">
         <input type="password" class="form-control input-lg font-14" placeholder="Senha" name="senha">
     </div>
 

@@ -65,10 +65,10 @@
                                             </a>
                                         </td>
                                     </tr>
-        <?php
-    }
-}
-?>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -77,11 +77,11 @@
 
         </div>
         <div class="col-xs-12 col-md-5">
-<?php
-echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'font-size: 24px;']);
-echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 24px;']);
-echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 24px;']);
-?>
+            <?php
+            echo $this->Form->moeda('valor_total', ['append' => null, 'readonly' => true, 'label' => 'Total', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'font-size: 24px;']);
+            echo $this->Form->moeda('valor_desconto', ['append' => null, 'readonly' => true, 'label' => 'Desconto', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: red;font-size: 24px;']);
+            echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 'label' => 'Liquido', 'div' => ['class' => 'col-xs-12 col-md-4'], 'style' => 'color: blue;font-size: 24px;']);
+            ?>
 
             <?php
             if (!empty($produtos_botoes)) {
@@ -95,13 +95,13 @@ echo $this->Form->moeda('valor_liquido', ['append' => null, 'readonly' => true, 
         <div style="margin: 20px;"></div>
         <hr>
         <div class="col-xs-12 col-md-8 text-left" style="margin: 0px; padding: 0px;">
-<?php
-echo $this->Form->moeda('valor_dinheiro', ['append' => null, 'label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px;']);
-echo $this->Form->moeda('valor_cheque', ['append' => null, 'label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
-echo $this->Form->moeda('valor_cartao', ['append' => null, 'label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px; color: green;']);
-echo $this->Form->moeda('valor_recebe', ['append' => null, 'readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: blue;']);
-echo $this->Form->moeda('valor_troco', ['append' => null, 'readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: red;']);
-?>
+            <?php
+            echo $this->Form->moeda('valor_dinheiro', ['append' => null, 'label' => 'Dinheiro', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px;']);
+            echo $this->Form->moeda('valor_cheque', ['append' => null, 'label' => 'Cheque', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: green;']);
+            echo $this->Form->moeda('valor_cartao', ['append' => null, 'label' => 'Cartão', 'div' => ['class' => 'col-xs-12 col-md-3'], 'style' => 'font-size: 24px; color: green;']);
+            echo $this->Form->moeda('valor_recebe', ['append' => null, 'readonly' => true, 'label' => 'Recebido', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: blue;']);
+            echo $this->Form->moeda('valor_troco', ['append' => null, 'readonly' => true, 'label' => 'Troco', 'div' => ['class' => 'col-xs-12 col-md-2'], 'style' => 'font-size: 24px; color: red;']);
+            ?>
         </div>
         <div class="col-xs-12 col-md-4 text-right" style="padding: 20px 0px 0px 0px; margin: 0px;">
             <?php
@@ -110,14 +110,39 @@ echo $this->Form->moeda('valor_troco', ['append' => null, 'readonly' => true, 'l
             echo $this->Form->button(__('Cancelar'), ['type' => 'button', 'id' => 'cancelar-pedido', 'icon' => 'close', 'class' => 'btn-danger']);
             ?>
         </div>
-            <?= $this->Form->end() ?>
+        <?= $this->Form->end() ?>
     </div>
 </div>
 
 
-        <?php
-        $this->Html->script('/js/select2.min.js', ['block' => 'script']);
-        $this->Html->css('/css/select2.min.css', ['block' => 'css']);
-        $this->Html->script('/js/pedidos.js', ['block' => 'script']);
-        ?>
-<?php $this->Html->scriptBlock('cake.pedidos.itens = ' . json_encode($lista_produtos) . ';', ['block' => 'script']); ?>
+<?php
+if ($this->request->session()->read('operador_pedido') < 1) {
+    /* echo $this->Form->button('Toggle Form', [
+      'data-toggle' => 'modal',
+      'data-target' => '#MyModal2'
+      ]); */
+    $_formOperadores = null;
+
+    $options = [];
+    foreach ($findCaixa as $key => $value) {
+        $options[$value->id] = $value->pessoa->nome;
+    }
+
+    $_formOperadores .= $this->Form->create(NULL, ['url' => ['action' => 'seleciona_operador']]);
+    $_formOperadores .= $this->Form->input('caixa_diario', ['class' => 'caixa_diario_operador', 'empty' => 'Selecione um Operador', 'options' => $options, 'label' => 'Selecione um operador', 'div' => ['class' => 'col-xs-12 col-md-12']]);
+    $_formOperadores .= $this->Form->button(__('Confirmar'), ['type' => 'submit', 'class' => 'btn-primary']);
+    $_formOperadores .= $this->Form->end();
+    $_formOperadores .= '<div class="clearfix"></div>';
+
+
+    echo $this->Modal->create(['id' => 'MyModal2', 'close' => false, 'aria-hidden' => true]);
+    echo $this->Modal->header('Example 2 - No HTML', ['close' => false]);
+    echo $this->Modal->body($_formOperadores);
+    echo $this->Modal->end();
+}
+
+$this->Html->script('/js/select2.min.js', ['block' => 'script']);
+$this->Html->css('/css/select2.min.css', ['block' => 'css']);
+$this->Html->script('/js/pedidos.js', ['block' => 'script']);
+$this->Html->scriptBlock('cake.pedidos.itens = ' . json_encode($lista_produtos) . ';', ['block' => 'script']);
+?>
