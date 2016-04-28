@@ -90,23 +90,27 @@
         <div style="width: 50%; float: left;">
             <div class="table-responsive">
                 <table class="table">
-                    <tbody>
+                    <tbody>  
+                        <tr>
+                            <td style="width: 30%;">Dinheiro :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">Cartão :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">Cheque :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">Prazo :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
+                        </tr>
                         
                         <tr>
-                            <td>Dinheiro :</td>
-                        </tr>
-                        <tr>
-                            <td>Cartão :</td>
-                        </tr>
-                        <tr>
-                            <td>Cheque :</td>
-                        </tr>
-                        <tr>
-                            <td>Prazo :</td>
-                        </tr>
-                        
-                        <tr>
-                            <td>Moedas :</td>
+                            <td style="width: 30%;">Moedas :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -117,16 +121,20 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td colspan="3">Sangria :</td>
+                            <td style="width: 30%;">Sangria :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Troco :</td>
+                            <td style="width: 30%;">Troco :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Total :</td>
+                            <td style="width: 30%;">Total :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Saldo CX :</td>
+                            <td style="width: 30%;">Saldo CX :</td>
+                            <td style="width: 70%;" class="borda_rodape"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -139,7 +147,7 @@
                     <tbody>
                         <tr>
                             <td style="width:30%;">Diferença :</td>
-                            <td style="width:40%;"></td>
+                            <td style="width:40%;" class="borda_rodape"></td>
                             <td style="width:30%;">(  ) - Sobra (  ) - Falta</td>
                         </tr>
                     </tbody>

@@ -38,11 +38,24 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($pedidos as $pedido):
-                    if(!isset($totais[$pedido->status])){
-                        $totais[$pedido->status] = 0;
-                    }
-                    $totais[$pedido->status] += $pedido->valor_liquido;
+                <?php
+                $totais['valor_total'] = 0;
+                $totais['valor_desconto'] = 0;
+                $totais['valor_liquido'] = 0;
+                $totais['valor_dinheiro'] = 0;
+                $totais['valor_cheque'] = 0;
+                $totais['valor_cartao'] = 0;
+                $totais['valor_troco'] = 0;
+                $totais['valor_prazo'] = 0;
+                foreach ($pedidos as $pedido):
+                    $totais['valor_total'] += $pedido->valor_total;
+                    $totais['valor_desconto'] += $pedido->valor_desconto;
+                    $totais['valor_liquido'] += $pedido->valor_liquido;
+                    $totais['valor_dinheiro'] += $pedido->valor_dinheiro;
+                    $totais['valor_cheque'] += $pedido->valor_cheque;
+                    $totais['valor_cartao'] += $pedido->valor_cartao;
+                    $totais['valor_troco'] += $pedido->valor_troco;
+                    $totais['valor_prazo'] += $pedido->valor_prazo;
                     ?>
                     <tr>
                         <td><?= $this->Number->format($pedido->id) ?></td>
@@ -53,7 +66,7 @@
                         <td><?= $this->Html->moeda($pedido->valor_liquido) ?></td>
                         <td><?= h($pedido->created) ?></td>
                         <td><?= h($pedido->modified) ?></td>
-                        
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -64,18 +77,34 @@
     <div class="col-xs-12">
         <h4>Totalizadores</h4>
         <div>
-            <?php
-            if (count($totais) > 0) {
-                foreach ($totais as $key => $value) {
-                    ?>
-                    <div class="col-xs-12 col-md-3 text-center">
-                        <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->statusPedido($key); ?></div>
-                        <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($value); ?></div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
+            <div class="col-xs-12 col-md-4 text-center">
+                <div class="col-xs-12 col-md-6 text-center">Valor Total</div>
+                <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_total']); ?></div>
+            </div>
+            <div class="col-xs-12 col-md-4 text-center">
+                <div class="col-xs-12 col-md-6 text-center">Descontos</div>
+                <div class="col-xs-12 col-md-6 text-center" style="color: red;"><?php echo $this->Html->moeda($totais['valor_desconto']); ?></div>
+            </div>
+            <div class="col-xs-12 col-md-4 text-center">
+                <div class="col-xs-12 col-md-6 text-center">Valor Liquido</div>
+                <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_liquido']); ?></div>
+            </div>
+            <div class="col-xs-12 col-md-3 text-center">
+                <div class="col-xs-12 col-md-6 text-center">Dinheiro</div>
+                <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_dinheiro']); ?></div>
+            </div>
+            <div class="col-xs-12 col-md-3 text-center">
+                <div class="col-xs-12 col-md-6 text-center">Cheque</div>
+                <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_cheque']); ?></div>
+            </div>
+            <div class="col-xs-12 col-md-3 text-center">
+                <div class="col-xs-12 col-md-6 text-center">Cartão</div>
+                <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_cartao']); ?></div>
+            </div>
+            <div class="col-xs-12 col-md-3 text-center">
+                <div class="col-xs-12 col-md-6 text-center">Prazo</div>
+                <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_prazo']); ?></div>
+            </div>
         </div>
     </div><!-- /.table-responsive -->
     <div class="clearfix"></div>
