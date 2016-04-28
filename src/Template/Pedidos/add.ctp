@@ -149,7 +149,7 @@ if ($this->request->session()->read('operador_pedido') < 1) {
 
 
     echo $this->Modal->create(['id' => 'MyModal2', 'close' => false, 'aria-hidden' => true]);
-    echo $this->Modal->header('Example 2 - No HTML', ['close' => false]);
+    echo $this->Modal->header('Pedido - Informe um operador', ['close' => false]);
     echo $this->Modal->body($_formOperadores);
     echo $this->Modal->end();
 }

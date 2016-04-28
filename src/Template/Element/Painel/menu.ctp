@@ -41,6 +41,7 @@
                             <li><?php echo $this->Html->link('Em aberto', ['controller' => 'Pedidos', 'action' => 'index', '?' => ['status' => 0]], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Recebido', ['controller' => 'Pedidos', 'action' => 'index', '?' => ['status' => 1]], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                             <li><?php echo $this->Html->link('Cancelado', ['controller' => 'Pedidos', 'action' => 'index', '?' => ['status' => 2]], ['class' => 'animsition-link', 'icon' => false]); ?></li>
+                            <li><?php echo $this->Html->link('Relatórios', ['controller' => 'Pedidos', 'action' => 'relatorios'], ['class' => 'animsition-link', 'icon' => false]); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown">

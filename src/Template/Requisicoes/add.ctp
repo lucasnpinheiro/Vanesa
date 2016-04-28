@@ -15,17 +15,7 @@
         echo $this->Form->tipo('tipo', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
         echo $this->Form->quantidade('quantidade', ['required' => true, 'div' => ['class' => 'col-xs-12 col-md-3']]);
         ?>
-        <div class="col-xs-12 col-md-6">
-            <?php echo $this->Form->input('produto', ['type' => 'text', 'class' => 'produtos_barra', 'list' => 'codigo_produtos', 'empty' => 'Informe um produto', 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
-            <datalist id="codigo_produtos">
-                <?php
-                foreach ($produtos_lista as $key => $value) {
-                    echo '<option value="' . $value . '">';
-                }
-                ?>
-            </datalist>
-        </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-12">
             <?php echo $this->Form->input('produto_id', ['required' => true, 'options' => $produtos, 'empty' => true, 'div' => ['class' => 'col-xs-12 col-md-12']]); ?>
         </div>
         <?php

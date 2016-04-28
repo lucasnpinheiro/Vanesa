@@ -9,10 +9,10 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <?php
-        echo $this->Html->css('/css/bootstrap.min.css');
-        echo $this->Html->css('/css/font-awesome.min.css');
-        echo $this->Html->css('/css/app.min.css');
-        echo $this->Html->css('/css/print.css');
+        echo $this->Html->css('/css/bootstrap.min.css', ['media' => 'all']);
+        echo $this->Html->css('/css/font-awesome.min.css', ['media' => 'all']);
+        echo $this->Html->css('/css/app.min.css', ['media' => 'all']);
+        echo $this->Html->css('/css/print.css', ['media' => 'all']);
         ?>
     </head>
 

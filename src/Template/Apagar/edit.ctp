@@ -22,10 +22,10 @@
         if ($apagar->tipo === 1) {
             $required = false;
             $disabled = true;
-             $disabledStatus = true;
+            $disabledStatus = true;
         }
-        
-        if($apagar->status === 2){
+
+        if ($apagar->status === 2) {
             $disabledStatus = true;
         }
         echo $this->Form->input('numero_documento', ['disabled' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
@@ -38,7 +38,7 @@
         echo $this->Form->moeda('valor_pagamento', ['required' => $required, 'disabled' => $disabled, 'div' => ['class' => 'col-xs-12 col-md-4']]);
         echo $this->Form->moeda('valor_acrescimo', ['disabled' => true, 'div' => ['class' => 'col-xs-12 col-md-4']]);
 
-        echo $this->Form->input('historico', ['div' => ['class' => 'col-xs-12 col-md-12'], 'type' => 'textarea']);
+        echo $this->Form->input('historico', ['disabled' => $disabledStatus, 'div' => ['class' => 'col-xs-12 col-md-12'], 'type' => 'textarea']);
         ?>
         <div class="clearfix"></div>
         <div class="text-right">

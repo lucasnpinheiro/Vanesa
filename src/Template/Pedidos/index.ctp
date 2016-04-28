@@ -52,20 +52,20 @@
                         <td><?= h($pedido->modified) ?></td>
                         <td class="actions text-right">
                             <?php
-                            if ($pedido->status === 0) {
-                                $this->Html->link(null, ['action' => 'add', $pedido->id], ['class' => ' btn-warning  btn btn-xs ', 'icon' => 'pencil', 'title' => __('Edit')]);
+                            if ($pedido->status < 1) {
+                                echo $this->Html->link(null, ['action' => 'add', $pedido->id], ['class' => ' btn-warning  btn btn-xs ', 'icon' => 'pencil', 'title' => __('Edit')]);
                             }
                             ?>
-    <?= $this->Form->postLink(null, ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id), 'title' => __('Delete')]) ?>
+                            <?= $this->Form->postLink(null, ['action' => 'delete', $pedido->id], ['confirm' => __('Are you sure you want to delete # {0}?', $pedido->id), 'title' => __('Delete')]) ?>
                         </td>
                     </tr>
-<?php endforeach; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div><!-- /.table-responsive -->
     <div class="panel-footer">
         <div class="row font-12 text-center-xs">
-<?php echo $this->element('Painel/paginacao') ?>
+            <?php echo $this->element('Painel/paginacao') ?>
         </div><!-- /.row -->
     </div>
 </div>

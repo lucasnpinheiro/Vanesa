@@ -28,6 +28,17 @@ class PedidosController extends AppController {
         $this->set('_serialize', ['pedidos']);
         $this->set('status', $this->request->query('status'));
     }
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function relatorios() {
+        $query = $this->Pedidos->find('search', $this->Pedidos->filterParams($this->request->query));
+
+        $this->set('pedidos', $query->all());
+        $this->set('_serialize', ['pedidos']);
+    }
 
     public function funcionarios() {
         $query = $this->Pedidos->find('search', $this->Pedidos->filterParams($this->request->query));

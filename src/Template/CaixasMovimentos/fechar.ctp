@@ -5,7 +5,7 @@
     <div class="col-xs-12">
         <h3>Totalizadores do Movimento</h3>
         <div class="table-responsive">
-            <table class="table table-bordered table-striped font-12 table-hover">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Tipo</th>
@@ -24,50 +24,127 @@
                 </tbody>
             </table>
         </div><!-- /.table-responsive -->
-        <div class="col-xs-12 col-md-6">
-            <div class="col-xs-12 col-md-6">Saldo Inicial</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($saldoInicial->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Entradas</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($entradas->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Retiradas</div><div class="col-xs-12 col-md-6 text-right" style="color:red;"><?php echo $this->Html->moeda($saidas->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Sangrias</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($sangrias->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Vendas</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendas->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Saldo Caixa</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda((floatval($vendas->total) + floatval($entradas->total) + floatval($saldoInicial->total)) - floatval($saidas->total)); ?></div>
-            <div class="clearfix"></div>
+        <div style="width: 50%; float: left;">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td style="width: 70%;">Saldo Inicial</td>
+                            <td style="width: 30%;" class="text-right" style="color:blue;"><?php echo $this->Html->moeda($saldoInicial->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Entradas</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($entradas->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Retiradas</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($saidas->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Sangrias</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($sangrias->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Vendas</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($vendas->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Saldo Caixa</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda((floatval($vendas->total) + floatval($entradas->total) + floatval($saldoInicial->total)) - floatval($saidas->total)); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-xs-12 col-md-6">
-            <div class="col-xs-12 col-md-6">Vendas Dinheiro</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasDinheiro->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Vendas Cartão</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasCartao->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Vendas Cheque</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasCheque->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Vendas Prazo</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasPrazo->total); ?></div>
-            <div class="clearfix"></div>
-            <div class="col-xs-12 col-md-6">Vendas Total</div><div class="col-xs-12 col-md-6 text-right" style="color:blue;"><?php echo $this->Html->moeda(floatval($vendasDinheiro->total) + floatval($vendasCartao->total) + floatval($vendasCheque->total) + floatval($vendasPrazo->total)); ?></div>
-            <div class="clearfix"></div>
+        <div style="width: 50%; float: left;">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Vendas Dinheiro</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasDinheiro->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Vendas Cartão</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasCartao->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Vendas Cheque</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasCheque->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Vendas Prazo</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda($vendasPrazo->total); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Vendas Total</td>
+                            <td class="text-right" style="color:blue;"><?php echo $this->Html->moeda(floatval($vendasDinheiro->total) + floatval($vendasCartao->total) + floatval($vendasCheque->total) + floatval($vendasPrazo->total)); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="clearfix"></div>
+        <div style="float: none;" class="clearfix"></div>
 
         <h3>Fechamento do Operador(a)</h3>
-        <div class="col-xs-12 col-md-6">
-            <div><div class="col-xs-2">Troco :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Dinheiro :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Cartão :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Cheque :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Prazo :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Sangria :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Moedas :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div class="clearfix"></div>
+        <div style="width: 50%; float: left;">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        
+                        <tr>
+                            <td>Dinheiro :</td>
+                        </tr>
+                        <tr>
+                            <td>Cartão :</td>
+                        </tr>
+                        <tr>
+                            <td>Cheque :</td>
+                        </tr>
+                        <tr>
+                            <td>Prazo :</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Moedas :</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-xs-12 col-md-6">
-            <div><div class="col-xs-2">Total :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Saldo CX :</div><div style="border-bottom: 1px solid #000;" class="col-xs-10">&nbsp;</div></div>
-            <div><div class="col-xs-2">Diferença :</div><div style="border-bottom: 1px solid #000;" class="col-xs-7">&nbsp;</div><div class="col-xs-3 text-right">(  ) - Sobra (  ) - Falta </div></div>
-            <div class="clearfix"></div>
+        <div style="width: 50%; float: left;">
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Sangria :</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Troco :</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Total :</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Saldo CX :</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="float: none;" class="clearfix"></div>
+        <div>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td style="width:30%;">Diferença :</td>
+                            <td style="width:40%;"></td>
+                            <td style="width:30%;">(  ) - Sobra (  ) - Falta</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="clearfix"></div>
         <div class="col-xs-12 col-md-3"></div>
@@ -76,6 +153,7 @@
             <div><div style="border-bottom: 1px solid #000;" class="col-xs-12">&nbsp;</div></div>
             <div class="clearfix"></div>
             <div class="text-center"> Ass. Operador(a) </div>
+            <div class="text-center"> Operador(a) <?php echo $caixasDiarios->pessoa->nome; ?> </div>
         </div>
         <div class="col-xs-12 col-md-3"></div>
         <div class="clearfix"></div>
