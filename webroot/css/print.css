@@ -1,6 +1,7 @@
 body{
     background-color: #ffffff;
     font-size: 11px;
+    height: 100%;
 }
 .panel-heading, .panel-body, .panel-footer{
     display: none;

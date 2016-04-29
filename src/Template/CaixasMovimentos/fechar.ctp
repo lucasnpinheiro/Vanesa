@@ -92,25 +92,25 @@
                 <table class="table">
                     <tbody>  
                         <tr>
-                            <td style="width: 30%;">Dinheiro :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Dinheiro :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                         <tr>
-                            <td style="width: 30%;">Cartão :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Cartão :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                         <tr>
-                            <td style="width: 30%;">Cheque :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Cheque :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                         <tr>
-                            <td style="width: 30%;">Prazo :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Prazo :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                         
                         <tr>
-                            <td style="width: 30%;">Moedas :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Moedas :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                     </tbody>
                 </table>
@@ -121,20 +121,20 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td style="width: 30%;">Sangria :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Sangria :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                         <tr>
-                            <td style="width: 30%;">Troco :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Troco :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                         <tr>
-                            <td style="width: 30%;">Total :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Total :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                         <tr>
-                            <td style="width: 30%;">Saldo CX :</td>
-                            <td style="width: 70%;" class="borda_rodape"></td>
+                            <td style="width: 20%;">Saldo CX :</td>
+                            <td style="width: 80%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
                         </tr>
                     </tbody>
                 </table>
@@ -146,9 +146,9 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td style="width:30%;">Diferença :</td>
-                            <td style="width:40%;" class="borda_rodape"></td>
-                            <td style="width:30%;">(  ) - Sobra (  ) - Falta</td>
+                            <td style="width:12%;">Diferença :</td>
+                            <td style="width:70%;"><div style="width: 100%;" class="borda_rodape">&nbsp;</div></td>
+                            <td style="width:18%; text-align: right;">(  ) - Sobra (  ) - Falta</td>
                         </tr>
                     </tbody>
                 </table>
