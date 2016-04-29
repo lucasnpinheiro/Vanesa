@@ -77,31 +77,31 @@
     <div class="col-xs-12">
         <h4>Totalizadores</h4>
         <div>
-            <div class="col-xs-12 col-md-4 text-center">
+            <div class="col-xs-12 col-md-6 text-center">
                 <div class="col-xs-12 col-md-6 text-center">Valor Total</div>
                 <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_total']); ?></div>
             </div>
-            <div class="col-xs-12 col-md-4 text-center">
+            <div class="col-xs-12 col-md-6 text-center">
                 <div class="col-xs-12 col-md-6 text-center">Descontos</div>
                 <div class="col-xs-12 col-md-6 text-center" style="color: red;"><?php echo $this->Html->moeda($totais['valor_desconto']); ?></div>
             </div>
-            <div class="col-xs-12 col-md-4 text-center">
+            <div class="col-xs-12 col-md-6 text-center">
                 <div class="col-xs-12 col-md-6 text-center">Valor Liquido</div>
                 <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_liquido']); ?></div>
             </div>
-            <div class="col-xs-12 col-md-3 text-center">
+            <div class="col-xs-12 col-md-6 text-center">
                 <div class="col-xs-12 col-md-6 text-center">Dinheiro</div>
                 <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_dinheiro']); ?></div>
             </div>
-            <div class="col-xs-12 col-md-3 text-center">
+            <div class="col-xs-12 col-md-6 text-center">
                 <div class="col-xs-12 col-md-6 text-center">Cheque</div>
                 <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_cheque']); ?></div>
             </div>
-            <div class="col-xs-12 col-md-3 text-center">
+            <div class="col-xs-12 col-md-6 text-center">
                 <div class="col-xs-12 col-md-6 text-center">Cartão</div>
                 <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_cartao']); ?></div>
             </div>
-            <div class="col-xs-12 col-md-3 text-center">
+            <div class="col-xs-12 col-md-6 text-center">
                 <div class="col-xs-12 col-md-6 text-center">Prazo</div>
                 <div class="col-xs-12 col-md-6 text-center"><?php echo $this->Html->moeda($totais['valor_prazo']); ?></div>
             </div>
